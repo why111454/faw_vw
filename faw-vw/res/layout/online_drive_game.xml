@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000" >
+    <com.fax.faw_vw.views.MatchVideoView 
+        android:id="@+id/videoView"
+        android:layout_gravity="bottom"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent" />
+    <FrameLayout 
+        android:id="@+id/online_drive_game_coins_layout"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent" />
+    
+    <ImageView 
+        android:id="@+id/online_drive_game_car_view"
+        android:src="@drawable/online_drive_game_car_default"
+        android:adjustViewBounds="true"
+        android:layout_gravity="bottom"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" />
+    
+    <TextView 
+        android:id="@+id/online_drive_game_score"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:text="0"
+        android:gravity="center"
+        android:drawableLeft="@drawable/online_drive_game_ic_coin"
+        android:layout_gravity="right|bottom"
+        android:drawablePadding="8dp"
+        android:layout_margin="20dp"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content" />
+    
+    <ImageView 
+        android:id="@+id/online_drive_game_center_info"
+        android:adjustViewBounds="true"
+        android:layout_gravity="center"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" />
+    <Button 
+        android:id="@+id/online_drive_game_front_control"
+        android:background="@android:color/transparent"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent" />
+
+</FrameLayout>

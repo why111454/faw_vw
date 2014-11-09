@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp" >
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+        <RadioButton
+            android:id="@+id/radioButton1"
+            style="@style/TabBtnGray"
+            android:layout_marginRight="1dp"
+            android:text="官方新闻" />
+        <RadioButton
+            android:id="@+id/radioButton2"
+            style="@style/TabBtnGray"
+            android:layout_marginRight="1dp"
+            android:text="媒体评测" />
+        <RadioButton
+            android:id="@+id/radioButton3"
+            style="@style/TabBtnGray"
+            android:text="车友分享" />
+    </RadioGroup>
+   <View style="@style/divHorizontal"
+       android:background="@color/dark_blue"
+       android:layout_height="2dp"/>
+	<com.fax.utils.view.list.ObjectXListView
+	    android:id="@android:id/list"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent" >
+	</com.fax.utils.view.list.ObjectXListView>
+</LinearLayout>

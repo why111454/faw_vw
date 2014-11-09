@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <RadioGroup
+        android:id="@+id/radio_group"
+    	android:paddingLeft="12dp"
+    	android:paddingRight="10dp"
+    	android:layout_marginTop="10dp" 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+        <RadioButton
+            android:id="@+id/radioButton1"
+            android:checked="true"
+            style="@style/TabBtnGray"
+            android:layout_marginRight="1dp"
+            android:text="品牌历程" />
+        <RadioButton
+            android:id="@+id/radioButton2"
+            style="@style/TabBtnGray"
+            android:layout_marginRight="1dp"
+            android:text="品牌介绍" />
+    </RadioGroup>
+   <View style="@style/divHorizontal"
+    	android:layout_marginLeft="12dp"
+    	android:layout_marginRight="12dp"
+       android:background="@color/dark_blue"
+       android:layout_height="2dp"/>
+	<ScrollView
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent" >
+	       <com.fax.faw_vw.views.FitWidthImageView
+	           android:id="@+id/brand_show_content"
+	           android:layout_width="match_parent"
+	           android:layout_height="wrap_content"
+	           android:src="@drawable/brand_show_1" />
+	</ScrollView>
+</LinearLayout>

@@ -1,0 +1,11 @@
+<resources>
+
+    <string name="Task.PleaseWait">请稍后</string>
+    <string name="Task.LoadFail">载入失败</string>
+    <string name="Task.DoSuccess">操作成功</string>
+    <string name="Task.Downloading">正在下载&#8230;</string>
+    <string name="Task.StopDownload">停止下载</string>
+    <string name="Task.DownloadComplete">下载完成</string>
+    <string name="Task.DownloadFail">下载失败</string>
+
+</resources>

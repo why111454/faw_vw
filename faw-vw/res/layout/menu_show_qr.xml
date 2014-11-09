@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <com.dlazaro66.qrcodereaderview.QRCodeReaderView
+        android:id="@+id/qrCodeReaderView"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"/>
+    <ImageView 
+        android:id="@+id/qrCodeReaderLine"
+        android:src="@drawable/menu_show_2wm_line"
+        android:layout_gravity="center"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"/>
+    <ImageView 
+        android:src="@drawable/menu_show_2wm_bg"
+        android:scaleType="fitXY"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"/>
+
+</FrameLayout>

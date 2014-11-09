@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/show360_touch_frames_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <ImageView 
+        android:id="@android:id/background"
+        android:scaleType="fitCenter"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"/>
+    
+	<com.fax.faw_vw.views.clickshow.ClickShowImageView
+	    android:id="@+id/back_btn"
+	    android:src="@drawable/show360_back_btn"
+	    android:layout_marginBottom="30dp"
+	    android:layout_marginLeft="12dp"
+	    android:layout_gravity="bottom|left"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"/>
+	<LinearLayout 
+	    android:id="@android:id/summary"
+	    android:gravity="center_horizontal"
+	    android:orientation="horizontal"
+	    android:layout_gravity="bottom|center_horizontal"
+	    android:layout_width="wrap_content"
+	    android:layout_height="40dp">
+	    <TextView 
+	        android:textSize="12sp"
+	        android:text="选择外观颜色"
+	        android:layout_marginTop="6dp"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"/>
+	</LinearLayout>
+</FrameLayout>

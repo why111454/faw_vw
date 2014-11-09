@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp" >
+
+        <com.fax.faw_vw.views.FitWidthImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/financial_service_core_title" />
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/radioButton1"
+                android:checked="true"
+                style="@style/TabBtnGray"
+                android:layout_marginRight="1dp"
+                android:text="精挑细选" />
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                style="@style/TabBtnGray"
+                android:layout_marginRight="1dp"
+                android:text="量身定做" />
+
+            <RadioButton
+                android:id="@+id/radioButton3"
+                style="@style/TabBtnGray"
+                android:layout_marginRight="1dp"
+                android:text="值得信赖" />
+
+            <RadioButton
+                android:id="@+id/radioButton4"
+                style="@style/TabBtnGray"
+                android:text="一站式" />
+        </RadioGroup>
+
+    <View style="@style/divHorizontal"
+        android:background="@color/dark_blue"
+        android:layout_height="2dp"/>
+
+        <com.fax.faw_vw.views.FitWidthImageView
+            android:id="@+id/financial_service_core_mid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/financial_service_core_mid1" />
+
+        <com.fax.faw_vw.views.FitWidthImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/financial_service_core_content" />
+    </LinearLayout>
+
+</ScrollView>

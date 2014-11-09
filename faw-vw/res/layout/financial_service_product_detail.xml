@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp" >
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+        <RadioButton
+            android:id="@+id/radioButton1"
+            style="@style/TabBtnGray"
+            android:layout_marginRight="1dp"
+            android:text="车贷" />
+        <RadioButton
+            android:id="@+id/radioButton2"
+            style="@style/TabBtnGray"
+            android:text="车险" />
+    </RadioGroup>
+   <View style="@style/divHorizontal"
+       android:background="@color/dark_blue"
+       android:layout_height="2dp"/>
+   <com.fax.utils.view.list.ExpandListHeadContain 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent">
+		<ExpandableListView
+		    android:id="@android:id/list"
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent" >
+		</ExpandableListView>
+   </com.fax.utils.view.list.ExpandListHeadContain>
+</LinearLayout>

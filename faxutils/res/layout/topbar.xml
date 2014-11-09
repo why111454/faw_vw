@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:background="@android:color/black">
+    <RelativeLayout
+        android:id="@+id/topbar_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/topbar_title"
+            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@+id/topbar_left_btn"
+            android:layout_toLeftOf="@+id/topbar_right_btn"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="#333333"
+            android:textSize="17sp" />
+        <Button
+            android:id="@+id/topbar_left_btn"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:visibility="invisible"
+            android:gravity="center"
+            android:layout_alignParentLeft="true"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:drawablePadding="4dp"
+            android:minHeight="44dp"
+            android:minWidth="60dp"
+            android:textSize="17sp"
+            android:textColor="#333333"
+            android:background="@drawable/common_btn_in_white"/>
+
+        <Button
+            android:id="@+id/topbar_right_btn"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:visibility="invisible"
+            android:gravity="center"
+            android:layout_alignParentRight="true"
+            android:textSize="12sp"
+            android:minWidth="60dp"
+            android:minHeight="44dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:drawablePadding="4dp"
+            android:textColor="#333333"
+            android:background="@drawable/common_btn_in_white"/>
+        <LinearLayout
+            android:id="@+id/topbar_right_extra_widget"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+	<ProgressBar 
+	    android:id="@+id/topbar_progress"
+		style="@android:style/Widget.ProgressBar.Horizontal"
+		android:indeterminate="false"
+	    android:max="100"
+	    android:progress="0"
+	    android:visibility="gone"
+	    android:layout_marginTop="-3dp"
+	    android:layout_width="match_parent"
+	    android:layout_height="3dp"/>
+</LinearLayout>

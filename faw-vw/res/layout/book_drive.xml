@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="*姓名"/>
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:singleLine="true"
+                android:id="@+id/name_text"
+                android:layout_weight="1"
+                android:hint="请输入您的姓名" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="*手机"/>
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:ems="10"
+                android:id="@+id/phone_text"
+                android:layout_weight="1"
+                android:hint="请输入您的手机号码" />
+
+        </LinearLayout>
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="8dp"
+            android:stretchColumns="1">
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="*试驾车型"
+                    android:layout_gravity="start|center_vertical"
+                    android:layout_column="0" />
+
+                <Button
+                    android:text="选择车型"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/select_car_button"
+                    android:layout_column="1"
+                    android:gravity="left|center_vertical" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <Button
+                    android:text="选择配置"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/select_car_model_button"
+                    android:layout_column="1"
+                    android:gravity="left|center_vertical" />
+            </TableRow>
+
+        </TableLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="希望试驾时间"
+                android:textSize="12sp"
+                android:layout_gravity="center_vertical" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                 	style="@style/FormBtn"
+                    android:text="平时"
+                    android:id="@+id/radioButton"
+                    android:checked="true"
+                    android:layout_weight="10" />
+
+                <RadioButton
+                 	style="@style/FormBtn"
+                    android:text="周末"
+                    android:id="@+id/radioButton2"
+                    android:layout_weight="10" />
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="*经销商"
+                android:layout_gravity="center_vertical" />
+
+            <Button
+                android:id="@+id/select_dealer_button"
+                android:text="请选择经销商"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:gravity="left|center_vertical" />
+
+        </LinearLayout>
+
+        <com.fax.utils.view.MultiLineRadioGroup
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+        	android:layout_marginTop="8dp"
+            android:orientation="vertical">
+			<LinearLayout 
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content">
+	          <TextView
+	              android:layout_width="wrap_content"
+	              android:layout_height="wrap_content"
+	              android:text="*计划购车时间"
+	              android:layout_column="0"
+	              android:textSize="12sp" />
+             <RadioButton
+                 style="@style/FormBtn"
+                 android:text="1周内"
+                 android:id="@+id/radioButton3"
+                 android:checked="true" />
+
+             <RadioButton
+                 style="@style/FormBtn"
+                 android:text="2周内"
+                 android:id="@+id/radioButton4" />
+
+             <RadioButton
+                 style="@style/FormBtn"
+                 android:text="1个月内"
+                 android:id="@+id/radioButton5" />
+			</LinearLayout>
+			<LinearLayout 
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content">
+	          <TextView
+	              android:layout_width="wrap_content"
+	              android:layout_height="wrap_content"
+	              android:text="*计划购车时间"
+	              android:visibility="invisible"
+	              android:textSize="12sp" />
+             <RadioButton
+                 style="@style/FormBtn"
+                 android:text="3个月内"
+                 android:id="@+id/radioButton6" />
+
+             <RadioButton
+                 style="@style/FormBtn"
+                 android:text="6个月内"
+                 android:id="@+id/radioButton7" />
+
+             <RadioButton
+                 style="@style/FormBtn"
+                 android:text="不确定"
+                 android:id="@+id/radioButton8" />
+			</LinearLayout>
+        </com.fax.utils.view.MultiLineRadioGroup>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="*为必填项。你的信息，我们将会完全保密，请您放心填写。"
+            android:textSize="10sp"
+            android:layout_marginTop="8dp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="确认提交"
+            android:id="@+id/commit_button"
+            android:layout_marginTop="8dp" />
+
+    </LinearLayout>
+</ScrollView>

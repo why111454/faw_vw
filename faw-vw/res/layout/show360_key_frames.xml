@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/show360_key_frames_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <ImageView 
+        android:id="@android:id/background"
+        android:scaleType="fitXY"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"/>
+    
+	<com.fax.faw_vw.views.clickshow.ClickShowImageView
+	    android:id="@+id/back_btn"
+	    android:src="@drawable/show360_back_btn"
+	    android:layout_marginBottom="30dp"
+	    android:layout_marginLeft="12dp"
+	    android:layout_gravity="bottom|left"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"/>
+	<com.fax.faw_vw.views.clickshow.ClickShowImageView
+	    android:id="@+id/detail_btn"
+	    android:src="@drawable/show360_detail_btn"
+	    android:layout_marginBottom="30dp"
+	    android:layout_marginRight="12dp"
+	    android:layout_gravity="bottom|right"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"/>
+	
+	<FrameLayout 
+	    android:background="@drawable/show360_bar"
+	    android:layout_gravity="bottom|center_horizontal"
+	    android:layout_marginBottom="40dp"
+	    android:layout_width="270dp"
+	    android:layout_height="wrap_content">
+	    <ImageView 
+	        android:id="@android:id/icon"
+	        android:src="@drawable/common_ic_red_point"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"/>
+	</FrameLayout>
+	<LinearLayout 
+	    android:id="@android:id/summary"
+	    android:orientation="horizontal"
+	    android:layout_gravity="bottom|center_horizontal"
+	    android:layout_marginBottom="20dp"
+	    android:layout_width="300dp"
+	    android:layout_height="wrap_content">
+	    
+	</LinearLayout>
+	
+    <FrameLayout 
+        android:id="@+id/show360_key_frames_front_point"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent">
+        
+    </FrameLayout>
+</FrameLayout>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="12dp"
+    android:orientation="vertical" >
+    <RadioGroup 
+        android:id="@+id/radio_group"
+        android:padding="0dp"
+        android:layout_marginTop="6dp"
+        android:orientation="horizontal"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/car_download_rb_pics"
+            android:tag="pics"
+            android:layout_marginRight="1dp"
+            android:text="精美图片"
+            style="@style/TabBtnGray"/>
+        <RadioButton 
+            android:id="@+id/car_download_rb_tvc"
+            android:tag="TVC"
+            android:layout_marginRight="1dp"
+            android:text="TVC"
+            style="@style/TabBtnGray"/>
+        <RadioButton 
+            android:id="@+id/car_download_rb_shouce"
+            android:tag="shouCe"
+            android:layout_marginRight="1dp"
+            android:text="产品手册"
+            style="@style/TabBtnGray"/>
+        <RadioButton 
+            android:id="@+id/car_download_rb_zazhi"
+            android:tag="zazhi"
+            android:text="电子杂志"
+            style="@style/TabBtnGray"/>
+    </RadioGroup>
+    <View style="@style/divHorizontal"
+        android:background="@color/dark_blue"
+        android:layout_height="2dp"/>
+    <com.fax.utils.view.list.ObjectXListView 
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

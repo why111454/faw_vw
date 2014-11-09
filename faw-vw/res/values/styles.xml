@@ -1,0 +1,74 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Light.NoTitleBar">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="android:windowBackground">@color/window_bg</item>
+    </style>
+    
+    <style name="BottomBarBtn">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:button">@null</item>
+        <item name="android:gravity">bottom|center_horizontal</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:drawablePadding">6dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:background">@drawable/common_cb_blue</item>
+    </style>
+    <style name="TabBtn" parent="BottomBarBtn">
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/tab_text_color</item>
+        <item name="android:background">@drawable/tab_text_bg</item>
+    </style>
+    <style name="TabBtnGray" parent="TabBtn">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/tab_text_bg_blue_gray</item>
+    </style>
+    <style name="FormBtn" parent="TabBtn">
+        <item name="android:layout_margin">3dp</item>
+    </style>
+	<style name="divVertical">
+        <item name="android:layout_width">1px</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@android:color/darker_gray</item>
+    </style>
+	<style name="divVerticalDark">
+        <item name="android:layout_width">1px</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/gray_press</item>
+    </style>
+    
+	<style name="divHorizontal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">@android:color/darker_gray</item>
+    </style>
+    
+	<style name="ShowCarDetailBtn">
+        <item name="android:paddingBottom">6dp</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:drawablePadding">6dp</item>
+        <item name="android:background">@drawable/common_btn_in_white</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+</resources>

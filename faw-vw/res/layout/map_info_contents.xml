@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:orientation="horizontal">
+  <LinearLayout
+    android:layout_width="260dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+      android:id="@+id/title"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:ellipsize="end"
+      android:textColor="@android:color/black"
+      android:textSize="14sp"
+      android:textStyle="bold"/>
+    <TextView
+      android:id="@+id/snippet"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:ellipsize="end"
+      android:textColor="@android:color/darker_gray"
+      android:textSize="12sp"/>
+    <LinearLayout 
+	  android:id="@+id/map_info_contents_layout"
+	  android:layout_width="match_parent"
+	  android:layout_height="wrap_content"
+	  android:layout_marginTop="6dp"
+	  android:orientation="horizontal">
+	    <Button
+	      android:id="@+id/map_info_contents_order_drive"
+	      android:layout_width="0dp"
+	      android:layout_weight="1"
+	      android:layout_height="wrap_content"
+	      android:text="预约试驾"
+	      android:background="@drawable/common_btn_in_white"
+	      android:drawableTop="@drawable/map_info_content_order_drive"
+	      android:textColor="@android:color/darker_gray"
+	      android:textSize="12sp"/>
+	    <View style="@style/divVertical"/>
+	    <Button
+	      android:id="@+id/map_info_contents_tel"
+	      android:layout_width="0dp"
+	      android:layout_weight="1"
+	      android:layout_height="wrap_content"
+	      android:text="电话联系"
+	      android:background="@drawable/common_btn_in_white"
+	      android:drawableTop="@drawable/map_info_content_tel"
+	      android:textColor="@android:color/darker_gray"
+	      android:textSize="12sp"/>
+	    <View style="@style/divVertical"/>
+	    <Button
+	      android:id="@+id/map_info_contents_navi"
+	      android:layout_width="0dp"
+	      android:layout_weight="1"
+	      android:layout_height="wrap_content"
+	      android:text="立即导航"
+	      android:background="@drawable/common_btn_in_white"
+	      android:drawableTop="@drawable/map_info_content_navi"
+	      android:textColor="@android:color/darker_gray"
+	      android:textSize="12sp"/>
+    </LinearLayout>
+  </LinearLayout>
+</LinearLayout>

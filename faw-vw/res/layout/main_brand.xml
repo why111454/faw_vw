@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical" >
+    <LinearLayout 
+        android:layout_weight="1"
+	    android:layout_width="match_parent"
+	    android:layout_height="0dp">
+	    <com.fax.faw_vw.views.clickshow.ClickShowFrameLayout 
+	        android:id="@+id/main_brand_show"
+	        android:layout_weight="1"
+		    android:layout_width="0dp"
+		    android:layout_height="match_parent">
+	        <TextView
+	            android:gravity="center" 
+	            android:drawableTop="@drawable/main_brand_show"
+	            android:background="@android:color/transparent"
+	            android:drawablePadding="10dp"
+	            android:layout_gravity="center"
+	            android:text="品牌展示"
+	            android:textSize="15sp"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"/>
+	    </com.fax.faw_vw.views.clickshow.ClickShowFrameLayout>
+	    <View style="@style/divVertical"/>
+	    <com.fax.faw_vw.views.clickshow.ClickShowFrameLayout 
+	        android:id="@+id/main_brand_innovation"
+	        android:layout_weight="1"
+		    android:layout_width="0dp"
+		    android:layout_height="match_parent">
+	        <TextView
+	            android:gravity="center" 
+	            android:drawableTop="@drawable/main_brand_innovation"
+	            android:background="@android:color/transparent"
+	            android:drawablePadding="10dp"
+	            android:layout_gravity="center"
+	            android:text="科技创新"
+	            android:textSize="15sp"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"/>
+	    </com.fax.faw_vw.views.clickshow.ClickShowFrameLayout>
+    </LinearLayout>
+	<View style="@style/divHorizontal"/>
+    <LinearLayout 
+        android:layout_weight="1"
+	    android:layout_width="match_parent"
+	    android:layout_height="0dp">
+	    <View 
+	        android:layout_weight="1"
+		    android:layout_width="0dp"
+		    android:layout_height="match_parent" />
+	    <View style="@style/divVertical"/>
+	    <View 
+	        android:layout_weight="1"
+		    android:layout_width="0dp"
+		    android:layout_height="match_parent" />
+    </LinearLayout>
+
+</LinearLayout>
