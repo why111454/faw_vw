@@ -63,6 +63,7 @@ public abstract class BasicBitmapFrame implements Frame {
 
 	@Override
 	public Drawable getDecodedDrawable() {
+		if(mBitmapDrawable==null) return mBitmapPreviewDrawable;
 		return mBitmapDrawable;
 	}
 

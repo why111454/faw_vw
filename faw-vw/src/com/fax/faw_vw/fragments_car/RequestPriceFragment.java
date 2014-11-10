@@ -49,6 +49,13 @@ public class RequestPriceFragment extends MyFragment
             }
         });
 
+        view.findViewById(R.id.commit_button).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO 接入接口提交信息（信息未填完Toast提示）
+				
+			}
+		});
         return new MyTopBar(getActivity()).setLeftBack()
                 .setTitle("报价索取").setContentView(view);
 	}

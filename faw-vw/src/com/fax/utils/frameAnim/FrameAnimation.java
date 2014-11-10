@@ -28,6 +28,7 @@ public class FrameAnimation implements Animatable{
 	private boolean isPause;
 	private boolean isFinish = true;
 	private boolean isOneShot = true;
+	private boolean isPreView = false;
 	public FrameAnimation(View view){
 		this.mView=view;
 	}
@@ -79,6 +80,9 @@ public class FrameAnimation implements Animatable{
 	}
 	public boolean isFinish(){
 		return isFinish;
+	}
+	public void setPreView(boolean isPreView) {
+		this.isPreView = isPreView;
 	}
 	public void setOneShot(boolean isOneShot) {
 		this.isOneShot = isOneShot;
@@ -146,7 +150,11 @@ public class FrameAnimation implements Animatable{
 			if(frame==null) return;
 			long timeBeforeDecode=System.currentTimeMillis();
 //			Log.d("fax", "decodingFrame,Index:"+decodingFrameIndex);
-			frame.decodeDrawable(mView.getContext());
+			if(!isFinish && isPreView){
+				frame.decodePreviewDrawable(mView.getContext());
+			}else{
+				frame.decodeDrawable(mView.getContext());
+			}
 			publishProgress(frame);
 			try {
 				long timeDecodeUse = System.currentTimeMillis()-timeBeforeDecode;
@@ -164,7 +172,11 @@ public class FrameAnimation implements Animatable{
 					}
 				}
 				
-				playFrame();
+				try {
+					playFrame();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				if(isFinish){
 					break;
 				}

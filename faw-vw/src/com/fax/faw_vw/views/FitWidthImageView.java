@@ -26,8 +26,12 @@ public class FitWidthImageView extends ImageView {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int vWidth = MeasureSpec.getSize(widthMeasureSpec);
         int dWidth = getDrawable().getIntrinsicWidth();
+        if(dWidth<=0){
+        	super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        	return;
+        }
+        int vWidth = MeasureSpec.getSize(widthMeasureSpec);
         float scale = (float) vWidth / (float) dWidth;
         int vHeight = (int) (getDrawable().getIntrinsicHeight() * scale);
 

@@ -13,10 +13,9 @@
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent" />
     
-    <ImageView 
+    <com.fax.faw_vw.views.FitWidthImageView 
         android:id="@+id/online_drive_game_car_view"
         android:src="@drawable/online_drive_game_car_default"
-        android:adjustViewBounds="true"
         android:layout_gravity="bottom"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content" />

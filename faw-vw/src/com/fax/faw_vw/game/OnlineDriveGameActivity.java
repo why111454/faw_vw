@@ -91,6 +91,7 @@ public class OnlineDriveGameActivity extends Activity {
 	private void initVideoView(){
 		String uri = "android.resource://" + getPackageName() + "/" + R.raw.run_final_480p;
 		videoView.setVideoPath(uri);
+		
 		videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
 			@Override
 			public void onPrepared(MediaPlayer mp) {
@@ -212,6 +213,7 @@ public class OnlineDriveGameActivity extends Activity {
 				
 				if(temp!=lastFrames){//开始动画
 					lastAnim.setFrames(lastFrames);
+					lastAnim.setPreView(true);
 					lastAnim.start();
 					lastAnim.setFrameAnimListener(new FrameAnimListener() {
 						@Override
@@ -363,35 +365,40 @@ public class OnlineDriveGameActivity extends Activity {
     	Typeface typeFace =Typeface.createFromAsset(getAssets(),"online_drive_game/font.ttf");
     	scoreTv.setTypeface(typeFace);
     	
-    	soundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 100);
-    	eatCoinSoundId = soundPool.load(this, R.raw.eat_coin, 100);
+    	soundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 0);
+    	eatCoinSoundId = soundPool.load(this, R.raw.eat_coin, 1);
 	}
 	private void showEatCoin(final ImageView coinImg){
-		soundPool.play(eatCoinSoundId, 1, 1, 100, 0, 1);
+		soundPool.play(eatCoinSoundId, 1, 1, 1, 0, 1);
 		score ++;
 		scoreTv.setText(score+"");
-		final ImageView hitAnim = new ImageView(this);
-		hitAnim.setScaleType(ScaleType.FIT_CENTER);
-		FrameLayout.LayoutParams iconLayoutParams = (LayoutParams) coinImg.getLayoutParams();
-		FrameLayout.LayoutParams hitAnimLayout = new FrameLayout.LayoutParams(iconLayoutParams.width*3, iconLayoutParams.height*3, Gravity.CENTER_HORIZONTAL);
-		hitAnimLayout.topMargin = iconLayoutParams.topMargin;
-		if(iconLayoutParams.leftMargin!=0) hitAnimLayout.leftMargin = iconLayoutParams.leftMargin+iconLayoutParams.width/2;
-		if(iconLayoutParams.rightMargin!=0) hitAnimLayout.rightMargin = iconLayoutParams.rightMargin+iconLayoutParams.width/2;
-		coinsLayout.addView(hitAnim, hitAnimLayout);
-		FrameAnimation fa = new FrameAnimation(hitAnim, FrameFactory.createFramesFromAsset(this, "online_drive_game/eat_coin", 40));
-		fa.setFrameAnimListener(new FrameAnimListener() {
-			@Override
-			public void onStart(FrameAnimation animation) {
-			}
-			@Override
-			public void onPlaying(FrameAnimation animation, int frameIndex) {
-			}
-			@Override
-			public void onFinish(FrameAnimation animation) {
-				coinsLayout.removeView(hitAnim);
-			}
-		});
-		fa.start();
+		
+		//下面这段 影响性能 去掉
+//		final ImageView hitAnim = new ImageView(this);
+//		hitAnim.setScaleType(ScaleType.FIT_CENTER);
+//		FrameLayout.LayoutParams iconLayoutParams = (LayoutParams) coinImg.getLayoutParams();
+//		FrameLayout.LayoutParams hitAnimLayout = new FrameLayout.LayoutParams(iconLayoutParams.width*3, iconLayoutParams.height*3, Gravity.CENTER_HORIZONTAL);
+//		hitAnimLayout.topMargin = iconLayoutParams.topMargin;
+//		if(iconLayoutParams.leftMargin!=0) hitAnimLayout.leftMargin = iconLayoutParams.leftMargin+iconLayoutParams.width/2;
+//		if(iconLayoutParams.rightMargin!=0) hitAnimLayout.rightMargin = iconLayoutParams.rightMargin+iconLayoutParams.width/2;
+//		coinsLayout.addView(hitAnim, hitAnimLayout);
+//		
+//		FrameAnimation fa = new FrameAnimation(hitAnim, FrameFactory.createFramesFromAsset(this, "online_drive_game/eat_coin", 40));
+//		fa.setPreView(true);
+//		fa.setFrameAnimListener(new FrameAnimListener() {
+//			@Override
+//			public void onStart(FrameAnimation animation) {
+//			}
+//			@Override
+//			public void onPlaying(FrameAnimation animation, int frameIndex) {
+//			}
+//			@Override
+//			public void onFinish(FrameAnimation animation) {
+//				coinsLayout.removeView(hitAnim);
+//			}
+//		});
+//		fa.start();
+
 		
 		Animation flip = AnimationUtils.loadAnimation(this, R.anim.fade_out_flip_to_top);
 		coinImg.startAnimation(flip);

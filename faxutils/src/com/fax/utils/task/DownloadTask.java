@@ -24,6 +24,7 @@ public abstract class DownloadTask extends ResultAsyncTask<File> {
 	HttpRequestBase request;
 	File file;
 	boolean isContinueDown;
+	boolean isShowSize = true;
 	Handler handler;
     public DownloadTask(Context context, String url){
         this(context, new HttpGet(url), createTempDownFile(context, url), false);
@@ -42,7 +43,10 @@ public abstract class DownloadTask extends ResultAsyncTask<File> {
         handler = new Handler(Looper.getMainLooper());
         setToast(R.string.Task_DownloadComplete, R.string.Task_DownloadFail);
     }
-    @Override
+    public void setShowSize(boolean isShowSize) {
+		this.isShowSize = isShowSize;
+	}
+	@Override
     protected boolean performCancel(boolean mayInterruptIfRunning) {
         try {
             if(request!=null) request.abort();
@@ -65,8 +69,11 @@ public abstract class DownloadTask extends ResultAsyncTask<File> {
 						@Override
 						public void run() {
 							getProgressDialog().setProgress(percent);
-							getProgressDialog().setMessage(context.getString(R.string.Task_Downloading)
-									+sizeToString(loaded)+"/"+sizeToString(total));
+							String message = context.getString(R.string.Task_Downloading);
+							if(isShowSize){
+								message += sizeToString(loaded)+"/"+sizeToString(total);
+							}
+							getProgressDialog().setMessage(message);
 						}
 					});
 				}

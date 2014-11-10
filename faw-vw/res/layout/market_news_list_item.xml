@@ -12,7 +12,8 @@
 	    android:orientation="vertical" >
     	<ImageView 
     	    android:id="@android:id/icon"
-    	    android:minHeight="160dp"
+    	    android:scaleType="centerCrop"
+    	    android:minHeight="200dp"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"/>
     	<TextView 

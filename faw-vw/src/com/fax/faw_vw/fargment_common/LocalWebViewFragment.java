@@ -51,8 +51,9 @@ public class LocalWebViewFragment extends MyFragment implements DownloadListener
 		// User settings
 		settings.setJavaScriptEnabled(true);
 		settings.setLoadsImagesAutomatically(true);
-//		settings.setUseWideViewPort(true);
-//		settings.setLoadWithOverviewMode(true);
+		settings.setUseWideViewPort(true);
+		settings.setLoadWithOverviewMode(true);
+		settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
 		CookieSyncManager.createInstance(context);
 		CookieManager.getInstance().setAcceptCookie(true);
 		
@@ -91,7 +92,7 @@ public class LocalWebViewFragment extends MyFragment implements DownloadListener
         
 		webView.loadDataWithBaseURL(null, data, "text/html", "UTF-8", null);
 		webView.setDownloadListener(this);
-		
+
 		return (topBarContain);
 	}
 
