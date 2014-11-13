@@ -13,6 +13,7 @@ import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.ContentBody;
+import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
@@ -80,21 +81,20 @@ public class RequestFactory {
         HttpGet httpRequest = new HttpGet(url);
         return httpRequest;
     }
-    
     public static HttpRequestBase createPost(String postURL, List<NameValuePair> params) {
-        if(DEBUG) Log.d("fax", "createPost:" + postURL);
-        if(DEBUG) for(NameValuePair pair:params){
-            Log.d("fax", pair.getName()+":"+pair.getValue());
-        }
-        HttpRequestBase httpRequest = new HttpPost(postURL);
-        if (params!=null&&params.size()>0) {
-            try {
-                HttpEntity httpentity = new UrlEncodedFormEntity(params, HTTP.UTF_8);
-                ((HttpPost) httpRequest).setEntity(httpentity);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return httpRequest;
+    	if(DEBUG) Log.d("fax", "createPost:" + postURL);
+    	if(DEBUG) for(NameValuePair pair:params){
+    		Log.d("fax", pair.getName()+":"+pair.getValue());
+    	}
+    	HttpRequestBase httpRequest = new HttpPost(postURL);
+    	if (params!=null&&params.size()>0) {
+    		try {
+    			HttpEntity httpentity = new UrlEncodedFormEntity(params, HTTP.UTF_8);
+    			((HttpPost) httpRequest).setEntity(httpentity);
+    		} catch (Exception e) {
+    			e.printStackTrace();
+    		}
+    	}
+    	return httpRequest;
     }
 }

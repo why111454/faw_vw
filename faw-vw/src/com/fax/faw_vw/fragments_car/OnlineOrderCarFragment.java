@@ -1,13 +1,24 @@
 package com.fax.faw_vw.fragments_car;
 
+import java.util.ArrayList;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.fax.faw_vw.MyFragment;
 import com.fax.faw_vw.R;
@@ -15,18 +26,23 @@ import com.fax.faw_vw.fragment_dealer.SearchDealerFragment;
 import com.fax.faw_vw.fragments_main.ShowCarsFragment;
 import com.fax.faw_vw.model.CarModelList;
 import com.fax.faw_vw.model.Dealer;
+import com.fax.faw_vw.model.Response;
 import com.fax.faw_vw.model.ShowCarItem;
 import com.fax.faw_vw.views.MyTopBar;
+import com.fax.utils.http.HttpUtils;
+import com.fax.utils.task.ResultAsyncTask;
+import com.google.gson.Gson;
 
 public class OnlineOrderCarFragment extends MyFragment implements ShowCarsFragment.OnSelectItem, ModelListFragment.OnSelectItem{
 
     private ShowCarItem car;
     private CarModelList.CarModel carModel;
     private Dealer dealer;
-
+    private String isbook,paytype,buydate;
+    private EditText name_text,phone_text,email_text;
     @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.online_order_car, container, false);
+        final View view = inflater.inflate(R.layout.online_order_car, container, false);
         //从首页进入的话car为空。从车型中进入的话需要直接选中这个车型
 		car = (ShowCarItem) getArguments().getSerializable(ShowCarItem.class.getName());
 		dealer = (Dealer) getArguments().getSerializable(Dealer.class.getName());
@@ -60,11 +76,103 @@ public class OnlineOrderCarFragment extends MyFragment implements ShowCarsFragme
 			}
 		});
 
+        RadioGroup radioGroup3=(RadioGroup) view.findViewById(R.id.radio_group3);
+        isbook=(String) ((RadioButton) radioGroup3.findViewById(radioGroup3.getCheckedRadioButtonId())).getText();
+		radioGroup3.setOnCheckedChangeListener(new OnCheckedChangeListener(){
+		   @Override  
+            public void onCheckedChanged(RadioGroup group, int checkedId) {  
+                //点击事件获取的选择对象  
+			      RadioButton  checkRadioButton = (RadioButton) view.findViewById(checkedId); 
+			      isbook=(String) checkRadioButton.getText();
+            }  
+        });
+		RadioGroup radioGroup4=(RadioGroup) view.findViewById(R.id.radio_group4);
+		paytype=(String) ((RadioButton) radioGroup4.findViewById(radioGroup4.getCheckedRadioButtonId())).getText();
+		radioGroup4.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+			@Override  
+			public void onCheckedChanged(RadioGroup group, int checkedId) {  
+				//点击事件获取的选择对象  
+				RadioButton  checkRadioButton = (RadioButton) view.findViewById(checkedId); 
+				paytype=(String) checkRadioButton.getText();
+			}  
+		});
+		RadioGroup radioGroup5=(RadioGroup) view.findViewById(R.id.radio_group5);
+		buydate=(String) ((RadioButton) radioGroup5.findViewById(radioGroup5.getCheckedRadioButtonId())).getText();
+		radioGroup5.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+			@Override  
+			public void onCheckedChanged(RadioGroup group, int checkedId) {  
+				//点击事件获取的选择对象  
+				RadioButton  checkRadioButton = (RadioButton) view.findViewById(checkedId); 
+				buydate=(String) checkRadioButton.getText();
+			}  
+		});
+		
         view.findViewById(R.id.commit_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// TODO 接入接口提交信息（信息未填完Toast提示）
-				
+				name_text=	(EditText) view.findViewById(R.id.name_text);
+				phone_text=(EditText) view.findViewById(R.id.phone_text);
+				email_text=(EditText) view.findViewById(R.id.EditText01);
+				if(TextUtils.isEmpty(name_text.getText().toString())){
+					Toast.makeText(context, "请输入您的姓名", Toast.LENGTH_SHORT).show();
+				}
+				if(TextUtils.isEmpty(phone_text.getText().toString())){
+					Toast.makeText(context, "请输入您的手机号码", Toast.LENGTH_SHORT).show();
+				}
+				if(TextUtils.isEmpty(email_text.getText().toString())){
+					Toast.makeText(context, "请输入您的邮箱", Toast.LENGTH_SHORT).show();
+				}
+				if (car == null) {
+                    Toast.makeText(context, "请先选择车型", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+				if(carModel==null){
+					Toast.makeText(context, "请先选择配置", Toast.LENGTH_SHORT).show();
+					return;
+				}
+				if(dealer==null){
+					Toast.makeText(context, "请先选择经销商", Toast.LENGTH_SHORT).show();
+					return;
+				}
+				new ResultAsyncTask<Response>(context) {
+					@Override
+					protected Response doInBackground(Void... params) {
+						final ArrayList<NameValuePair> pairs=new ArrayList<NameValuePair>();
+						pairs.add(new BasicNameValuePair("adminid", dealer.getId()));
+						pairs.add(new BasicNameValuePair("admintitle", dealer.getName()));
+						pairs.add(new BasicNameValuePair("truename", name_text.getText().toString()));
+						pairs.add(new BasicNameValuePair("mobile", phone_text.getText().toString()));
+						pairs.add(new BasicNameValuePair("email", email_text.getText().toString()));
+						pairs.add(new BasicNameValuePair("modelid", car.getId()));
+						pairs.add(new BasicNameValuePair("modelname", car.getModel_cn()));
+						pairs.add(new BasicNameValuePair("configid", carModel.getId()));
+						pairs.add(new BasicNameValuePair("configname", carModel.getModel_name()));
+						pairs.add(new BasicNameValuePair("isbook",isbook));
+						pairs.add(new BasicNameValuePair("paytype",paytype));
+						pairs.add(new BasicNameValuePair("buydate", buydate));
+						String json=HttpUtils.reqForGet("http://faw-vw.allyes.com/index.php?g=api&m=ordercar&a=add",pairs);
+						try {
+							return new Gson().fromJson(json, Response.class);
+						} catch (Exception e) {
+						}
+						return null;
+					}
+					@Override
+					protected void onPostExecute(Response result) {
+					 if(result.getSuccess()==1){//登陆成功
+						 Toast.makeText(context, "信息提交成功", Toast.LENGTH_SHORT).show();
+							if(!((FragmentActivity) context).getSupportFragmentManager().popBackStackImmediate()){
+								((Activity) context).finish();
+							}
+						}else Toast.makeText(context, "信息提交失败", Toast.LENGTH_SHORT).show();
+						super.onPostExecute(result);
+					}
+					@Override
+					protected void onPostExecuteSuc(Response result) {
+						// TODO Auto-generated method stub
+					}
+				}.execute();
 			}
 		});
         return new MyTopBar(getActivity()).setLeftBack()

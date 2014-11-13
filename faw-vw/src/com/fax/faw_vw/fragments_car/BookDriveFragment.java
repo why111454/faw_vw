@@ -1,14 +1,13 @@
 package com.fax.faw_vw.fragments_car;
-
 import java.util.ArrayList;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
+import android.support.v4.app.FragmentActivity;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,8 +38,8 @@ public class BookDriveFragment extends MyFragment
     private ShowCarItem car;
     private CarModelList.CarModel carModel;
     private Dealer dealer;
-
-    private String bookdate,buydate;
+    private String bookdate;
+    private String buydate;
     private EditText name_text,phone_text;
     @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,6 +56,7 @@ public class BookDriveFragment extends MyFragment
                 addFragment(showCarsFragment);
             }
         });
+        
         view.findViewById(R.id.select_car_model_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,8 +77,8 @@ public class BookDriveFragment extends MyFragment
 				addFragment(dealerFragment);
 			}
 		});
-        
         RadioGroup radioGroup1=(RadioGroup) view.findViewById(R.id.radio_group1);
+        bookdate=(String) ((RadioButton) radioGroup1.findViewById(radioGroup1.getCheckedRadioButtonId())).getText();
 		radioGroup1.setOnCheckedChangeListener(new OnCheckedChangeListener(){
 		   @Override  
             public void onCheckedChanged(RadioGroup group, int checkedId) {  
@@ -88,6 +88,7 @@ public class BookDriveFragment extends MyFragment
             }  
         });
 		RadioGroup radioGroup2=(RadioGroup) view.findViewById(R.id.radio_group2);
+		buydate=(String) ((RadioButton) radioGroup2.findViewById(radioGroup2.getCheckedRadioButtonId())).getText();
 		radioGroup2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
 			@Override  
 			public void onCheckedChanged(RadioGroup group, int checkedId) {  
@@ -121,7 +122,6 @@ public class BookDriveFragment extends MyFragment
 					Toast.makeText(context, "请先选择经销商", Toast.LENGTH_SHORT).show();
 					return;
 				}
-				
 				new ResultAsyncTask<Response>(context) {
 					@Override
 					protected Response doInBackground(Void... params) {
@@ -145,17 +145,19 @@ public class BookDriveFragment extends MyFragment
 					}
 					@Override
 					protected void onPostExecute(Response result) {
-						 if(result.getSuccess()==1){//登陆成功
-								Toast.makeText(context, "信息提交成功", Toast.LENGTH_SHORT).show();
-								
-							}else Toast.makeText(context, "信息提交失败", Toast.LENGTH_SHORT).show();
-							super.onPostExecute(result);
-						}
-						@Override
-						protected void onPostExecuteSuc(Response result) {
-							// TODO Auto-generated method stub
-						}
-					}.setProgressDialog().execute();
+					 if(result.getSuccess()==1){//登陆成功
+						 Toast.makeText(context, "信息提交成功", Toast.LENGTH_SHORT).show();
+							if(!((FragmentActivity) context).getSupportFragmentManager().popBackStackImmediate()){
+								((Activity) context).finish();
+							}
+						}else Toast.makeText(context, "信息提交失败", Toast.LENGTH_SHORT).show();
+						super.onPostExecute(result);
+					}
+					@Override
+					protected void onPostExecuteSuc(Response result) {
+						// TODO Auto-generated method stub
+					}
+				}.execute();
 			}
 		});
 

@@ -132,6 +132,7 @@
                 android:textSize="12sp" />
 
             <RadioGroup
+                android:id="@+id/radio_group3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
@@ -187,6 +188,7 @@
                 android:textSize="12sp" />
 
             <RadioGroup
+                android:id="@+id/radio_group4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
@@ -208,6 +210,7 @@
         </LinearLayout>
 
         <com.fax.utils.view.MultiLineRadioGroup
+            android:id="@+id/radio_group5"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
         	android:layout_marginTop="8dp"
