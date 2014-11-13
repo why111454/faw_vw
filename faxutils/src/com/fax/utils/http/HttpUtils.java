@@ -124,6 +124,11 @@ public class HttpUtils {
         HttpRequestBase httpPost = RequestFactory.createPost(postUrl);
         return executeForString(httpPost);
 	}
+	public static String reqForGet(String getURL, List<NameValuePair> params) {
+		if(TextUtils.isEmpty(getURL)) return null;
+		HttpRequestBase httpGet = RequestFactory.createGet(getURL, params);
+		return executeForString(httpGet);
+	}
     public static String reqForGet(String getURL) {
         if(TextUtils.isEmpty(getURL)) return null;
         HttpRequestBase httpGet = RequestFactory.createGet(getURL);

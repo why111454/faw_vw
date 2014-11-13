@@ -13,7 +13,9 @@ import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.ContentBody;
+import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -57,20 +59,38 @@ public class RequestFactory {
         List<NameValuePair> pairList= Arrays.asList(pairs);
         return createPost(postUrl, pairList);
     }
-    public static HttpRequestBase createPost(String postURL, List<NameValuePair> params) {
-        if(DEBUG) Log.d("fax", "createPost:" + postURL);
+    public static HttpRequestBase createGet(String getURL, List<NameValuePair> params) {
+        if(DEBUG) Log.d("fax", "createGet:" + getURL);
         if(DEBUG) for(NameValuePair pair:params){
             Log.d("fax", pair.getName()+":"+pair.getValue());
         }
-        HttpRequestBase httpRequest = new HttpPost(postURL);
+        String url = null;
         if (params!=null&&params.size()>0) {
             try {
-                HttpEntity httpentity = new UrlEncodedFormEntity(params, HTTP.UTF_8);
-                ((HttpPost) httpRequest).setEntity(httpentity);
+            	  UrlEncodedFormEntity httpentity = new UrlEncodedFormEntity(params, HTTP.UTF_8);
+                  url=getURL+"&"+EntityUtils.toString(httpentity);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+        Log.e("lib", "createGet:" + url);
+        HttpGet httpRequest = new HttpGet(url);
         return httpRequest;
+    }
+    public static HttpRequestBase createPost(String postURL, List<NameValuePair> params) {
+    	if(DEBUG) Log.d("fax", "createPost:" + postURL);
+    	if(DEBUG) for(NameValuePair pair:params){
+    		Log.d("fax", pair.getName()+":"+pair.getValue());
+    	}
+    	HttpRequestBase httpRequest = new HttpPost(postURL);
+    	if (params!=null&&params.size()>0) {
+    		try {
+    			HttpEntity httpentity = new UrlEncodedFormEntity(params, HTTP.UTF_8);
+    			((HttpPost) httpRequest).setEntity(httpentity);
+    		} catch (Exception e) {
+    			e.printStackTrace();
+    		}
+    	}
+    	return httpRequest;
     }
 }
