@@ -42,6 +42,7 @@ import android.util.Log;
 
 /**
  * 方便使用http请求的工具类
+ * 
  */
 public class HttpUtils {
 //	static final String connectFail="错误：连接失败";
@@ -123,6 +124,11 @@ public class HttpUtils {
         if(TextUtils.isEmpty(postUrl)) return null;
         HttpRequestBase httpPost = RequestFactory.createPost(postUrl);
         return executeForString(httpPost);
+	}
+	public static String reqForGet(String getURL, List<NameValuePair> params) {
+		if(TextUtils.isEmpty(getURL)) return null;
+		HttpRequestBase httpGet = RequestFactory.createGet(getURL, params);
+		return executeForString(httpGet);
 	}
     public static String reqForGet(String getURL) {
         if(TextUtils.isEmpty(getURL)) return null;

@@ -18,6 +18,7 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,6 +54,7 @@ import com.fax.faw_vw.MyApp;
 import com.fax.faw_vw.MyFragment;
 import com.fax.faw_vw.R;
 import com.fax.faw_vw.fragments_car.BookDriveFragment;
+import com.fax.faw_vw.fragments_car.RequestPriceFragment;
 import com.fax.faw_vw.model.CityInfo;
 import com.fax.faw_vw.model.Dealer;
 import com.fax.faw_vw.model.ProvinceList;
@@ -67,6 +69,7 @@ import com.google.gson.reflect.TypeToken;
 
 /**经销商查询 */
 public class SearchDealerFragment extends MyFragment {
+
 	private FirstHideSpinnerAdapter emptyAdapter = new FirstHideSpinnerAdapter(new String[]{null}){
 		@Override
 		public TextView getView(int position, View convertView, ViewGroup parent) {
@@ -248,9 +251,14 @@ public class SearchDealerFragment extends MyFragment {
 					backStack();
 					getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, MyApp.createIntent(dealer));
 					
-				}else{
-					addFragment(MyApp.createFragment(BookDriveFragment.class, dealer));
 				}
+				if(getTargetFragment() instanceof RequestPriceFragment){
+					backStack();
+					getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, MyApp.createIntent(dealer));
+				}
+				/*else{
+					addFragment(MyApp.createFragment(BookDriveFragment.class, dealer));
+				}*/
 			}
 		});
 		view.findViewById(R.id.map_info_contents_tel).setOnClickListener(new View.OnClickListener() {
@@ -384,6 +392,9 @@ public class SearchDealerFragment extends MyFragment {
 				if (marker.isInfoWindowShown()) {
 					marker.hideInfoWindow();
 				} else {
+					if(getTargetFragment() instanceof RequestPriceFragment){
+				((Button) mContents.findViewById(R.id.map_info_contents_order_drive)).setText("报价索取");
+					}
 					marker.showInfoWindow();
 				}
 				return false;

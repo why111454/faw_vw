@@ -3,13 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:paddingLeft="16dp"
-        android:paddingRight="16dp">
+        android:paddingRight="16dp" >
 
         <LinearLayout
             android:orientation="horizontal"
@@ -70,7 +69,7 @@
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:inputType="phone"
+                android:inputType="textEmailAddress"
                 android:ems="10"
                 android:id="@+id/email_text"
                 android:layout_weight="10"
@@ -82,7 +81,7 @@
             android:layout_height="fill_parent"
             android:layout_marginTop="8dp"
             android:stretchColumns="1">
-
+       
             <TableRow
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent">
@@ -118,53 +117,9 @@
                     android:gravity="left|center_vertical" />
             </TableRow>
 
+           
+
         </TableLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginTop="8dp">
-
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:text="*省份"
-                android:layout_gravity="center_vertical" />
-
-            <Button
-                android:text="请选择省份"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/select_province_button"
-                android:layout_column="1"
-                android:paddingLeft="8dp"
-                android:gravity="left|center_vertical" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginTop="8dp">
-
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:text="*城镇/城市"
-                android:layout_gravity="center_vertical" />
-
-            <Button
-                android:text="请选择城镇/城市"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/select_city_button"
-                android:layout_column="1"
-                android:paddingLeft="8dp"
-                android:gravity="left|center_vertical" />
-
-        </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -194,18 +149,6 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_marginTop="8dp">
-
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:text="经销商地址"
-                android:layout_gravity="center_vertical" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="查找经销商地图"
-                android:id="@+id/map_button" />
         </LinearLayout>
 
         <TextView

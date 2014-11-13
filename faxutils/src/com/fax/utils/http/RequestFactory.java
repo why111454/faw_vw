@@ -14,6 +14,7 @@ import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.ContentBody;
 import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -57,6 +58,29 @@ public class RequestFactory {
         List<NameValuePair> pairList= Arrays.asList(pairs);
         return createPost(postUrl, pairList);
     }
+    /**
+     * httpoGet多参数请求
+     * @author lib
+     * */
+    public static HttpRequestBase createGet(String getURL, List<NameValuePair> params) {
+        if(DEBUG) Log.d("fax", "createGet:" + getURL);
+        if(DEBUG) for(NameValuePair pair:params){
+            Log.d("fax", pair.getName()+":"+pair.getValue());
+        }
+        String url = null;
+        if (params!=null&&params.size()>0) {
+            try {
+            	  UrlEncodedFormEntity httpentity = new UrlEncodedFormEntity(params, HTTP.UTF_8);
+                  url=getURL+"&"+EntityUtils.toString(httpentity);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        Log.e("lib", "createGet:" + url);
+        HttpGet httpRequest = new HttpGet(url);
+        return httpRequest;
+    }
+    
     public static HttpRequestBase createPost(String postURL, List<NameValuePair> params) {
         if(DEBUG) Log.d("fax", "createPost:" + postURL);
         if(DEBUG) for(NameValuePair pair:params){
