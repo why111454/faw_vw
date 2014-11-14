@@ -10,6 +10,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.ContentBody;
@@ -68,16 +69,19 @@ public class RequestFactory {
         if(DEBUG) for(NameValuePair pair:params){
             Log.d("fax", pair.getName()+":"+pair.getValue());
         }
-        String url = null;
+        String url = getURL;//如果params是空，那么会直接用这个地址来请求。
         if (params!=null&&params.size()>0) {
             try {
-            	  UrlEncodedFormEntity httpentity = new UrlEncodedFormEntity(params, HTTP.UTF_8);
-                  url=getURL+"&"+EntityUtils.toString(httpentity);
+            	if(getURL.contains("?")){//已经带参数了，地址用&来拼接
+            		url = getURL+"&"+URLEncodedUtils.format(params, "UTF-8");
+            	}else{//否则用?来拼接
+            		url = getURL+"?"+URLEncodedUtils.format(params, "UTF-8");
+            	}
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        Log.e("lib", "createGet:" + url);
+        if(DEBUG) Log.e("lib", "createGet:" + url);
         HttpGet httpRequest = new HttpGet(url);
         return httpRequest;
     }

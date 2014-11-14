@@ -116,12 +116,15 @@ public class OnlineOrderCarFragment extends MyFragment implements ShowCarsFragme
 				email_text=(EditText) view.findViewById(R.id.EditText01);
 				if(TextUtils.isEmpty(name_text.getText().toString())){
 					Toast.makeText(context, "请输入您的姓名", Toast.LENGTH_SHORT).show();
+					return;
 				}
 				if(TextUtils.isEmpty(phone_text.getText().toString())){
 					Toast.makeText(context, "请输入您的手机号码", Toast.LENGTH_SHORT).show();
+					return;
 				}
 				if(TextUtils.isEmpty(email_text.getText().toString())){
 					Toast.makeText(context, "请输入您的邮箱", Toast.LENGTH_SHORT).show();
+					return;
 				}
 				if (car == null) {
                     Toast.makeText(context, "请先选择车型", Toast.LENGTH_SHORT).show();

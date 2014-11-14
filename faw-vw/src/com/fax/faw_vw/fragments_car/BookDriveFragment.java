@@ -106,9 +106,11 @@ public class BookDriveFragment extends MyFragment
 				phone_text=(EditText) view.findViewById(R.id.phone_text);
 				if(TextUtils.isEmpty(name_text.getText().toString())){
 					Toast.makeText(context, "请输入您的姓名", Toast.LENGTH_SHORT).show();
+					return;
 				}
 				if(TextUtils.isEmpty(phone_text.getText().toString())){
 					Toast.makeText(context, "请输入您的手机号码", Toast.LENGTH_SHORT).show();
+					return;
 				}
 				if (car == null) {
                     Toast.makeText(context, "请先选择车辆", Toast.LENGTH_SHORT).show();
