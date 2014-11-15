@@ -30,8 +30,9 @@ public class OnlineDriveGamePreStartFrag extends MyFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final ShowCarItem showCarItem = getSerializableExtra(ShowCarItem.class);
+		View view;
 		if(showCarItem!=null){//已选中了车型
-			View view = inflater.inflate(R.layout.online_drive_game_pre_start, container, false);
+			view = inflater.inflate(R.layout.online_drive_game_pre_start, container, false);
 			view.findViewById(android.R.id.button1).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -40,10 +41,9 @@ public class OnlineDriveGamePreStartFrag extends MyFragment {
 								.putExtra(ShowCarItem.class.getName(), showCarItem));
 				}
 			});
-			return view;
 			
 		}else{//没有选中车型，再次选一遍
-			View view = inflater.inflate(R.layout.online_drive_game_choose_car, container, false);
+			view = inflater.inflate(R.layout.online_drive_game_choose_car, container, false);
 			final ViewPager viewPager = (ViewPager) view.findViewById(R.id.view_pager);
 			viewPager.setAdapter(new SamePagerAdapter<AssetFrame>(FrameFactory.createFramesFromAsset(context, "online_drive_game/choose_cars", -1)) {
 				@Override
@@ -64,15 +64,15 @@ public class OnlineDriveGamePreStartFrag extends MyFragment {
 								.putExtra(ShowCarItem.class.getName(), CHOOSE_CAR_ITEMS[viewPager.getCurrentItem()]));
 				}
 			});
-			view.findViewById(android.R.id.closeButton).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					backStack();
-				}
-			});
-			return view;
 		}
-		
+
+		view.findViewById(android.R.id.closeButton).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				backStack();
+			}
+		});
+		return view;
 	}
 
 }

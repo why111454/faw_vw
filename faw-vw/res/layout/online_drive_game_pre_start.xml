@@ -4,9 +4,16 @@
     android:layout_height="match_parent"
     android:background="@drawable/online_drive_game_pre_start_bg" >
     <com.fax.faw_vw.views.clickshow.ClickShowImageView 
+        android:id="@android:id/closeButton"
+        android:layout_margin="10dp"
+        android:layout_gravity="bottom|left"
+        android:src="@drawable/online_drive_game_choose_cars_back"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"/>
+    
+    <com.fax.faw_vw.views.clickshow.ClickShowImageView 
         android:id="@android:id/button1"
-        android:layout_marginBottom="10dp"
-        android:layout_gravity="bottom|center_horizontal"
+        android:layout_gravity="bottom|right"
         android:src="@drawable/online_drive_game_pre_start_btn"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"/>
