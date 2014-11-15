@@ -6,6 +6,7 @@ import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Animatable;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -88,6 +89,13 @@ public class FrameAnimation implements Animatable{
 		this.isOneShot = isOneShot;
 	}
 
+	public void showPreStartView(){
+		stop();
+		mCurrentFrameIndex = 0;
+		if(mFrames!=null && mFrames.size()>0 && mView!=null){
+			setFrameToView(mView, mFrames.get(0));
+		}
+	}
 	@Override
 	public void start() {
 		if(animTask!=null) animTask.cancel(true);
@@ -99,7 +107,16 @@ public class FrameAnimation implements Animatable{
 	}
 	@Override
 	public void stop() {
-		animTask.cancel(true);
+		if(animTask!=null) animTask.cancel(true);
+		isFinish = true;
+	}
+	public void seekTo(int position){
+		int fixPosition = Math.max(position, mFrames.size()-1);
+		if(!isFinish){
+			mCurrentFrameIndex = fixPosition;
+		}else{
+			setFrameToView(mView, mFrames.get(fixPosition));
+		}
 	}
 	@Override
 	public boolean isRunning() {
@@ -128,14 +145,6 @@ public class FrameAnimation implements Animatable{
 				isFinish=true;
 				return null;
 			}
-			while(decodingFrameIndex == mCurrentFrameIndex+1){//主线程还没有收到上一次publish的图片，等候
-				try {
-					Thread.sleep(10);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				return null;
-			}
 //			int mCurrentFrameIndex = mCurrentFrame==null ? -1:mFrames.indexOf(mCurrentFrame);
 			decodingFrameIndex = mCurrentFrameIndex+1;//获得下一帧
 			if(decodingFrameIndex >= mFrames.size() -1){//到尾了
@@ -146,6 +155,14 @@ public class FrameAnimation implements Animatable{
 		}
 		
 		private void playFrame(){
+			while(!mView.isShown() || mView.getWidth()==0 || mView.getHeight()==0 ){//图片还没有被显示，等候
+				try {
+					Thread.sleep(20);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			
 			Frame frame = getPreShowFrame();
 			if(frame==null) return;
 			long timeBeforeDecode=System.currentTimeMillis();
@@ -183,7 +200,7 @@ public class FrameAnimation implements Animatable{
 			}
 			return null;
 		}
-		LruCache<Integer, Frame> cacheFrames = new LruCache<Integer, Frame>(2){
+		LruCache<Integer, Frame> cacheFrames = new LruCache<Integer, Frame>(3){
 			@Override
 			protected void entryRemoved(boolean evicted, Integer key, Frame oldValue, Frame newValue) {
 				super.entryRemoved(evicted, key, oldValue, newValue);
@@ -200,7 +217,7 @@ public class FrameAnimation implements Animatable{
 			}
 			
 			Frame frame=values[0];
-			Drawable drawable = frame.getDecodedDrawable();
+			Drawable drawable = frame.decodeDrawable(mView.getContext());
 			setDrawableToView(mView, drawable);
 			mCurrentFrameIndex = decodingFrameIndex;
 //			Log.d("fax", "setDrawableToView, mCurrentFrameIndex:"+mCurrentFrameIndex);

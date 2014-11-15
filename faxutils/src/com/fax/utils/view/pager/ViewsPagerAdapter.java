@@ -2,6 +2,7 @@ package com.fax.utils.view.pager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
@@ -23,8 +24,8 @@ public class ViewsPagerAdapter extends PagerAdapter {
 		this.mListViews = new ArrayList<View>(Arrays.asList(views));// 构造方法，参数是我们的页卡，这样比较方便。
 	}
 
-	public ViewsPagerAdapter(ArrayList<View> mListViews) {
-		this.mListViews = mListViews;// 构造方法，参数是我们的页卡，这样比较方便。
+	public ViewsPagerAdapter(List<? extends View> mListViews) {
+		this.mListViews = new ArrayList<View>(mListViews);// 构造方法，参数是我们的页卡，这样比较方便。
 	}
 
 	public void addView(View view) {

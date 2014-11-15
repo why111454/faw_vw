@@ -50,8 +50,8 @@ public class PointIndicator extends LinearLayout {
 		}
 	}
 	private int checkedPosition;
-	private int colorChecked = Color.WHITE;
-	private int colorNormal = 0x55ffffff;
+	private int colorChecked = 0xff004898;
+	private int colorNormal = Color.WHITE;
 	private Paint paint;
 	private View createPointView(final int position){
 		View pointView = new View(getContext()){
