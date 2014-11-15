@@ -100,9 +100,9 @@ public class FrameAnimation implements Animatable{
 	public void start() {
 		if(animTask!=null) animTask.cancel(true);
 		mCurrentFrameIndex = 0;
+		isFinish = false;
 		animTask = new InnerTask();
 		animTask.execute();
-		isFinish = false;
 		if(mListener!=null) mListener.onStart(this);
 	}
 	@Override
@@ -154,13 +154,9 @@ public class FrameAnimation implements Animatable{
 			return mFrames.get(decodingFrameIndex);
 		}
 		
-		private void playFrame(){
-			while(!mView.isShown() || mView.getWidth()==0 || mView.getHeight()==0 ){//图片还没有被显示，等候
-				try {
-					Thread.sleep(20);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+		private void playFrame() throws InterruptedException{
+			while(mView.isLayoutRequested()){//图片等待被显示，等候
+				Thread.sleep(20);
 			}
 			
 			Frame frame = getPreShowFrame();
@@ -173,26 +169,26 @@ public class FrameAnimation implements Animatable{
 				frame.decodeDrawable(mView.getContext());
 			}
 			publishProgress(frame);
-			try {
-				long timeDecodeUse = System.currentTimeMillis()-timeBeforeDecode;
-				long sleep = frame.getDuration()-timeDecodeUse;
-				if(sleep>0) Thread.sleep(sleep);
-			} catch (Exception ignored) {
-			}
+			
+			long timeDecodeUse = System.currentTimeMillis()-timeBeforeDecode;
+			long sleep = frame.getDuration()-timeDecodeUse;
+			if(sleep>=0) Thread.sleep(sleep);
 		}
 		@Override
 		protected Void doInBackground(Void... params) {
 			while(true){
 				while(isPause){
-					try { Thread.sleep(500);
+					try { 
+						Thread.sleep(500);
 					} catch (InterruptedException e) {
+						break;
 					}
 				}
 				
 				try {
 					playFrame();
-				} catch (Exception e) {
-					e.printStackTrace();
+				} catch (InterruptedException e) {
+					break;
 				}
 				if(isFinish){
 					break;

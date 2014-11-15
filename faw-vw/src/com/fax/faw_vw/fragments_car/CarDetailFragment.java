@@ -150,7 +150,7 @@ public class CarDetailFragment extends MyFragment {
 		scrollView.findViewById(R.id.showcar_detail_bt3).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FragmentContainLandscape.start(getActivity(), OnlineDriveGamePreStartFrag.class);
+				FragmentContainLandscape.start(getActivity(), OnlineDriveGamePreStartFrag.class, MyApp.createIntent(showCarItem), 0);
 			}
 		});
 		//经销商查询

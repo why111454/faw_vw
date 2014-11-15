@@ -39,6 +39,7 @@ import android.widget.ImageView.ScaleType;
 
 import com.fax.faw_vw.MyFragment;
 import com.fax.faw_vw.R;
+import com.fax.faw_vw.model.ShowCarItem;
 import com.fax.faw_vw.util.SimpleDirectionGesture;
 import com.fax.utils.frameAnim.BasicBitmapFrame;
 import com.fax.utils.frameAnim.Frame;
@@ -175,12 +176,14 @@ public class OnlineDriveGameActivity extends Activity {
 	boolean canEatLeft,canEatRight;
 	boolean canEatCenter = true;
 	private void initControlBtn(){
-		final List<? extends Frame> totalFrames = FrameFactory.createFramesFromAsset(this, "online_drive_game/car_golf", 30);
-		final List<? extends Frame> centerToLeft = totalFrames.subList(0, 14);
-		final List<? extends Frame> leftToCenter = totalFrames.subList(14, 28);
-		final List<? extends Frame> centerToRight = totalFrames.subList(28, 41);
-		final List<? extends Frame> rightToCenter = totalFrames.subList(41, totalFrames.size());
+		ShowCarItem showCarItem = (ShowCarItem) getIntent().getSerializableExtra(ShowCarItem.class.getName());
+		final List<? extends Frame> totalFrames = FrameFactory.createFramesFromAsset(this, "online_drive_game/cars/"+showCarItem.getModel_en(), 30);
+		final List<? extends Frame> centerToLeft = totalFrames.subList(0, 12);
+		final List<? extends Frame> leftToCenter = totalFrames.subList(12, 25);
+		final List<? extends Frame> centerToRight = totalFrames.subList(25, 38);
+		final List<? extends Frame> rightToCenter = totalFrames.subList(38, totalFrames.size());
 		
+		FrameAnimation.setFrameToView(carImg, totalFrames.get(0));
 		controlBtn.setOnTouchListener(new SimpleDirectionGesture(controlBtn) {
 			List<? extends Frame> lastFrames;
 			FrameAnimation lastAnim;
