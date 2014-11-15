@@ -221,7 +221,7 @@ public class CarDetailFragment extends MyFragment {
 					return super.onScroll(e1, e2, distanceX, distanceY);
 				}
 				@Override
-				protected void onFling(int direction) {//返回车型的父页面
+				public void onFling(int direction) {//返回车型的父页面
 					if(carItemChild!=null && direction == SimpleDirectionGesture.Direction_Left){
 						replaceFragment(MyApp.createFragment(CarDetailFragment.class, showCarItem));
 					}

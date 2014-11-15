@@ -148,8 +148,11 @@ public class FrameAnimation implements Animatable{
 //			int mCurrentFrameIndex = mCurrentFrame==null ? -1:mFrames.indexOf(mCurrentFrame);
 			decodingFrameIndex = mCurrentFrameIndex+1;//获得下一帧
 			if(decodingFrameIndex >= mFrames.size() -1){//到尾了
-				if(isOneShot) isFinish=true;//结束
-				else decodingFrameIndex=0;//重复
+				if(isOneShot){
+					isFinish=true;//结束
+					decodingFrameIndex = mFrames.size()-1;
+					
+				} else decodingFrameIndex=0;//重复
 			}
 			return mFrames.get(decodingFrameIndex);
 		}
@@ -208,11 +211,11 @@ public class FrameAnimation implements Animatable{
 		@Override
 		protected void onProgressUpdate(Frame... values) {
 			Frame lastFrame = getCurrentFrame();
-			if(lastFrame!=null){
+			Frame frame=values[0];
+			if(lastFrame!=null && lastFrame!= frame){
 				cacheFrames.put(mCurrentFrameIndex, lastFrame);
 			}
 			
-			Frame frame=values[0];
 			Drawable drawable = frame.decodeDrawable(mView.getContext());
 			setDrawableToView(mView, drawable);
 			mCurrentFrameIndex = decodingFrameIndex;

@@ -72,7 +72,7 @@ public class Show360FrameFragment extends MyFragment {
 		
 		view.setOnTouchListener(new SimpleDirectionGesture(view){
             @Override
-            protected void onFling(int direction) {
+            public void onFling(int direction) {
             	if(direction == SimpleDirectionGesture.Direction_Left){
             		playNextFrames();
             	}else if(direction == SimpleDirectionGesture.Direction_Right){

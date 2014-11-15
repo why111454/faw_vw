@@ -45,5 +45,5 @@ public abstract class SimpleDirectionGesture extends GestureDetector.SimpleOnGes
         }
         return true;
     }
-    protected abstract void onFling(int direction);
+    public abstract void onFling(int direction);
 }

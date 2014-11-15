@@ -8,19 +8,21 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
@@ -31,13 +33,12 @@ import android.view.animation.Transformation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 import android.widget.TextView;
 import android.widget.VideoView;
-import android.widget.ImageView.ScaleType;
 
-import com.fax.faw_vw.MyFragment;
+import com.fax.faw_vw.MyApp;
 import com.fax.faw_vw.R;
 import com.fax.faw_vw.model.ShowCarItem;
 import com.fax.faw_vw.util.SimpleDirectionGesture;
@@ -70,6 +71,7 @@ public class OnlineDriveGameActivity extends Activity {
 		initVideoView();
 		initControlBtn();
 		initEatCoin();
+		initSensor();
 	}
 	
 	@Override
@@ -87,6 +89,29 @@ public class OnlineDriveGameActivity extends Activity {
 	protected void onDestroy() {
 		super.onDestroy();
 		soundPool.release();
+		mSensorManager.unregisterListener(sensorEventListener);
+	}
+	
+	SensorEventListener sensorEventListener = new SensorEventListener() {
+		@Override
+		public void onSensorChanged(SensorEvent event) {
+			if(directionGesture==null) return;
+			if(event.values[1]<-2){
+				directionGesture.onFling(SimpleDirectionGesture.Direction_Left);
+			}else if(event.values[1]>2){
+				directionGesture.onFling(SimpleDirectionGesture.Direction_Right);
+			}
+		}
+		@Override
+		public void onAccuracyChanged(Sensor sensor, int accuracy) {
+		}
+	};
+	SensorManager mSensorManager;
+	private void initSensor(){
+		mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);  
+		Sensor mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);// TYPE_GRAVITY  
+        // 参数三，检测的精准度  
+        mSensorManager.registerListener(sensorEventListener, mSensor, SensorManager.SENSOR_DELAY_NORMAL);//SENSOR_DELAY_GAME
 	}
 
 	private void initVideoView(){
@@ -157,6 +182,22 @@ public class OnlineDriveGameActivity extends Activity {
 	private void startGame(){
 		carImg.clearAnimation();
 		videoView.seekTo(1);
+
+		if(!MyApp.hasKeyOnce("online_game_tip")){
+			ImageView tipImage = new ImageView(this);
+			tipImage.setImageResource(R.drawable.online_drive_game_tips);
+			tipImage.setScaleType(ScaleType.CENTER_CROP);
+			addContentView(tipImage, new FrameLayout.LayoutParams(-1, -1));
+			tipImage.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					((ViewGroup)v.getParent()).removeView(v);
+					startGame();
+				}
+			});
+			return;
+		}
+		
 		List<? extends Frame> frames = FrameFactory.createFramesFromAsset(OnlineDriveGameActivity.this, "online_drive_game/game_start", 30);
 		showCenterInfoAnim(frames, new FrameAnimListener() {
 			@Override
@@ -175,20 +216,21 @@ public class OnlineDriveGameActivity extends Activity {
 	
 	boolean canEatLeft,canEatRight;
 	boolean canEatCenter = true;
+	SimpleDirectionGesture directionGesture;
 	private void initControlBtn(){
 		ShowCarItem showCarItem = (ShowCarItem) getIntent().getSerializableExtra(ShowCarItem.class.getName());
-		final List<? extends Frame> totalFrames = FrameFactory.createFramesFromAsset(this, "online_drive_game/cars/"+showCarItem.getModel_en(), 30);
+		final List<? extends Frame> totalFrames = FrameFactory.createFramesFromAsset(this, "online_drive_game/cars/"+showCarItem.getModel_en(), 20);
 		final List<? extends Frame> centerToLeft = totalFrames.subList(0, 12);
 		final List<? extends Frame> leftToCenter = totalFrames.subList(12, 25);
 		final List<? extends Frame> centerToRight = totalFrames.subList(25, 38);
 		final List<? extends Frame> rightToCenter = totalFrames.subList(38, totalFrames.size());
 		
 		FrameAnimation.setFrameToView(carImg, totalFrames.get(0));
-		controlBtn.setOnTouchListener(new SimpleDirectionGesture(controlBtn) {
+		controlBtn.setOnTouchListener(directionGesture = new SimpleDirectionGesture(controlBtn) {
 			List<? extends Frame> lastFrames;
 			FrameAnimation lastAnim;
 			@Override
-			protected void onFling(int direction) {
+			public void onFling(int direction) {
 				if(!videoView.isPlaying()) return;//视频没有在播放不能控制
 				
 				if(lastAnim==null) lastAnim = new FrameAnimation(carImg);
@@ -253,10 +295,6 @@ public class OnlineDriveGameActivity extends Activity {
 		});
 	}
 	
-
-	private void showCenterInfoAnim(List<Frame> frames){
-		showCenterInfoAnim(frames, null);
-	}
 	private void showCenterInfoAnim(List<? extends Frame> frames, final FrameAnimListener animListener){
 		FrameAnimation fa = new FrameAnimation(centerInfo, frames);
 		fa.setFrameAnimListener(new FrameAnimListener() {
@@ -285,7 +323,7 @@ public class OnlineDriveGameActivity extends Activity {
 			int delay;
 			@Override
 			public void run() {
-				if(videoView.isPlaying() && videoView.getDuration()-videoView.getCurrentPosition()>8000){
+				if(videoView.isPlaying() && videoView.getDuration()-videoView.getCurrentPosition()>4000){
 					addCoin(nextRoad);
 					
 					delay = 2000;
@@ -294,7 +332,7 @@ public class OnlineDriveGameActivity extends Activity {
 					handler.postDelayed(this, delay);
 				}
 			}
-		}, 3000);
+		}, 2000);
 	}
 	/**
 	 * 加一个金币
