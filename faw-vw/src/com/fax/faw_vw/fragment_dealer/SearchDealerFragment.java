@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
+import android.view.animation.BounceInterpolator;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,9 +30,11 @@ import com.amap.api.location.AMapLocationListener;
 import com.amap.api.location.LocationManagerProxy;
 import com.amap.api.location.LocationProviderProxy;
 import com.amap.api.maps.AMap;
+import com.amap.api.maps.AMap.CancelableCallback;
 import com.amap.api.maps.AMap.InfoWindowAdapter;
 import com.amap.api.maps.AMap.OnMarkerClickListener;
 import com.amap.api.maps.AMapUtils;
+import com.amap.api.maps.CameraUpdate;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.LocationSource.OnLocationChangedListener;
@@ -276,7 +279,8 @@ public class SearchDealerFragment extends MyFragment {
 				startActivity(intent);
 			}
 		});
-		Animation a = AnimationUtils.loadAnimation(context, R.anim.big_and_restore);
+		Animation a = AnimationUtils.loadAnimation(context, R.anim.alpha_small_to_normal);
+		a.setInterpolator(new BounceInterpolator());
 		a.setAnimationListener(new AnimationListener() {
 			@Override
 			public void onAnimationStart(Animation animation) {
@@ -362,6 +366,7 @@ public class SearchDealerFragment extends MyFragment {
     private MapView mapView;  
     private OnLocationChangedListener mListener;  
     LocationSource locationSource;
+    private Marker lastShowInfoMarker;
 	public static final LatLng SHANGHAI = new LatLng(31.238068, 121.501654);// 上海市经纬度
 	CameraPosition LUJIAZUI = new CameraPosition.Builder().target(SHANGHAI).zoom(11).bearing(0).tilt(30).build();
     private void setUpMap() {  
@@ -394,13 +399,30 @@ public class SearchDealerFragment extends MyFragment {
 //        aMap.setOnMarkerDragListener(this);
         aMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 			@Override
-			public boolean onMarkerClick(Marker marker) {
+			public boolean onMarkerClick(final Marker marker) {
 				if (marker.isInfoWindowShown()) {
 					marker.hideInfoWindow();
 				} else {
-					marker.showInfoWindow();
+					aMap.animateCamera(CameraUpdateFactory.changeLatLng(marker.getPosition()), new CancelableCallback(){
+						@Override
+						public void onCancel() {
+						}
+						@Override
+						public void onFinish() {
+							marker.showInfoWindow();
+							lastShowInfoMarker = marker;
+						}
+					});
 				}
-				return false;
+				return true;
+			}
+		});
+        aMap.setOnMapClickListener(new AMap.OnMapClickListener() {
+			@Override
+			public void onMapClick(LatLng latlng) {
+				if(lastShowInfoMarker!=null){
+					lastShowInfoMarker.hideInfoWindow();
+				}
 			}
 		});
         
