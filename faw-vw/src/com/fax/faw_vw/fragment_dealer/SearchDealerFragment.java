@@ -246,22 +246,22 @@ public class SearchDealerFragment extends MyFragment {
 				}.setProgressDialog().execute();
 			}
 		});
-		view.findViewById(R.id.map_info_contents_order_drive).setOnClickListener(new View.OnClickListener() {
+
+		TextView chooseBtn = (TextView) view.findViewById(R.id.map_info_contents_order_drive);
+		if(getTargetFragment() instanceof RequestPriceFragment){
+			chooseBtn.setText("报价索取");
+		}else if(getTargetFragment() instanceof OnlineOrderCarFragment){
+			chooseBtn.setText("在线订车");
+		}else if(getTargetFragment() instanceof BookDriveFragment){
+			chooseBtn.setText("预约试驾");
+		}
+		chooseBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				//预约试驾
-				if(getTargetFragment() instanceof BookDriveFragment){
-					backStack();
-					getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, MyApp.createIntent(dealer));
-				}
-				if(getTargetFragment() instanceof RequestPriceFragment){
-					backStack();
-					getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, MyApp.createIntent(dealer));
-				}
-				/*else{
-					addFragment(MyApp.createFragment(BookDriveFragment.class, dealer));
-				}*/
-				if(getTargetFragment() instanceof OnlineOrderCarFragment){
+				if(getTargetFragment() instanceof BookDriveFragment
+						|| getTargetFragment() instanceof RequestPriceFragment
+						|| getTargetFragment() instanceof OnlineOrderCarFragment){
 					backStack();
 					getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, MyApp.createIntent(dealer));
 				}
@@ -398,14 +398,7 @@ public class SearchDealerFragment extends MyFragment {
 				if (marker.isInfoWindowShown()) {
 					marker.hideInfoWindow();
 				} else {
-					if(getTargetFragment() instanceof RequestPriceFragment){
-				((Button) mContents.findViewById(R.id.map_info_contents_order_drive)).setText("报价索取");
-					}
-					if(getTargetFragment() instanceof OnlineOrderCarFragment){
-						((Button)mContents.findViewById(R.id.map_info_contents_order_drive)).setText("在线订车");
-					}
 					marker.showInfoWindow();
-					
 				}
 				return false;
 			}
