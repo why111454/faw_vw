@@ -3,16 +3,18 @@ package com.fax.faw_vw;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fax.faw_vw.fragment_dealer.SearchDealerFragment;
 import com.fax.faw_vw.fragments_car.BookDriveFragment;
 import com.fax.faw_vw.fragments_main.BrandFragment;
 import com.fax.faw_vw.fragments_main.FindCarsAssistorFragment;
 import com.fax.faw_vw.fragments_main.HomeFragment;
 import com.fax.faw_vw.fragments_main.MoreFragment;
 import com.fax.faw_vw.fragments_main.ShowCarsFragment;
-import com.fax.faw_vw.menu.FeedbackFragment;
-import com.fax.faw_vw.menu.OnlineQAFragment;
 import com.fax.faw_vw.menu.QRFragment;
 import com.fax.faw_vw.menu.SearchAppFragment;
+import com.fax.faw_vw.more.FeedbackFragment;
+import com.fax.faw_vw.more.OnlineQAFragment;
+import com.fax.faw_vw.more.QueryIllegalFragment;
 import com.fax.faw_vw.util.Blur;
 import com.fax.utils.frameAnim.AssetFrame;
 import com.fax.utils.frameAnim.Frame;
@@ -71,10 +73,18 @@ public class MainActivity extends FragmentActivity {
 		};
 		findViewById(R.id.main_menu_btn_person).setOnClickListener(animRightDrawClick);
 		((TextView)findViewById(R.id.main_menu_btn_person)).getCompoundDrawables()[2].setAlpha(0);
-		findViewById(R.id.main_menu_btn_buy_userd).setOnClickListener(animRightDrawClick);
-		((TextView)findViewById(R.id.main_menu_btn_buy_userd)).getCompoundDrawables()[2].setAlpha(0);
-		findViewById(R.id.main_menu_btn_query_illegal).setOnClickListener(animRightDrawClick);
-		((TextView)findViewById(R.id.main_menu_btn_query_illegal)).getCompoundDrawables()[2].setAlpha(0);
+		findViewById(R.id.main_menu_btn_search_dealer).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				FragmentContain.start(MainActivity.this, SearchDealerFragment.class);
+			}
+		});
+		findViewById(R.id.main_menu_btn_query_illegal).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				FragmentContain.start(MainActivity.this, QueryIllegalFragment.class);
+			}
+		});
 		findViewById(R.id.main_menu_btn_tel).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

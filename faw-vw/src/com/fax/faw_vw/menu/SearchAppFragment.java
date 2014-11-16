@@ -23,6 +23,8 @@ import com.fax.faw_vw.fragments_main.FindCarsAssistorFragment;
 import com.fax.faw_vw.fragments_main.ShowCarsFragment;
 import com.fax.faw_vw.model.ShowCarItem;
 import com.fax.faw_vw.model.ShowCarItemRes;
+import com.fax.faw_vw.more.FeedbackFragment;
+import com.fax.faw_vw.more.OnlineQAFragment;
 import com.fax.faw_vw.views.MyTopBar;
 import com.fax.utils.view.list.ObjectXAdapter;
 import com.fax.utils.view.list.ObjectXListView;

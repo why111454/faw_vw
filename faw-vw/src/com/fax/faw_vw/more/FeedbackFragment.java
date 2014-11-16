@@ -1,4 +1,4 @@
-package com.fax.faw_vw.menu;
+package com.fax.faw_vw.more;
 
 import java.util.ArrayList;
 

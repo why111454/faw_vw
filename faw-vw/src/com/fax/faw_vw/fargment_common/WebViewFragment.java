@@ -80,8 +80,8 @@ public class WebViewFragment extends MyFragment implements DownloadListener {
         String url = null;
         if(getArguments()!=null){
         	url = getArguments().getString(Extra_Url);
-        	if(url== null) url = getSerializableExtra(String.class);
         }
+    	if(url== null) url = getSerializableExtra(String.class);
         if(TextUtils.isEmpty(url)) url = EmptyUrlLoad;
         else if(!url.startsWith("http://")&&!url.startsWith("https://")) url = "http://" + url;
         
