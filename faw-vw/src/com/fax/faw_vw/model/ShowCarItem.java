@@ -15,7 +15,7 @@ public class ShowCarItem implements Serializable{
 	private static final ShowCarItemRes ShowCarMagotan = new ShowCarItemRes(R.drawable.showcar_detail_magotan_360,
 			new ShowCarItemRes.ShowCarDetailHead(0, R.drawable.showcar_detail_magotan_head_1, "设计"),
 			new ShowCarItemRes.ShowCarDetailHead(0, R.drawable.showcar_detail_magotan_head_2, "动力"),
-			new ShowCarItemRes.ShowCarDetailHead(0, R.drawable.showcar_detail_magotan_head_3, "装置"),
+			new ShowCarItemRes.ShowCarDetailHead(0, R.drawable.showcar_detail_magotan_head_3, "配置"),
 			new ShowCarItemRes.ShowCarDetailHead(0, R.drawable.showcar_detail_magotan_head_4, "安全"));
 	
 	private static final ShowCarItemRes ShowCarSAGITAR_NORMAL = new ShowCarItemRes(R.drawable.showcar_detail_sagitar_360,

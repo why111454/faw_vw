@@ -12,6 +12,7 @@ import com.fax.faw_vw.game.OnlineDriveGamePreStartFrag;
 import com.fax.faw_vw.model.ShowCarItemRes;
 import com.fax.faw_vw.model.ShowCarItem;
 import com.fax.faw_vw.util.SimpleDirectionGesture;
+import com.fax.faw_vw.views.FitWidthImageView;
 import com.fax.faw_vw.views.MyTopBar;
 
 import android.content.Intent;
@@ -75,7 +76,7 @@ public class CarDetailFragment extends MyFragment {
 			headContain.removeAllViews();
 			for(int i=0,size=resChildren.length;i<size;i++){
 				final ShowCarItemRes.CarItemChild carItemChild = resChildren[i];
-				ImageView imgView = new ImageView(context);
+				ImageView imgView = new FitWidthImageView(context);
 				imgView.setAdjustViewBounds(true);
 				imgView.setImageResource(carItemChild.getImgResId());
 				imgView.setOnClickListener(new View.OnClickListener() {

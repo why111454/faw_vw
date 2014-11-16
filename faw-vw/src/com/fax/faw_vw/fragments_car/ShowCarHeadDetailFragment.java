@@ -81,11 +81,9 @@ public class ShowCarHeadDetailFragment extends MyFragment{
 		        pointIndicator.bindViewPager(viewPager);
 		        viewPager.startAnimation(AnimationUtils.loadAnimation(context, R.anim.alpha_small_to_normal));
 		        
-		        if(!MyApp.hasKeyOnce("car_detail_gallery")){
-		        	View handImg = view.findViewById(R.id.tip_hand);
-			        handImg.setVisibility(View.VISIBLE);
-			        handImg.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in_out));
-		        }
+	        	View handImg = view.findViewById(R.id.tip_hand);
+		        handImg.setVisibility(View.VISIBLE);
+		        handImg.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in_out));
 			}
 		}, 500);
         return view;
