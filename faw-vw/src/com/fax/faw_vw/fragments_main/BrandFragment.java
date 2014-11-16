@@ -5,6 +5,7 @@ import com.fax.faw_vw.MyFragment;
 import com.fax.faw_vw.R;
 import com.fax.faw_vw.brand.BrandInnovationFragment;
 import com.fax.faw_vw.brand.BrandShowFragment;
+import com.fax.faw_vw.views.MyTopBar;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,6 +30,6 @@ public class BrandFragment extends MyFragment {
 				FragmentContain.start(getActivity(), BrandInnovationFragment.class);
 			}
 		});
-		return view;
+		return new MyTopBar(context).setTitle("了解品牌").setContentView(view);
 	}
 }

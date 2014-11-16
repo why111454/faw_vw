@@ -10,6 +10,7 @@ import com.fax.faw_vw.fragment_dealer.SearchDealerFragment;
 import com.fax.faw_vw.fragments_car.MarketFragment;
 import com.fax.faw_vw.fragments_car.NewsFragment;
 import com.fax.faw_vw.fragments_car.OnlineOrderCarFragment;
+import com.fax.faw_vw.views.MyTopBar;
 import com.fax.utils.view.list.ObjectXListView;
 
 import android.os.Bundle;
@@ -58,6 +59,6 @@ public class FindCarsAssistorFragment extends MyFragment {
 				FragmentContain.start(getActivity(), SearchDealerFragment.class);
 			}
 		});
-		return view;
+		return new MyTopBar(context).setTitle("寻车助手").setContentView(view);
 	}
 }

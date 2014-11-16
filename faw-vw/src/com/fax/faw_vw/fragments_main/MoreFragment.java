@@ -78,7 +78,7 @@ public class MoreFragment extends MyFragment {
 				return 1;
 			}
 		});
-		
-		return listView;
+
+		return new MyTopBar(context).setTitle("更多").setContentView(listView);
 	}
 }
