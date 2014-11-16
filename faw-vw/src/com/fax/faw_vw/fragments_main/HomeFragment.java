@@ -1,5 +1,6 @@
 package com.fax.faw_vw.fragments_main;
 
+import com.amap.api.location.AMapLocation;
 import com.fax.faw_vw.FragmentContain;
 import com.fax.faw_vw.FragmentContainLandscape;
 import com.fax.faw_vw.MyApp;
@@ -17,6 +18,7 @@ import com.fax.faw_vw.fragments_car.OnlineOrderCarFragment;
 import com.fax.faw_vw.game.OnlineDriveGamePreStartFrag;
 import com.fax.faw_vw.model.ImageResPagePair;
 import com.fax.faw_vw.model.ShowCarItem;
+import com.fax.faw_vw.util.LocManager;
 import com.fax.utils.view.pager.NetImgsViewPager;
 import com.fax.utils.view.pager.PointIndicator;
 import com.fax.utils.view.pager.SamePagerAdapter;
@@ -26,6 +28,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -121,7 +124,7 @@ public class HomeFragment extends MyFragment {
 			@Override
 			public void run() {
 				viewPager360.setCurrentItem(viewPager360.getCurrentItem()+1);
-				handler.postDelayed(this, 2000);
+				handler.postDelayed(this, 3000);
 			}
 		}, 2000);
 		
@@ -146,7 +149,12 @@ public class HomeFragment extends MyFragment {
 		});
 		
 		//TODO 天气的获取的展示，使用GsonAycnTask或者HttpAycnTask来完成
-		
+		LocManager.reqLoc(context, new LocManager.LocationListener() {
+			@Override
+			public void onFindLocation(AMapLocation aMapLocation) {
+				Log.w("fax", "city:"+aMapLocation.getCity()+"location:"+aMapLocation);
+			}
+		});
 		return view;
 	}
 }

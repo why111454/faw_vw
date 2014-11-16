@@ -28,15 +28,15 @@ public class LocManager {
         //注意设置合适的定位时间的间隔，并且在合适时间调用removeUpdates()方法来取消定位请求
         //在定位结束后，在合适的生命周期调用destroy()方法
         //其中如果间隔时间为-1，则定位只定一次
-        mLocationManagerProxy.requestLocationUpdates(
+        mLocationManagerProxy.requestLocationData(
                 LocationProviderProxy.AMapNetwork, 60 * 1000, -1, locationListener);
 
         mLocationManagerProxy.setGpsEnable(false);
     }
     
-    public static void reqLoc(Context context,final AMapLocationListener locationListener) {
+    public static void reqLoc(Context context,final LocationListener listener) {
         LocationManagerProxy mLocationManagerProxy = LocationManagerProxy.getInstance(context);
-        mLocationManagerProxy.requestLocationUpdates(
+        mLocationManagerProxy.requestLocationData(
                 LocationProviderProxy.AMapNetwork, 60 * 1000, -1, new AMapLocationListener() {
 					@Override
 					public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -56,8 +56,8 @@ public class LocManager {
 					}
 					@Override
 					public void onLocationChanged(AMapLocation aMapLocation) {
-			            LocManager.location = aMapLocation;
 						if(locationListener!=null) locationListener.onLocationChanged(aMapLocation);
+						if(listener!=null) listener.onFindLocation(aMapLocation);
 					}
 				});
 
@@ -81,5 +81,7 @@ public class LocManager {
         public void onProviderDisabled(String provider) {
         }
     };
-
+    public interface LocationListener{
+    	public void onFindLocation(AMapLocation aMapLocation);
+    }
 }
