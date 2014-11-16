@@ -37,7 +37,7 @@ public class MoreFragment extends MyFragment {
 			new ImageTextPagePair(R.drawable.main_more_extra, "增值服务", null),
 			new ImageTextPagePair(R.drawable.main_more_online_service, "在线客服", MyApp.createFragment(OnlineQAFragment.class)),
 			new ImageTextPagePair(R.drawable.main_more_feedback, "意见反馈", MyApp.createFragment(FeedbackFragment.class)),
-			new ImageTextPagePair(R.drawable.main_more_setting, "系统设置", null),
+			new ImageTextPagePair(R.drawable.main_more_setting, "系统设置", MyApp.createFragment(SettingFragment.class)),
 			new ImageTextPagePair(R.drawable.main_more_downcenter, "下载中心", MyApp.createFragment(ShowCarsFragment.class, CarDownloadFragment.class)),
 			new ImageTextPagePair(R.drawable.main_more_statement, "免责声明", MyApp.createFragment(StatementFragment.class)),
 	};
