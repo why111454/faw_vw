@@ -30,7 +30,7 @@ import android.widget.TextView;
 /**更多 页卡 */
 public class MoreFragment extends MyFragment {
 	ImageTextPagePair[] pagePairs = new ImageTextPagePair[]{
-			new ImageTextPagePair(R.drawable.main_more_aftermarket, "售后服务", null),
+//			new ImageTextPagePair(R.drawable.main_more_aftermarket, "售后服务", null),
 			new ImageTextPagePair(R.drawable.main_more_person, "个人中心", null),
 			new ImageTextPagePair(R.drawable.main_more_query_illegal, "违章查询", null),
 			new ImageTextPagePair(R.drawable.main_more_extra, "增值服务", null),

@@ -6,8 +6,8 @@
     android:orientation="vertical">
     <RadioGroup
         android:id="@+id/radio_group"
-    	android:paddingLeft="12dp"
-    	android:paddingRight="10dp"
+    	android:paddingLeft="13dp"
+    	android:paddingRight="13dp"
     	android:layout_marginTop="10dp" 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,12 +20,12 @@
         <RadioButton
             android:id="@+id/radioButton2"
             style="@style/TabBtnGray"
-            android:layout_marginRight="1dp"
+            android:layout_marginLeft="1dp"
             android:text="品牌介绍" />
     </RadioGroup>
    <View style="@style/divHorizontal"
-    	android:layout_marginLeft="12dp"
-    	android:layout_marginRight="12dp"
+    	android:layout_marginLeft="13dp"
+    	android:layout_marginRight="13dp"
        android:background="@color/dark_blue"
        android:layout_height="2dp"/>
 	<ScrollView

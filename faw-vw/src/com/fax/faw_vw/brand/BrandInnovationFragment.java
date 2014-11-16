@@ -30,6 +30,7 @@ public class BrandInnovationFragment extends MyFragment {
 		final List<AssetFrame> imgs = FrameFactory.createFramesFromAsset(context, "brand/tec/imgs", 0);
 		final List<AssetFrame> bigImgs = FrameFactory.createFramesFromAsset(context, "brand/tec/bigImgs", 0);
 		ObjectXListView listView = new ObjectXListView(context);
+		listView.setPullRefreshEnable(false);
 		listView.setAdapter(new ObjectXAdapter.SingleLocalGridPageAdapter<AssetFrame>(2) {
 			@Override
 			public List<AssetFrame> instanceNewList() throws Exception {
