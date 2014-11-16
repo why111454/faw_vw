@@ -3,10 +3,10 @@
     android:background="@drawable/show360_key_frames_bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-    <ImageView 
+    <com.fax.faw_vw.views.FitWidthImageView 
         android:id="@android:id/background"
-        android:scaleType="fitXY"
-	    android:layout_width="match_parent"
+        android:layout_gravity="center"
+	    android:layout_width="wrap_content"
 	    android:layout_height="match_parent"/>
     
 	<com.fax.faw_vw.views.clickshow.ClickShowImageView
@@ -50,6 +50,7 @@
 	
     <FrameLayout 
         android:id="@+id/show360_key_frames_front_point"
+        android:layout_gravity="center"
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent">
         

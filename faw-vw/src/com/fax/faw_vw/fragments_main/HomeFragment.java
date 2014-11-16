@@ -1,6 +1,12 @@
 package com.fax.faw_vw.fragments_main;
 
 import java.nio.DoubleBuffer;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationListener;
@@ -21,13 +27,23 @@ import com.fax.faw_vw.fragments_car.OnlineOrderCarFragment;
 import com.fax.faw_vw.game.OnlineDriveGamePreStartFrag;
 import com.fax.faw_vw.model.ImageResPagePair;
 import com.fax.faw_vw.model.ShowCarItem;
+import com.fax.faw_vw.model.WeatherResponse;
 import com.fax.faw_vw.util.LocManager;
+import com.fax.utils.bitmap.BitmapManager;
+import com.fax.utils.http.HttpUtils;
+import com.fax.utils.task.ResultAsyncTask;
 import com.fax.utils.view.pager.NetImgsViewPager;
 import com.fax.utils.view.pager.PointIndicator;
 import com.fax.utils.view.pager.SamePagerAdapter;
 import com.fax.utils.view.photoview.PhotoView;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
@@ -38,14 +54,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
+import android.widget.TextView;
 import android.widget.Toast;
 /**首页 页卡 */
 
 public class HomeFragment extends MyFragment{
-	
+	private Boolean b=true;
+	private TextView mcity_name,mdate,mtemperature,mchangecity,mPM;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	
 		View view = inflater.inflate(R.layout.main_home, container, false);
+		mcity_name=(TextView) view.findViewById(R.id.cityname_textview);
+		mdate=(TextView) view.findViewById(R.id.date_textview);
+		mtemperature=(TextView) view.findViewById(R.id.temperature_textview);
+		mchangecity=(TextView) view.findViewById(R.id.change_city_textview);
+		mPM=(TextView) view.findViewById(R.id.PM_textview);
+		
 		ViewPager viewPager = (ViewPager) view.findViewById(R.id.view_pager);
 		viewPager.setPageMargin((int) MyApp.convertToDp(4));
 		viewPager.getLayoutParams().height = getResources().getDisplayMetrics().widthPixels * 300 / 612;
@@ -133,7 +158,7 @@ public class HomeFragment extends MyFragment{
 			@Override
 			public void run() {
 				viewPager360.setCurrentItem(viewPager360.getCurrentItem()+1);
-				handler.postDelayed(this, 2000);
+				handler.postDelayed(this, 3000);
 			}
 		}, 2000);
 		
@@ -157,42 +182,81 @@ public class HomeFragment extends MyFragment{
 			}
 		});
 		
+	
+		
+		mchangecity.setOnClickListener(new View.OnClickListener() {
+			//切换城市点击事件
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Log.i("fax", "切换城市");
+			}
+		});
 		//TODO 天气的获取的展示，使用GsonAycnTask或者HttpAycnTask来完成
-		LocManager.reqLoc(context, new AMapLocationListener() {
-			
+		LocManager.reqLoc(context, new LocManager.LocationListener() {
 			@Override
-			public void onStatusChanged(String provider, int status, Bundle extras) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void onProviderEnabled(String provider) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void onProviderDisabled(String provider) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void onLocationChanged(Location location) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void onLocationChanged(AMapLocation location) {
-				// TODO Auto-generated method stub
-				Log.i("why",location.getCity()+"");
+			public void onFindLocation(AMapLocation aMapLocation) {
+				Log.w("fax", "city:"+aMapLocation.getCityCode()+"location:"+aMapLocation);
+				if(b==true){
+					showWeather(aMapLocation.getCity(), context);
+					b=false;
+					
+				}
 			}
 		});
 
 		return view;
 	}
+	public void showWeather(final String cityname,Context context){
+		
+		new ResultAsyncTask<WeatherResponse>(context) {
 
+			@SuppressWarnings("deprecation")
+			@Override
+			protected void onPostExecuteSuc(WeatherResponse result) {
+				// TODO Auto-generated method stub
+				if(result.getError()==0){
+					Log.w("fax",result.getResults().get(0).getCurrentCity());
+					if(result.getResults().size()>=0){
+						mcity_name.setText(result.getResults().get(0).getCurrentCity());
+						mdate.setText(result.getDate());
+						mPM.setText(result.getResults().get(0).getPm25());
+						mtemperature.setText(result.getResults().get(0).getWeather_data().get(0).getTemperature());
+						SimpleDateFormat sdf = new SimpleDateFormat("HH");
+						int hour= Integer.parseInt(sdf.format(new Date()));
+						BitmapDrawable drawableright;
+						Bitmap bitmap;
+						//判断白天晚上
+						if((hour>=7)&&(hour<=19)==true){
+							bitmap=BitmapManager.getBitmap(result.getResults().get(0).getWeather_data().get(0).getDayPictureUrl());
+						}else{
+							
+						}
+					
+					}
+				}
+			}
+			@Override
+			protected WeatherResponse doInBackground(Void... params) {
+				// TODO Auto-generated method stub
+				String url="http://api.map.baidu.com/telematics/v3/weather";
+				 ArrayList<NameValuePair> pairs=new ArrayList<NameValuePair>();
+				pairs.add(new BasicNameValuePair("location", cityname));
+				pairs.add(new BasicNameValuePair("output", "json"));
+				pairs.add(new BasicNameValuePair("ak", "zrozpc3abEsmGCwQRNIXbmk8"));
+				String json=HttpUtils.reqForGet(url,pairs);
+				WeatherResponse response;
+				try {
+					response = new Gson().fromJson(json, WeatherResponse.class);
+					return response;
+				} catch (JsonSyntaxException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return null;
+			}
+		}.setProgressDialog().execute();
+		
+	}
 	
 }

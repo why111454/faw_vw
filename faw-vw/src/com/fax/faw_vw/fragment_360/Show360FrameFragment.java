@@ -46,7 +46,7 @@ public class Show360FrameFragment extends MyFragment {
 	ImageView redPoint;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.show360_key_frames, container, false);
+		ViewGroup view = (ViewGroup) inflater.inflate(R.layout.show360_key_frames, container, false);
 		final ImageView imageView = (ImageView) view.findViewById(android.R.id.background);
 		final FrameLayout frontLay = (FrameLayout) view.findViewById(R.id.show360_key_frames_front_point);
 		final ShowCarItem carItem = getSerializableExtra(ShowCarItem.class);
@@ -68,6 +68,17 @@ public class Show360FrameFragment extends MyFragment {
 			FragmentContainLandscape.start((Activity) context, fragment);
 			getActivity().finish();
 			return view;
+		}
+		//首次进入360页面操作提示
+		if(!MyApp.hasKeyOnce("tip_360")){
+			final View tip = View.inflate(context, R.layout.tip_360, null);
+			view.addView(tip, new FrameLayout.LayoutParams(-1, -1));
+			tip.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					((ViewGroup)tip.getParent()).removeView(tip);
+				}
+			});
 		}
 		
 		view.setOnTouchListener(new SimpleDirectionGesture(view){
@@ -193,8 +204,8 @@ public class Show360FrameFragment extends MyFragment {
 		
 		if(imageView.getDrawable()==null) return btn;
 		final int size = (int) MyApp.convertToDp(20);
-		final int x = 2 * keyPoint.getHot_x() * imageView.getWidth() / imageView.getDrawable().getIntrinsicWidth() - size/2;
-		final int y = 2 * keyPoint.getHot_y() * imageView.getHeight() / imageView.getDrawable().getIntrinsicHeight() - size/2;
+		final int x = 2 * keyPoint.getHot_x() * imageView.getWidth() / imageView.getDrawable().getIntrinsicWidth() - size;
+		final int y = 2 * keyPoint.getHot_y() * imageView.getHeight() / imageView.getDrawable().getIntrinsicHeight() - size;
 		
 		FrameLayout.LayoutParams param = new FrameLayout.LayoutParams(size, size, Gravity.LEFT|Gravity.TOP);
 		param.topMargin = y;
@@ -214,7 +225,7 @@ public class Show360FrameFragment extends MyFragment {
 					if(keyPoint.getImage_y()!=0) topMargin = 2 * keyPoint.getImage_y() * imageView.getHeight() / imageView.getDrawable().getIntrinsicHeight() + size/2;
 					else topMargin = (int) (y - bitmap.getHeight() * 6 / 10 );
 					param.topMargin = topMargin;
-					param.leftMargin = x + size;
+					param.leftMargin = x + size/3;
 
 					front.addView(infoView, param);
 					infoView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in_to_left));

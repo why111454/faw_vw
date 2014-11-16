@@ -85,19 +85,24 @@
                     android:text="上海"
                     android:textSize="18sp"
 				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"/>
+				    android:layout_height="wrap_content"
+				    android:id="@+id/cityname_textview"
+				    />
                 <TextView 
                     android:text="2014年3月4日"
                     android:textSize="12sp"
 				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"/>
+				    android:layout_height="wrap_content"
+				    android:id="@+id/date_textview"
+				    />
                 <TextView 
                     android:text="-2℃ 晴"
                     android:gravity="center"
                     android:drawableRight="@drawable/main_home_weather_fine"
                     android:textColor="@color/dark_blue"
 				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"/>
+				    android:layout_height="wrap_content"
+				    android:id="@+id/temperature_textview"/>
             </LinearLayout>
             
             <LinearLayout 
@@ -114,17 +119,23 @@
                     android:drawableLeft="@drawable/main_home_ic_city"
                     android:textSize="12sp"
 				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"/>
+				    android:layout_height="wrap_content"
+				    android:id="@+id/change_city_textview"
+				    />
                 <TextView 
                     android:text="PM2.5"
                     android:textColor="@color/dark_blue"
 				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"/>
+				    android:layout_height="wrap_content"
+				   
+				    />
                 <TextView 
                     android:text="指数250"
                     android:textSize="12sp"
 				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"/>
+				    android:layout_height="wrap_content"
+				     android:id="@+id/PM_textview"
+				     />
             </LinearLayout>
             
             <LinearLayout 
