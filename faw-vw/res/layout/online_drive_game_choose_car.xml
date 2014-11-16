@@ -7,6 +7,20 @@
         android:id="@+id/view_pager"
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent" />
+    <com.fax.faw_vw.views.clickshow.ClickShowImageView 
+        android:id="@+id/online_drive_game_ic_arrow_left"
+        android:src="@drawable/online_drive_game_ic_arrow_left"
+        android:padding="10dp"
+        android:layout_gravity="center_vertical|left"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"/>
+    <com.fax.faw_vw.views.clickshow.ClickShowImageView 
+        android:id="@+id/online_drive_game_ic_arrow_right"
+        android:src="@drawable/online_drive_game_ic_arrow_right"
+        android:padding="10dp"
+        android:layout_gravity="center_vertical|right"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"/>
     
     <com.fax.faw_vw.views.clickshow.ClickShowImageView 
         android:id="@android:id/closeButton"
@@ -18,8 +32,19 @@
     
     <com.fax.faw_vw.views.clickshow.ClickShowImageView 
         android:id="@android:id/button1"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/online_drive_game_choose_car_select"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"/>
+    <TextView 
+        android:id="@android:id/text1"
+        android:textSize="16sp"
+		android:gravity="center"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="10dp"
         android:layout_gravity="bottom|right"
-        android:src="@drawable/online_drive_game_pre_start_btn"
+        android:background="@drawable/online_drive_game_choose_car_name"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"/>
 

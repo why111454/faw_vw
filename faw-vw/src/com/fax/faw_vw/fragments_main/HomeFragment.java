@@ -24,6 +24,7 @@ import com.fax.utils.view.photoview.PhotoView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,7 +74,7 @@ public class HomeFragment extends MyFragment {
 		PointIndicator pointIndicator = (PointIndicator) view.findViewById(R.id.point_indicator);
 		pointIndicator.bindViewPager(viewPager);
 		
-		ViewPager viewPager360 = (ViewPager) view.findViewById(R.id.home_show_360);
+		final ViewPager viewPager360 = (ViewPager) view.findViewById(R.id.home_show_360);
 		viewPager360.getLayoutParams().height = getResources().getDisplayMetrics().widthPixels * 185 / 640;
 		viewPager360.setAdapter(new SamePagerAdapter<Void>() {
 			ShowCarItem[] carItems = new ShowCarItem[]{
@@ -115,6 +116,14 @@ public class HomeFragment extends MyFragment {
 			}
 		});
 		viewPager360.setCurrentItem(Integer.MAX_VALUE/6/2*6);
+		final Handler handler = new Handler();
+		handler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				viewPager360.setCurrentItem(viewPager360.getCurrentItem()+1);
+				handler.postDelayed(this, 2000);
+			}
+		}, 2000);
 		
 		
 		view.findViewById(R.id.home_order_drive_btn).setOnClickListener(new View.OnClickListener() {

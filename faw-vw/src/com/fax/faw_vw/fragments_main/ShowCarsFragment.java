@@ -67,7 +67,7 @@ public class ShowCarsFragment extends MyFragment {
 				nameLayout.removeAllViews();
 				
 				CarItemChild[] itemChildren = t.getDetailRes().getItemChildren();
-				if(itemChildren!=null && !isChooseMode){
+				if(itemChildren!=null /*&& !isChooseMode*/){
 					//如果有子项，那么显示子项
 					for(CarItemChild carItemChild : itemChildren){
 						TextView brandCnTv = new TextView(context);

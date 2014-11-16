@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
+import android.widget.TextView;
 
 import com.fax.faw_vw.MyFragment;
 import com.fax.faw_vw.R;
@@ -54,14 +55,48 @@ public class OnlineDriveGamePreStartFrag extends MyFragment {
 					FrameAnimation.setFrameToView(convertView, t);
 					return convertView;
 				}
+				@Override
+				protected AssetFrame getItemAtPosition(int position) {
+					return super.getItemAtPosition(position % CHOOSE_CAR_ITEMS.length);
+				}
+				@Override
+				public int getCount() {
+					return Integer.MAX_VALUE;
+				}
 			});
+			final TextView carName = (TextView) view.findViewById(android.R.id.text1);
+			viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+				@Override
+				public void onPageSelected(int position) {
+					carName.setText(CHOOSE_CAR_ITEMS[position% CHOOSE_CAR_ITEMS.length].getModel_cn());
+				}
+				@Override
+				public void onPageScrolled(int arg0, float arg1, int arg2) {
+				}
+				@Override
+				public void onPageScrollStateChanged(int arg0) {
+				}
+			});
+			viewPager.setCurrentItem(Integer.MAX_VALUE/CHOOSE_CAR_ITEMS.length/2 * CHOOSE_CAR_ITEMS.length);
 
+			view.findViewById(R.id.online_drive_game_ic_arrow_left).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					viewPager.setCurrentItem(viewPager.getCurrentItem()-1);
+				}
+			});
+			view.findViewById(R.id.online_drive_game_ic_arrow_right).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
+				}
+			});
 			view.findViewById(android.R.id.button1).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					getActivity().finish();
 					startActivity(new Intent(context, OnlineDriveGameActivity.class)
-								.putExtra(ShowCarItem.class.getName(), CHOOSE_CAR_ITEMS[viewPager.getCurrentItem()]));
+								.putExtra(ShowCarItem.class.getName(), CHOOSE_CAR_ITEMS[viewPager.getCurrentItem()% CHOOSE_CAR_ITEMS.length]));
 				}
 			});
 		}
