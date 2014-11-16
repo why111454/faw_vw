@@ -1,5 +1,9 @@
 package com.fax.faw_vw.fragments_main;
 
+import java.nio.DoubleBuffer;
+
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationListener;
 import com.fax.faw_vw.FragmentContain;
 import com.fax.faw_vw.FragmentContainLandscape;
 import com.fax.faw_vw.MyApp;
@@ -17,22 +21,28 @@ import com.fax.faw_vw.fragments_car.OnlineOrderCarFragment;
 import com.fax.faw_vw.game.OnlineDriveGamePreStartFrag;
 import com.fax.faw_vw.model.ImageResPagePair;
 import com.fax.faw_vw.model.ShowCarItem;
+import com.fax.faw_vw.util.LocManager;
 import com.fax.utils.view.pager.NetImgsViewPager;
 import com.fax.utils.view.pager.PointIndicator;
 import com.fax.utils.view.pager.SamePagerAdapter;
 import com.fax.utils.view.photoview.PhotoView;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
+import android.widget.Toast;
 /**首页 页卡 */
-public class HomeFragment extends MyFragment {
+
+public class HomeFragment extends MyFragment{
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.main_home, container, false);
@@ -68,6 +78,8 @@ public class HomeFragment extends MyFragment {
 //						}
 					}
 				});
+				
+				
 				return convertView;
 			}
 		});
@@ -146,7 +158,41 @@ public class HomeFragment extends MyFragment {
 		});
 		
 		//TODO 天气的获取的展示，使用GsonAycnTask或者HttpAycnTask来完成
-		
+		LocManager.reqLoc(context, new AMapLocationListener() {
+			
+			@Override
+			public void onStatusChanged(String provider, int status, Bundle extras) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onProviderEnabled(String provider) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onProviderDisabled(String provider) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onLocationChanged(Location location) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onLocationChanged(AMapLocation location) {
+				// TODO Auto-generated method stub
+				Log.i("why",location.getCity()+"");
+			}
+		});
+
 		return view;
 	}
+
+	
 }
