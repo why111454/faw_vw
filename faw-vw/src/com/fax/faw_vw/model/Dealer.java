@@ -2,7 +2,7 @@ package com.fax.faw_vw.model;
 
 import java.io.Serializable;
 
-import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps2d.model.LatLng;
 
 public class Dealer implements Serializable{
 	String id;

@@ -2,7 +2,7 @@ package com.fax.faw_vw.model;
 
 import java.util.ArrayList;
 
-import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps2d.model.LatLng;
 import com.google.gson.annotations.SerializedName;
 
 public class ProvinceList {
