@@ -159,7 +159,7 @@ public class BookDriveFragment extends MyFragment
 					protected void onPostExecuteSuc(Response result) {
 						// TODO Auto-generated method stub
 					}
-				}.execute();
+				}.setProgressDialog().execute();
 			}
 		});
 

@@ -41,9 +41,12 @@ public abstract class BasicBitmapFrame implements Frame {
     }
     @Override
     public Drawable decodePreviewDrawable(Context context) {
+        return decodePreviewDrawable(context, 3);
+    }
+    public Drawable decodePreviewDrawable(Context context, int inSampleSize) {
         if(mBitmapPreviewDrawable==null){
             try {
-            	Bitmap bitmap = decodePreviewBitmap(context);
+            	Bitmap bitmap = decodePreviewBitmap(context, inSampleSize);
                 if(bitmap!=null)
                 	mBitmapPreviewDrawable=new BitmapDrawable(context.getResources(), bitmap);
                 else 
@@ -59,7 +62,10 @@ public abstract class BasicBitmapFrame implements Frame {
 	protected abstract Bitmap decodeBitmap(Context context) throws Exception;
     /**解析出预览Bitmap，只会调用一次，没有显式的调用就不需要这个方法
      * @throws Exception */
-    protected Bitmap decodePreviewBitmap(Context context) throws Exception{return null;}
+    protected Bitmap decodePreviewBitmap(Context context) throws Exception{return decodePreviewBitmap(context, 3);}
+    /**解析出预览Bitmap，只会调用一次，没有显式的调用就不需要这个方法
+    * @throws Exception */
+   protected Bitmap decodePreviewBitmap(Context context, int inSampleSize) throws Exception{return null;}
 
 	@Override
 	public Drawable getDecodedDrawable() {

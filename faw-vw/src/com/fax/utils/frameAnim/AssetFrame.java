@@ -24,10 +24,10 @@ public class AssetFrame extends BasicBitmapFrame {
 	}
 
     @Override
-    protected Bitmap decodePreviewBitmap(Context context) throws Exception {
+    protected Bitmap decodePreviewBitmap(Context context, int inSampleSize) throws Exception {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = false;
-        options.inSampleSize = 3;
+        options.inSampleSize = inSampleSize;
         return BitmapFactory.decodeStream(context.getAssets().open(mPath), null, options);
     }
 

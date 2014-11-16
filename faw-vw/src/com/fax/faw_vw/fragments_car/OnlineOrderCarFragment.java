@@ -175,7 +175,7 @@ public class OnlineOrderCarFragment extends MyFragment implements ShowCarsFragme
 					protected void onPostExecuteSuc(Response result) {
 						// TODO Auto-generated method stub
 					}
-				}.execute();
+				}.setProgressDialog().execute();
 			}
 		});
         return new MyTopBar(getActivity()).setLeftBack()

@@ -13,6 +13,7 @@ import com.fax.faw_vw.fragments_car.CarDownloadFragment;
 import com.fax.faw_vw.model.ImageTextPagePair;
 import com.fax.faw_vw.more.FeedbackFragment;
 import com.fax.faw_vw.more.OnlineQAFragment;
+import com.fax.faw_vw.more.StatementFragment;
 import com.fax.faw_vw.views.MyTopBar;
 import com.fax.faw_vw.views.clickshow.ClickShowTextView;
 import com.fax.utils.view.list.ObjectXAdapter;
@@ -30,14 +31,15 @@ import android.widget.TextView;
 /**更多 页卡 */
 public class MoreFragment extends MyFragment {
 	ImageTextPagePair[] pagePairs = new ImageTextPagePair[]{
-			new ImageTextPagePair(R.drawable.main_more_aftermarket, "售后服务", null),
+//			new ImageTextPagePair(R.drawable.main_more_aftermarket, "售后服务", null),
 			new ImageTextPagePair(R.drawable.main_more_person, "个人中心", null),
 			new ImageTextPagePair(R.drawable.main_more_query_illegal, "违章查询", null),
 			new ImageTextPagePair(R.drawable.main_more_extra, "增值服务", null),
 			new ImageTextPagePair(R.drawable.main_more_online_service, "在线客服", MyApp.createFragment(OnlineQAFragment.class)),
 			new ImageTextPagePair(R.drawable.main_more_feedback, "意见反馈", MyApp.createFragment(FeedbackFragment.class)),
-			new ImageTextPagePair(R.drawable.main_more_setting, "系统设置", null),
-			new ImageTextPagePair(R.drawable.main_more_downcenter, "下载中心", MyApp.createFragment(ShowCarsFragment.class, CarDownloadFragment.class)),	
+			new ImageTextPagePair(R.drawable.main_more_setting, "系统设置", MyApp.createFragment(SettingFragment.class)),
+			new ImageTextPagePair(R.drawable.main_more_downcenter, "下载中心", MyApp.createFragment(ShowCarsFragment.class, CarDownloadFragment.class)),
+			new ImageTextPagePair(R.drawable.main_more_statement, "免责声明", MyApp.createFragment(StatementFragment.class)),
 	};
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -78,7 +80,7 @@ public class MoreFragment extends MyFragment {
 				return 1;
 			}
 		});
-		
-		return listView;
+
+		return new MyTopBar(context).setTitle("更多").setContentView(listView);
 	}
 }

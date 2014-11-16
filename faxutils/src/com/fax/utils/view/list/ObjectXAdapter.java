@@ -1,7 +1,10 @@
 package com.fax.utils.view.list;
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -12,6 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.fax.utils.http.HttpUtils;
+import com.fax_utils.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -116,12 +120,25 @@ public interface ObjectXAdapter<T>{
     		this.column = column;
     	}
     	Drawable selector;
+    	Drawable divider;
     	@Override
 		public void setListView(ObjectXListView listView) {
 			super.setListView(listView);
-			listView.setDividerHeight(getDividerHeight());
+			int dividerHeight = getDividerHeight();
+			listView.setDividerHeight(dividerHeight);
 			selector = listView.getSelector();
 			listView.setSelector(new ColorDrawable(Color.TRANSPARENT));
+			
+			if(dividerHeight>0){
+				Drawable drawable = listView.getDivider();
+				Bitmap bitmap = Bitmap.createBitmap(dividerHeight, dividerHeight, Bitmap.Config.ARGB_8888);
+				Canvas canvas = new Canvas(bitmap);
+				if(drawable instanceof ColorDrawable){
+					canvas.drawColor(((ColorDrawable) drawable).getColor());
+					drawable = new BitmapDrawable(listView.getContext().getResources(), bitmap);
+				}
+				divider = drawable;
+			}
 		}
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(-1, -1, 1);
 		@SuppressLint("NewApi")
@@ -132,6 +149,11 @@ public interface ObjectXAdapter<T>{
 			LinearLayout linear = (LinearLayout) rowContain;
 			if(linear == null){
 				linear = new LinearLayout(listView.getContext());
+				if(getDividerHeight()>0 && divider!=null && Build.VERSION.SDK_INT>=11){
+					linear.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
+					linear.setDividerDrawable(divider);
+				}
+				
 				for(int i=0;i<column;i++){
 					FrameLayout grid = new FrameLayout(listView.getContext());
 					if(selector!=null){
@@ -145,11 +167,7 @@ public interface ObjectXAdapter<T>{
 					}
 					linear.addView(grid, params);
 				}
-			}
-			int dividerHeight = getDividerHeight();
-			if(dividerHeight>0 && Build.VERSION.SDK_INT>=11){
-				linear.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
-				linear.setDividerDrawable(listView.getDivider());
+				
 			}
 			
 			T[] gridArray = tArray.get(row);
