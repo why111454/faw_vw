@@ -50,7 +50,7 @@ public class MarketFragment extends MyFragment {
                 if(convertView== null){
                 	convertView = View.inflate(context, R.layout.market_news_list_item, null);
                 }
-                BitmapManager.bindView(convertView.findViewById(android.R.id.icon), t.getTHUM_PICTURE());
+//                BitmapManager.bindView(convertView.findViewById(android.R.id.icon), t.getTHUM_PICTURE());
                 ((TextView)convertView.findViewById(android.R.id.title)).setText(t.getTITLE());
                 ((TextView)convertView.findViewById(android.R.id.summary)).setText(t.getUPDATE_TIME());
                 return convertView;

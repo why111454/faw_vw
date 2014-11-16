@@ -25,7 +25,8 @@
 		            <include 
 	            		android:id="@+id/showcar_detail_head_2"
 	            		layout="@layout/showcar_detail_head_item"/>
-	        	<View style="@style/divVertical"/>
+	        	<View style="@style/divVertical"
+	        	    android:layout_marginLeft="-1dp"/>
 		            <include 
             			android:id="@+id/showcar_detail_head_3"
 		                layout="@layout/showcar_detail_head_item"/>

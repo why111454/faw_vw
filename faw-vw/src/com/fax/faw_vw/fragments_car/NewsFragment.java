@@ -39,14 +39,14 @@ public class NewsFragment extends MyFragment {
             @Override
             public String getUrl(int page) {
                 return "http://faw-vw.allyes.com/index.php?g=api&m=apicache&a=getnews&newsbigtype=1&"
-                		+ "sourcetype="+sourcetype +"&page="+page+"&pagesize=10";
+                		+ "type="+sourcetype +"&page="+page+"&pagesize=10";
             }
             @Override
             public View bindView(MarketNewsModelList.NewsModel t, int position, View convertView) {
                 if(convertView== null){
                 	convertView = View.inflate(context, R.layout.market_news_list_item, null);
                 }
-                BitmapManager.bindView(convertView.findViewById(android.R.id.icon), t.getTHUM_PICTURE());
+//                BitmapManager.bindView(convertView.findViewById(android.R.id.icon), t.getTHUM_PICTURE());
                 ((TextView)convertView.findViewById(android.R.id.title)).setText(t.getTITLE());
                 ((TextView)convertView.findViewById(android.R.id.summary)).setText(t.getUPDATE_TIME());
                 return convertView;
@@ -72,10 +72,10 @@ public class NewsFragment extends MyFragment {
 					sourcetype = 0;
 					break;
 				case R.id.radioButton2:
-					sourcetype = 1;
+					sourcetype = 2;
 					break;
 				case R.id.radioButton3:
-					sourcetype = 2;
+					sourcetype = 3;
 					break;
 				}
 				listView.reload();

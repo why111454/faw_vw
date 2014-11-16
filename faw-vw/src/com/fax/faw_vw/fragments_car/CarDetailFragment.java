@@ -102,14 +102,23 @@ public class CarDetailFragment extends MyFragment {
 			
 			if(carItemChild!=null){//是车型子页
 				ImageView backTip = new ImageView(context);
+				backTip.setBackgroundResource(R.drawable.common_btn_in_black);
 				backTip.setImageResource(R.drawable.showcar_detail_sagitar_back_bt);
 				backTip.setScaleType(ScaleType.FIT_XY);
-				headContain.addView(backTip, -2, -1);
+
+				int padLeft = (int) MyApp.convertToDp(20);
+				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(-2, -1);
+				params.leftMargin = - padLeft;
+				backTip.setPadding(padLeft, 0, 0, 0);
+				headContain.addView(backTip, params);
+				backTip.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						replaceFragment(MyApp.createFragment(CarDetailFragment.class, showCarItem));
+					}
+				});
 			}
 		}
-		
-		
-		
 		
 		//360车型
 		ImageView round360Image = ((ImageView)scrollView.findViewById(R.id.showcar_detail_360_img));
