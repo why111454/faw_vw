@@ -24,7 +24,7 @@ public class ShowCarItem implements Serializable{
 			new ShowCarItemRes.ShowCarDetailHead(0, R.drawable.showcar_detail_sagitar_head_2, "驾趣"),
 			new ShowCarItemRes.ShowCarDetailHead(0, R.drawable.showcar_detail_sagitar_head_3, "科技") );
 	
-	private static final ShowCarItemRes ShowCarSAGITAR_GTI = new ShowCarItemRes(-1,
+	private static final ShowCarItemRes ShowCarSAGITAR_GLI = new ShowCarItemRes(-1,
 			new ShowCarItemRes.ShowCarDetailHead(0, R.drawable.showcar_detail_sagitar_gli_head_1, "设计"),
 			null,
 			null,
@@ -40,7 +40,7 @@ public class ShowCarItem implements Serializable{
 			R.drawable.showcar_detail_sagitar_360,
 			new ShowCarItemRes.CarItemChild[]{
 					new ShowCarItemRes.CarItemChild(R.drawable.showcar_detail_sagitar, "速腾", "SAGITAR", ShowCarSAGITAR_NORMAL),
-					new ShowCarItemRes.CarItemChild(R.drawable.showcar_detail_sagitar_gti, "速腾GTI", "SAGITAR GLI", ShowCarSAGITAR_GTI),
+					new ShowCarItemRes.CarItemChild(R.drawable.showcar_detail_sagitar_gti, "速腾GLI", "SAGITAR GLI", ShowCarSAGITAR_GLI),
 					new ShowCarItemRes.CarItemChild(R.drawable.showcar_detail_sagitar_blue, "速腾蓝驱", "Sagitar BlueMotion", ShowCarSAGITAR_BLUE),
 			});
 	
@@ -86,6 +86,8 @@ public class ShowCarItem implements Serializable{
 
 	public static final ShowCarItem ShowCarItemSagitarBlue =
 			new ShowCarItem("9", "速腾蓝驱", "SAGITAR", R.drawable.showcar_list_sagitar, ShowCarSAGITAR_BLUE);
+	public static final ShowCarItem ShowCarItemSagitarGLI =
+			new ShowCarItem("9", "GLI", "SAGITAR", R.drawable.showcar_list_sagitar, ShowCarSAGITAR_GLI);
 
 	public static final ShowCarItem SHOW_CAR_ITEM_CC = new ShowCarItem("15", "CC", "CC", R.drawable.showcar_list_cc, ShowCarCC);
 	public static final ShowCarItem SHOW_CAR_ITEM_MAGOTAN = new ShowCarItem("8", "迈腾", "MAGOTAN", R.drawable.showcar_list_magotan, ShowCarMagotan);

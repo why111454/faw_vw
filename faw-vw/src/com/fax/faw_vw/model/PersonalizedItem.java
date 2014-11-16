@@ -13,6 +13,7 @@ public class PersonalizedItem implements Serializable{
 		new PersonalizedItem("E 低碳生活", ShowCarItem.ShowCarItemSagitarBlue, "环保派", "蓝驱科技，关爱环境", R.drawable.personalized_choose_car_4),
 		new PersonalizedItem("F 优雅是一生中的崇高境界", ShowCarItem.SHOW_CAR_ITEMS[0], "优雅派", "心蕴优雅，瞬绽光华", R.drawable.personalized_choose_car_5),
 		new PersonalizedItem("G 制定标准者定天下", ShowCarItem.SHOW_CAR_ITEMS[2], "质感派", "质造新标准", R.drawable.personalized_choose_car_6),
+		new PersonalizedItem("H 激情能够战胜一切困难", ShowCarItem.ShowCarItemSagitarGLI, "激情派", "激情天成", R.drawable.personalized_choose_car_7),
 		
 	};
 	
