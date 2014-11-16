@@ -156,7 +156,7 @@ public class RequestPriceFragment extends MyFragment
 						return null;
 					}
 					}
-				}.execute();
+				}.setProgressDialog().execute();
 			}
 		});
         return new MyTopBar(getActivity()).setLeftBack()

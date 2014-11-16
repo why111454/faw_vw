@@ -43,7 +43,7 @@ import com.fax.utils.task.ResultAsyncTask;
 public class Show360FrameFragment extends MyFragment {
 	PackedFileLoader fileLoader;
 	ArrayList<FrameInfo> frameInfos;
-	ImageView redPoint;
+	ImageView progressPoint;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		ViewGroup view = (ViewGroup) inflater.inflate(R.layout.show360_key_frames, container, false);
@@ -106,13 +106,13 @@ public class Show360FrameFragment extends MyFragment {
 				//查看详细情况
 				if(preShowIndex == 2){
 					//查看全景
-					FragmentContain.start(getActivity(), MyApp.createFragment(PanoFragment.class, getArguments()));
+					FragmentContainLandscape.start(getActivity(), MyApp.createFragment(PanoFragment.class, getArguments()));
 				}
 				else addFragment(MyApp.createFragment(Touch360Fragment.class, getArguments()));
 				
 			}
 		});
-		redPoint = (ImageView) view.findViewById(android.R.id.icon);
+		progressPoint = (ImageView) view.findViewById(android.R.id.icon);
 		maxProgress = (frameInfos.get(frameInfos.size()-1).getKeyFrame() - 1);
 		LinearLayout linear = (LinearLayout) view.findViewById(android.R.id.summary);
 		for(int i=0,size=frameInfos.size(); i<size; i++){
@@ -153,9 +153,9 @@ public class Show360FrameFragment extends MyFragment {
 	int maxProgress;
 	private void setProgress(int progress){
 		if(progress>maxProgress) progress = maxProgress;
-		int left = progress * (((View)redPoint.getParent()).getWidth()-redPoint.getWidth()) / maxProgress ;
-		((MarginLayoutParams)redPoint.getLayoutParams()).leftMargin = left;
-		redPoint.requestLayout();
+		int left = progress * (((View)progressPoint.getParent()).getWidth()-progressPoint.getWidth()) / maxProgress ;
+		((MarginLayoutParams)progressPoint.getLayoutParams()).leftMargin = left;
+		progressPoint.requestLayout();
 	}
 	
 	int showingIndex;
@@ -187,6 +187,11 @@ public class Show360FrameFragment extends MyFragment {
 	}
 
 	private void showRedPointToFront(FrameLayout front, ImageView imageView, FrameInfo frameInfo){
+		if(front.getWidth()!=imageView.getWidth() || front.getHeight()!=imageView.getHeight()){
+			front.getLayoutParams().width = imageView.getWidth();
+			front.getLayoutParams().height = imageView.getHeight();
+			front.requestLayout();
+		}
 		int animDelay = 0;
 		for(KeyPoint keyPoint : frameInfo.getKeyPoints()){
 			View btn = addRedPointToFront(front, imageView, keyPoint);
@@ -204,8 +209,8 @@ public class Show360FrameFragment extends MyFragment {
 		
 		if(imageView.getDrawable()==null) return btn;
 		final int size = (int) MyApp.convertToDp(20);
-		final int x = 2 * keyPoint.getHot_x() * imageView.getWidth() / imageView.getDrawable().getIntrinsicWidth() - size;
-		final int y = 2 * keyPoint.getHot_y() * imageView.getHeight() / imageView.getDrawable().getIntrinsicHeight() - size;
+		final int x = (int) (1000f/568 * keyPoint.getHot_x() * imageView.getWidth() / imageView.getDrawable().getIntrinsicWidth() - size/2);
+		final int y = (int) (1000f/568 * keyPoint.getHot_y() * imageView.getHeight() / imageView.getDrawable().getIntrinsicHeight() - size/2);
 		
 		FrameLayout.LayoutParams param = new FrameLayout.LayoutParams(size, size, Gravity.LEFT|Gravity.TOP);
 		param.topMargin = y;
@@ -220,13 +225,14 @@ public class Show360FrameFragment extends MyFragment {
 				try {
 					Bitmap bitmap = BitmapFactory.decodeStream(fileLoader.readKeyPointImageFile(keyPoint));
 					infoView.setImageBitmap(bitmap);
-					FrameLayout.LayoutParams param = new FrameLayout.LayoutParams(-2, -2, Gravity.LEFT|Gravity.TOP);
+					FrameLayout.LayoutParams param = new FrameLayout.LayoutParams(
+							(int) MyApp.convertToDp(bitmap.getWidth()), -2, Gravity.LEFT|Gravity.TOP);
 					int topMargin = 0;
-					if(keyPoint.getImage_y()!=0) topMargin = 2 * keyPoint.getImage_y() * imageView.getHeight() / imageView.getDrawable().getIntrinsicHeight() + size/2;
+					if(keyPoint.getImage_y()!=0) topMargin = (int) (keyPoint.getImage_y() * imageView.getHeight() / imageView.getDrawable().getIntrinsicHeight() + size/2);
 					else topMargin = (int) (y - bitmap.getHeight() * 6 / 10 );
 					param.topMargin = topMargin;
-					param.leftMargin = x + size/3;
-
+					param.leftMargin = keyPoint.getImage_x()!=0 ? (keyPoint.getImage_x()-size*2) : (x + size * 2 / 3);
+					
 					front.addView(infoView, param);
 					infoView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in_to_left));
 					infoView.setOnClickListener(new View.OnClickListener() {

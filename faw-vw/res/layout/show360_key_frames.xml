@@ -51,7 +51,7 @@
     <FrameLayout 
         android:id="@+id/show360_key_frames_front_point"
         android:layout_gravity="center"
-	    android:layout_width="match_parent"
+	    android:layout_width="wrap_content"
 	    android:layout_height="match_parent">
         
     </FrameLayout>

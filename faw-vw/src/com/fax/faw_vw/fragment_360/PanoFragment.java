@@ -6,9 +6,12 @@ import java.util.ArrayList;
 import org.apache.commons.io.IOUtils;
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,12 +26,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ImageView.ScaleType;
+import android.widget.TextView;
 
 import com.fax.faw_vw.MyApp;
 import com.fax.faw_vw.MyFragment;
 import com.fax.faw_vw.R;
 import com.fax.faw_vw.fragment_360.PackedFileLoader.PanoInfo;
 import com.fax.faw_vw.model.ShowCarItem;
+import com.fax.utils.frameAnim.BasicBitmapFrame;
 import com.fax.utils.task.ResultAsyncTask;
 
 @SuppressLint("NewApi")
@@ -72,15 +77,17 @@ public class PanoFragment extends MyFragment{
 		LinearLayout linear = (LinearLayout) view.findViewById(android.R.id.summary);
 		for(int i=0,size=panoInfos.size(); i<size; i++){
 			final PanoInfo panoInfo = panoInfos.get(i);
-			ImageButton tv = new ImageButton(context);
-//			tv.setText(touch360.color_name);
-//			tv.setTextSize(12);
+			TextView tv = new TextView(context);
+			tv.setText(panoInfo.color_name);
+			tv.setTextSize(12);
 			tv.setBackgroundResource(R.drawable.common_btn_in_white);
-			Drawable drawable = panoInfo.colorFrame.decodeDrawable(context);
-			tv.setScaleType(ScaleType.CENTER_INSIDE);
-			tv.setImageDrawable(drawable);
-//			tv.setCompoundDrawablesWithIntrinsicBounds(null, drawable, null, null);
-//			tv.setGravity(Gravity.CENTER);
+			Drawable drawable = ((BasicBitmapFrame)panoInfo.colorFrame).decodePreviewDrawable(context, 2);
+			if(drawable.getIntrinsicHeight()>drawable.getIntrinsicWidth()){//图片可能是被加了底部透明高度的图
+				Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
+				drawable = new BitmapDrawable(getResources(), Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight()/2));
+			}
+			tv.setCompoundDrawablesWithIntrinsicBounds(null, drawable, null, null);
+			tv.setGravity(Gravity.CENTER);
 			int padding = (int) MyApp.convertToDp(6);
 			tv.setPadding(padding, padding, padding, padding);
 			tv.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +116,7 @@ public class PanoFragment extends MyFragment{
 			if(i==0){//载入第一个
 				tv.performClick();
 			}
-			linear.addView(tv, new LinearLayout.LayoutParams((int) MyApp.convertToDp(50), -1));
+			linear.addView(tv, -2, -2);
 		}
 		view.findViewById(R.id.back_btn).setOnClickListener(new View.OnClickListener() {
 			@Override
