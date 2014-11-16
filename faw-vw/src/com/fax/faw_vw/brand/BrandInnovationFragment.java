@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import com.fax.faw_vw.MyApp;
 import com.fax.faw_vw.MyFragment;
 import com.fax.faw_vw.fargment_common.AssetFrameTitleFragment;
+import com.fax.faw_vw.views.FitWidthImageView;
 import com.fax.faw_vw.views.MyTopBar;
 import com.fax.faw_vw.views.clickshow.ClickShowImageView;
 import com.fax.utils.frameAnim.AssetFrame;
@@ -36,11 +37,11 @@ public class BrandInnovationFragment extends MyFragment {
 			}
 			@Override
 			protected View bindGridView(ViewGroup contain, AssetFrame t, int position, View convertView) {
-				int padding = (int) MyApp.convertToDp(6);
+				int padding = (int) MyApp.convertToDp(4);
 				contain.setPadding(padding, padding, padding, padding);
 				
 				if(convertView==null){
-					convertView = new ClickShowImageView(context);
+					convertView = new FitWidthImageView(context);
 					((ImageView)convertView).setAdjustViewBounds(true);
 				}
 				FrameAnimation.setFrameToView(convertView, t);

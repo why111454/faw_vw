@@ -14,7 +14,6 @@
         android:orientation="horizontal" >
         <RadioButton
             android:id="@+id/radioButton1"
-            android:checked="true"
             style="@style/TabBtnGray"
             android:layout_marginRight="1dp"
             android:text="品牌历程" />
@@ -30,12 +29,12 @@
        android:background="@color/dark_blue"
        android:layout_height="2dp"/>
 	<ScrollView
+	    android:id="@+id/scrollView"
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent" >
 	       <com.fax.faw_vw.views.FitWidthImageView
 	           android:id="@+id/brand_show_content"
 	           android:layout_width="match_parent"
-	           android:layout_height="wrap_content"
-	           android:src="@drawable/brand_show_1" />
+	           android:layout_height="wrap_content" />
 	</ScrollView>
 </LinearLayout>
