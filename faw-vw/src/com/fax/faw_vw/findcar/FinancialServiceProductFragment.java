@@ -44,6 +44,9 @@ public class FinancialServiceProductFragment extends MyFragment {
 				case R.id.radioButton6:
 					midImage.setImageResource(R.drawable.financial_service_product_6);
 					break;
+				case R.id.radioButton7:
+					midImage.setImageResource(R.drawable.financial_service_product_7);
+					break;
 				}
 			}
 		});

@@ -63,7 +63,7 @@ public class FinancialServiceProductDetailFragment extends MyFragment {
 					}));
 					break;
 				}
-				
+				listView.setGroupIndicator(null );
 				listView.setAdapter(new SimpleExpandAdapter<String, Integer>(map) {
 					@Override
 					public View getGroupView(int groupPosition,boolean isExpanded, View convertView,String group) {

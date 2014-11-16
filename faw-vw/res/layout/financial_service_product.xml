@@ -5,43 +5,67 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="10dp" >
+    <HorizontalScrollView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <RadioGroup
         android:id="@+id/radio_group"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
         <RadioButton
             android:id="@+id/radioButton1"
-            android:layout_width="10dp"
             android:checked="true"
             style="@style/TabBtnGray"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:layout_marginRight="1dp"
             android:text="全系车型" />
         <RadioButton
             android:id="@+id/radioButton2"
             style="@style/TabBtnGray"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:layout_marginRight="1dp"
             android:text="新CC" />
         <RadioButton
             android:id="@+id/radioButton3"
             style="@style/TabBtnGray"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_width="wrap_content"
             android:layout_marginRight="1dp"
             android:text="迈腾" />
         <RadioButton
             android:id="@+id/radioButton4"
             style="@style/TabBtnGray"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:layout_marginRight="1dp"
             android:text="速腾" />
         <RadioButton
             android:id="@+id/radioButton5"
             style="@style/TabBtnGray"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_width="wrap_content"
             android:layout_marginRight="1dp"
-            android:text="宝来" />
+            android:text="全新高尔夫" />
         <RadioButton
             android:id="@+id/radioButton6"
             style="@style/TabBtnGray"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_marginRight="1dp"
+            android:text="宝来" />
+        <RadioButton
+            android:id="@+id/radioButton7"
+            style="@style/TabBtnGray"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:text="捷达" />
     </RadioGroup>
+    </HorizontalScrollView>
    <View style="@style/divHorizontal"
        android:background="@color/dark_blue"
        android:layout_height="2dp"/>

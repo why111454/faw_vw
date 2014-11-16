@@ -21,11 +21,11 @@
             android:id="@+id/radioButton2"
             style="@style/TabBtnGray"
             android:layout_marginRight="1dp"
-            android:text="17贷8活动" />
+            android:text="“17贷8活动”" />
         <RadioButton
             android:id="@+id/radioButton3"
             style="@style/TabBtnGray"
-            android:text="17抢8活动" />
+            android:text="“17抢8活动”" />
     </RadioGroup>
    <View style="@style/divHorizontal"
        android:background="@color/dark_blue"
