@@ -29,6 +29,7 @@ import com.fax.faw_vw.fragments_car.OnlineOrderCarFragment;
 import com.fax.faw_vw.game.OnlineDriveGamePreStartFrag;
 import com.fax.faw_vw.model.HomeTipConfig;
 import com.fax.faw_vw.model.ImageResPagePair;
+import com.fax.faw_vw.model.OilPriceResponse;
 import com.fax.faw_vw.model.ShowCarItem;
 import com.fax.faw_vw.model.WeatherResponse;
 import com.fax.faw_vw.util.LocManager;
@@ -69,7 +70,7 @@ import android.widget.Toast;
 
 public class HomeFragment extends MyFragment{
 	private TextView mcity_name,mdate,mtemperature,mchangecity,mPM;
-	
+	private TextView mprice_95,mprice_93;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 	
@@ -79,7 +80,8 @@ public class HomeFragment extends MyFragment{
 		mtemperature=(TextView) view.findViewById(R.id.home_temperature_textview);
 		mchangecity=(TextView) view.findViewById(R.id.home_change_city_textview);
 		mPM=(TextView) view.findViewById(R.id.home_pm_textview);
-		
+		mprice_95=(TextView) view.findViewById(R.id.home_price_95);
+		mprice_93=(TextView) view.findViewById(R.id.home_price_93);
 		ViewPager viewPager = (ViewPager) view.findViewById(R.id.view_pager);
 		viewPager.setPageMargin((int) MyApp.convertToDp(4));
 		viewPager.getLayoutParams().height = getResources().getDisplayMetrics().widthPixels * 300 / 612;
@@ -190,9 +192,6 @@ public class HomeFragment extends MyFragment{
 				FragmentContain.start(getActivity(), SearchDealerFragment.class);
 			}
 		});
-		
-	
-		
 		mchangecity.setOnClickListener(new View.OnClickListener() {
 			//切换城市点击事件
 			@Override
@@ -259,8 +258,6 @@ public class HomeFragment extends MyFragment{
 							BitmapManager.bindView(view.findViewById(R.id.home_weather_icon),
 									responseResult.getWeather_data().getNightPictureUrl());
 						}
-						
-						
 						//显示爱车贴士
 						((TextView)view.findViewById(R.id.home_love_car_tip)).setText(HomeTipConfig.getATip(context));
 					}
@@ -276,6 +273,39 @@ public class HomeFragment extends MyFragment{
 		task.execute();
 
 		//TODO 显示当前油价（用油价的接口）
-		
+         ResultAsyncTask<OilPriceResponse> oiltask=new ResultAsyncTask<OilPriceResponse>(context) {
+			
+			@Override
+			protected void onPostExecuteSuc(OilPriceResponse result) {
+				// TODO Auto-generated method stub
+				if(result.getError_code()==0){
+					mprice_93.setText("93#"+result.getResult().getData().get(0).getPrice().getE93());
+					mprice_95.setText("97#"+result.getResult().getData().get(0).getPrice().getE97());
+				}
+				
+			}
+
+			@Override
+			protected OilPriceResponse doInBackground(Void... params) {
+				// TODO Auto-generated method stub
+				String url="http://m3.mgogo.com/vwapp/oil.php";
+				ArrayList<NameValuePair> pairs=new ArrayList<NameValuePair>();
+				pairs.add(new BasicNameValuePair("city", cityname));
+				String json=HttpUtils.reqForGet(url, pairs);
+				try {
+					OilPriceResponse oilresponse=new Gson().fromJson(json, OilPriceResponse.class);
+					return oilresponse;
+				} catch (JsonSyntaxException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return null;
+			}
+		};
+		oiltask.setToast(false);
+		oiltask.execute();
 	}
+
+	
+
 }

@@ -225,9 +225,12 @@
                     android:layout_height="wrap_content"
                     android:text="95#"
                     android:textColor="@color/dark_blue"
-                    android:textSize="12sp" />
+                    android:textSize="12sp" 
+                    android:id="@+id/home_price_95"
+                    />
 
                 <TextView
+                    android:id="@+id/home_price_93"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="93#"
