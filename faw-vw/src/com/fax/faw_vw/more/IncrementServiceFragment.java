@@ -12,7 +12,7 @@ import com.fax.faw_vw.views.MyTopBar;
 public class IncrementServiceFragment extends MyFragment {
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		 View view = inflater.inflate(R.layout.more_query_illegal, container, false);
+		 View view = inflater.inflate(R.layout.more_increment_service, container, false);
 		MyTopBar topBar = (MyTopBar) new MyTopBar(context).setLeftBack()
 				.setTitle("增值服务").setContentView(view);
 		

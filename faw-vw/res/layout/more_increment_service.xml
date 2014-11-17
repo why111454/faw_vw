@@ -4,22 +4,65 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="10dp" >
-      <LinearLayout 
-        android:layout_weight="1"
-	    android:layout_width="match_parent"
-	    android:layout_height="0dp"
-	    android:background="@drawable/more_incrementservice_weather_lightrain">
+    >
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="1.5"
+         >
 	   
        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:orientation="vertical"
+           >
+               
+          <LinearLayout 
+                android:padding="4dp"
+                android:layout_weight="0.5"
+                android:layout_width="match_parent"
+			    android:layout_height="match_parent"
+			    android:background="@drawable/more_incrementservice_weather_lightrain">
+                
+            </LinearLayout>
+        
+            <View style="@style/divHorizontal" />
             
+             <LinearLayout 
+                android:padding="4dp"
+                android:layout_weight="1.8"
+                android:layout_width="match_parent"
+			    android:layout_height="match_parent"
+			    >
+          <LinearLayout
+	             android:layout_width="wrap_content"
+	             android:layout_height="wrap_content"
+	             android:orientation="vertical"
+	              android:layout_margin="10dp"
+	            >
+                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="空气质量"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="13sp" />
+                 <TextView
+                    android:layout_width="45dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="良"
+                    android:textColor="#FFFFFF"
+                    android:background="#FF9900"
+                    android:textSize="12sp" />
+                 </LinearLayout>
+             </LinearLayout>
+        
         </LinearLayout>
         
-    </LinearLayout>
-	<View style="@style/divHorizontal"/>
+         
+     </LinearLayout>
+	  <View style="@style/divHorizontal"/>
 	
     <LinearLayout 
         android:layout_weight="1"
@@ -27,51 +70,109 @@
 	    android:layout_height="0dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-            <TextView 
-                    android:text="洗车指数"
-                    android:drawablePadding="2dp"
-                    android:textSize="18sp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#d5d5d5"
+                android:orientation="vertical"
+                android:padding="4dp" >
+             <LinearLayout
+	             android:layout_width="wrap_content"
+	             android:layout_height="wrap_content"
+	             android:orientation="horizontal"
+	             android:padding="4dp" >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
                     android:drawableLeft="@drawable/more_incrementservice_car"
-                    android:layout_marginBottom="6dp"
-				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"/>
-                <TextView 
-                    android:text="雨天路滑,请注意您的刹车片。"
-                    android:textSize="12sp"
-				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"/>
-
-                
-
-        </LinearLayout>
-
-	    
-	    <View style="@style/divVertical"/>
-	    
-	   <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-            <TextView 
-                    android:text="洗车指数"
                     android:drawablePadding="2dp"
-                    android:textSize="18sp"
-                    android:drawableLeft="@drawable/more_incrementservice_gasoline"
+                    />
+                <LinearLayout
+	             android:layout_width="wrap_content"
+	             android:layout_height="wrap_content"
+	             android:orientation="vertical"
+	            >
+                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="6dp"
+                    android:text="洗车指数"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="13sp" />
+                 <TextView
+                    android:layout_width="45dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginTop="10dp"
+                    android:text="不宜"
+                    android:textColor="#FFFFFF"
+                    android:background="@color/dark_blue"
+                    android:textSize="12sp" />
+                 </LinearLayout>
+              </LinearLayout>
+              
+                <TextView
+                    android:id="@+id/home_love_car_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp" />
+
+          </LinearLayout>
+
+            <View style="@style/divVertical" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#d5d5d5"
+                android:orientation="vertical"
+                android:padding="4dp" >
+
+                <LinearLayout
+	             android:layout_width="wrap_content"
+	             android:layout_height="wrap_content"
+	             android:orientation="horizontal"
+	             android:padding="4dp" >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
-				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"/>
-                <TextView 
-                    android:text="雨天路滑,请注意您的刹车片。"
-                    android:textSize="12sp"
-				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"/>
+                    android:drawableLeft="@drawable/more_incrementservice_gasoline"
+                    android:drawablePadding="2dp"
+                    />
+                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="6dp"
+                    android:text="参考油价"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="13sp" />
+              </LinearLayout>
 
-                
+                <TextView
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="97#7.32(沪95号)"
+                    android:textStyle="bold"
+                    android:textSize="14sp" />
 
-        </LinearLayout>
-    </LinearLayout>
+                <TextView
+                     android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="93#6.88(沪92号)"
+                    android:textStyle="bold"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        
+       
+   </LinearLayout>
 
 </LinearLayout>
