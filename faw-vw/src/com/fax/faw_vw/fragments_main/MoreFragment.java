@@ -12,7 +12,9 @@ import com.fax.faw_vw.R;
 import com.fax.faw_vw.fragments_car.CarDownloadFragment;
 import com.fax.faw_vw.model.ImageTextPagePair;
 import com.fax.faw_vw.more.FeedbackFragment;
+import com.fax.faw_vw.more.IncrementServiceFragment;
 import com.fax.faw_vw.more.OnlineQAFragment;
+import com.fax.faw_vw.more.QueryIllegalFragment;
 import com.fax.faw_vw.more.StatementFragment;
 import com.fax.faw_vw.views.MyTopBar;
 import com.fax.faw_vw.views.clickshow.ClickShowTextView;
@@ -33,8 +35,8 @@ public class MoreFragment extends MyFragment {
 	ImageTextPagePair[] pagePairs = new ImageTextPagePair[]{
 //			new ImageTextPagePair(R.drawable.main_more_aftermarket, "售后服务", null),
 			new ImageTextPagePair(R.drawable.main_more_person, "个人中心", null),
-			new ImageTextPagePair(R.drawable.main_more_query_illegal, "违章查询", null),
-			new ImageTextPagePair(R.drawable.main_more_extra, "增值服务", null),
+			new ImageTextPagePair(R.drawable.main_more_query_illegal, "违章查询", MyApp.createFragment(QueryIllegalFragment.class)),
+			new ImageTextPagePair(R.drawable.main_more_extra, "增值服务",  MyApp.createFragment(IncrementServiceFragment.class)),
 			new ImageTextPagePair(R.drawable.main_more_online_service, "在线客服", MyApp.createFragment(OnlineQAFragment.class)),
 			new ImageTextPagePair(R.drawable.main_more_feedback, "意见反馈", MyApp.createFragment(FeedbackFragment.class)),
 			new ImageTextPagePair(R.drawable.main_more_setting, "系统设置", MyApp.createFragment(SettingFragment.class)),
