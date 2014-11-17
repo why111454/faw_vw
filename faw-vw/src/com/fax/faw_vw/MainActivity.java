@@ -12,8 +12,12 @@ import com.fax.faw_vw.fragments_main.MoreFragment;
 import com.fax.faw_vw.fragments_main.ShowCarsFragment;
 import com.fax.faw_vw.menu.QRFragment;
 import com.fax.faw_vw.menu.SearchAppFragment;
+import com.fax.faw_vw.model.ImageResPagePair;
+import com.fax.faw_vw.model.ImageTextPagePair;
 import com.fax.faw_vw.more.FeedbackFragment;
+import com.fax.faw_vw.more.MenuListSettingFragment;
 import com.fax.faw_vw.more.OnlineQAFragment;
+import com.fax.faw_vw.more.PersonFragment;
 import com.fax.faw_vw.more.QueryIllegalFragment;
 import com.fax.faw_vw.util.Blur;
 import com.fax.utils.frameAnim.AssetFrame;
@@ -23,6 +27,8 @@ import com.fax.utils.frameAnim.FrameAnimation;
 import com.fax.utils.frameAnim.FrameFactory;
 import com.fax.utils.view.RadioGroupFragmentBinder;
 import com.fax.utils.view.RadioGroupStateFragmentBinder;
+import com.fax.utils.view.list.ObjectXAdapter;
+import com.fax.utils.view.list.ObjectXListView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -57,6 +63,13 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 public class MainActivity extends FragmentActivity {
+	
+	ObjectXListView menuList;
+	@Override
+	protected void onResume() {
+		super.onResume();
+		menuList.reload();
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -71,20 +84,6 @@ public class MainActivity extends FragmentActivity {
 				animDrawableRight((TextView) v);
 			}
 		};
-		findViewById(R.id.main_menu_btn_person).setOnClickListener(animRightDrawClick);
-		((TextView)findViewById(R.id.main_menu_btn_person)).getCompoundDrawables()[2].setAlpha(0);
-		findViewById(R.id.main_menu_btn_search_dealer).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				FragmentContain.start(MainActivity.this, SearchDealerFragment.class);
-			}
-		});
-		findViewById(R.id.main_menu_btn_query_illegal).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				FragmentContain.start(MainActivity.this, QueryIllegalFragment.class);
-			}
-		});
 		findViewById(R.id.main_menu_btn_tel).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -98,29 +97,45 @@ public class MainActivity extends FragmentActivity {
 				FragmentContain.start(MainActivity.this, SearchAppFragment.class);
 			}
 		});
-		findViewById(R.id.main_menu_btn_book).setOnClickListener(new View.OnClickListener() {
+		//初始化侧边栏里可以被配置的条目
+		menuList = (ObjectXListView) findViewById(android.R.id.list);
+		menuList.setAdapter(new ObjectXAdapter.SingleLocalPageAdapter<ImageTextPagePair>() {
 			@Override
-			public void onClick(View v) {
-				FragmentContain.start(MainActivity.this, BookDriveFragment.class);
+			public View bindView(ImageTextPagePair t, int position, View convertView) {
+				TextView tv = (TextView) convertView;
+				if(tv==null){
+					tv = new TextView(MainActivity.this);
+					int padding = (int) MyApp.convertToDp(12);
+					tv.setPadding(padding, padding, padding, padding);
+					tv.setBackgroundResource(R.drawable.common_btn_in_black);
+					tv.setCompoundDrawablePadding((int) MyApp.convertToDp(12));
+					tv.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);
+					tv.setMinHeight((int) MyApp.convertToDp(50));
+					tv.setTextColor(Color.WHITE);
+					tv.setTextSize(20);
+				}
+				tv.setText(t.getText());
+				tv.setCompoundDrawablesWithIntrinsicBounds(t.getImgResId(), 0, 0, 0);
+				return tv;
 			}
-		});
-		findViewById(R.id.main_menu_btn_feedback).setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(View v) {
-				FragmentContain.start(MainActivity.this, FeedbackFragment.class);
+			public List<ImageTextPagePair> instanceNewList() throws Exception {
+				return MenuListSettingFragment.getEnablePagePairs(MainActivity.this);
 			}
-		});
-		findViewById(R.id.main_menu_btn_online_qa).setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(View v) {
-				FragmentContain.start(MainActivity.this, OnlineQAFragment.class);
+			public boolean isDynamicHeight() {
+				return true;
 			}
-		});
-
-		findViewById(R.id.main_menu_btn_qr).setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(View v) {
-				FragmentContain.start(MainActivity.this, QRFragment.class);
+			public void onItemClick(ImageTextPagePair t, View view, int position, long id) {
+				super.onItemClick(t, view, position, id);
+				if(t.getFragment()!=null){
+					if(t.isLandscape()){
+						FragmentContainLandscape.start(MainActivity.this, t.getFragment());
+					}else{
+						FragmentContain.start(MainActivity.this, t.getFragment());
+					}
+				}
 			}
 		});
 		
