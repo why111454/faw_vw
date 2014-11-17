@@ -8,7 +8,7 @@ public class WeatherResponse implements Serializable{
 	private int error;
 	private String status;
 	private String date;
-	private ArrayList<results> results;
+	private ArrayList<Result> results;
 	public int getError() {
 		return error;
 	}
@@ -22,28 +22,26 @@ public class WeatherResponse implements Serializable{
 		this.status = status;
 	}
 	public String getDate() {
-		return date;
+		return date.replaceFirst("-", "年").replaceFirst("-", "月")+"日";
 	}
 	public void setDate(String date) {
 		this.date = date;
 	}
 	
-	public ArrayList<results> getResults() {
-		return results;
-	}
-	public void setResults(ArrayList<results> results) {
-		this.results = results;
+	public Result getResult() {
+		if(results==null || results.size()==0) return null;
+		return results.get(0);
 	}
 
-	public class results implements Serializable{
+	public class Result implements Serializable{
 		private String currentCity;
-		private String pm25;
-		private ArrayList<weatherdata> weather_data;
-		private ArrayList<weatherindex> index;
-		public ArrayList<weatherindex> getIndex() {
+		private int pm25;
+		private ArrayList<Weatherdata> weather_data;
+		private ArrayList<Weatherindex> index;
+		public ArrayList<Weatherindex> getIndex() {
 			return index;
 		}
-		public void setIndex(ArrayList<weatherindex> index) {
+		public void setIndex(ArrayList<Weatherindex> index) {
 			this.index = index;
 		}
 		public String getCurrentCity() {
@@ -52,20 +50,17 @@ public class WeatherResponse implements Serializable{
 		public void setCurrentCity(String currentCity) {
 			this.currentCity = currentCity;
 		}
-		public String getPm25() {
+		public int getPm25() {
 			return pm25;
 		}
-		public void setPm25(String pm25) {
-			this.pm25 = pm25;
-		}
 
-		public ArrayList<weatherdata> getWeather_data() {
-			return weather_data;
+		public Weatherdata getWeather_data() {
+			return weather_data.get(0);
 		}
-		public void setWeather_data(ArrayList<weatherdata> weather_data) {
+		public void setWeather_data(ArrayList<Weatherdata> weather_data) {
 			this.weather_data = weather_data;
 		}
-	public class weatherdata implements Serializable {
+	public class Weatherdata implements Serializable {
 				private String date;
 				private String dayPictureUrl;
 				private String nightPictureUrl;
@@ -110,7 +105,7 @@ public class WeatherResponse implements Serializable{
 				}
 
 			}
-	public class weatherindex implements Serializable {
+	public class Weatherindex implements Serializable {
 				private String title;
 				private  String zs;
 				private String tipt;

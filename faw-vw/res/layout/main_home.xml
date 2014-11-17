@@ -3,191 +3,238 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    <LinearLayout 
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:padding="6dp"
-	    android:orientation="vertical">
-        <android.support.v4.view.ViewPager 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="6dp" >
+
+        <android.support.v4.view.ViewPager
             android:id="@+id/view_pager"
-		    android:layout_width="match_parent"
-		    android:layout_height="160dp"/>
-        <com.fax.utils.view.pager.PointIndicator 
+            android:layout_width="match_parent"
+            android:layout_height="160dp" />
+
+        <com.fax.utils.view.pager.PointIndicator
             android:id="@+id/point_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
             android:layout_marginTop="-20dp"
-            android:gravity="center"
-		    android:layout_width="match_parent"
-		    android:layout_height="20dp"/>
-        <android.support.v4.view.ViewPager 
+            android:gravity="center" />
+
+        <android.support.v4.view.ViewPager
             android:id="@+id/home_show_360"
-            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"/>
-        <LinearLayout 
-            android:gravity="center"
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content">
-            <Button 
+            android:layout_marginTop="10dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center" >
+
+            <Button
                 android:id="@+id/home_order_drive_btn"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/common_blue_arrow_btn"
+                android:drawablePadding="6dp"
                 android:drawableTop="@drawable/main_home_ic_test_drive"
+                android:gravity="center_horizontal|bottom"
                 android:paddingTop="10dp"
-                android:layout_margin="2dp"
-                android:drawablePadding="6dp"
                 android:text="预约试驾"
-                android:textSize="12sp"
-                android:gravity="center_horizontal|bottom"
                 android:textColor="@android:color/white"
-                android:background="@drawable/common_blue_arrow_btn"
-                android:layout_weight="1"
-			    android:layout_width="0dp"
-			    android:layout_height="80dp"/>
-            <Button 
+                android:textSize="12sp" />
+
+            <Button
                 android:id="@+id/home_discount_btn"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/common_blue_arrow_btn"
+                android:drawablePadding="6dp"
                 android:drawableTop="@drawable/main_home_ic_activity"
+                android:gravity="center_horizontal|bottom"
                 android:paddingTop="10dp"
-                android:layout_margin="2dp"
-                android:drawablePadding="6dp"
                 android:text="市场活动"
-                android:textSize="12sp"
-                android:gravity="center_horizontal|bottom"
                 android:textColor="@android:color/white"
-                android:background="@drawable/common_blue_arrow_btn"
-                android:layout_weight="1"
-			    android:layout_width="0dp"
-			    android:layout_height="80dp"/>
-            <Button 
+                android:textSize="12sp" />
+
+            <Button
                 android:id="@+id/home_store_search"
-                android:drawableTop="@drawable/main_home_ic_find_dealer"
-                android:paddingTop="10dp"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
                 android:layout_margin="2dp"
-                android:drawablePadding="6dp"
-                android:text="经销商查询"
-                android:textSize="12sp"
-                android:gravity="center_horizontal|bottom"
-                android:textColor="@android:color/white"
-                android:background="@drawable/common_blue_arrow_btn"
                 android:layout_weight="1"
-			    android:layout_width="0dp"
-			    android:layout_height="80dp"/>
+                android:background="@drawable/common_blue_arrow_btn"
+                android:drawablePadding="6dp"
+                android:drawableTop="@drawable/main_home_ic_find_dealer"
+                android:gravity="center_horizontal|bottom"
+                android:paddingTop="10dp"
+                android:text="经销商查询"
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
         </LinearLayout>
-        <LinearLayout 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:gravity="center"
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content">
-            <LinearLayout 
-                android:padding="2dp"
+            android:minHeight="100dp" >
+
+            <LinearLayout
+                android:layout_width="20dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
-			    android:layout_width="wrap_content"
-			    android:layout_height="wrap_content">
-                <TextView 
-                    android:text="上海"
-                    android:textSize="18sp"
-				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"
-				    android:id="@+id/cityname_textview"
-				    />
-                <TextView 
-                    android:text="2014年3月4日"
-                    android:textSize="12sp"
-				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"
-				    android:id="@+id/date_textview"
-				    />
-                <TextView 
-                    android:text="-2℃ 晴"
+                android:padding="2dp" >
+                <TextView
+                    android:id="@+id/home_cityname_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/home_date_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp" />
+                <TextView
+                    android:id="@+id/home_temperature_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:drawableRight="@drawable/main_home_weather_fine"
-                    android:textColor="@color/dark_blue"
-				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"
-				    android:id="@+id/temperature_textview"/>
+                    android:textColor="@color/dark_blue" />
+				<LinearLayout 
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+	                <TextView
+	                    android:id="@+id/home_weather_textview"
+	                    android:textSize="12sp"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:gravity="center"
+	                    android:textColor="@color/dark_blue" />
+	                <ImageView 
+	                    android:id="@+id/home_weather_icon"
+	                    android:layout_marginLeft="4dp"
+	                    android:layout_width="26dp"
+	                    android:layout_height="26dp"/>
+				</LinearLayout>
             </LinearLayout>
-            
-            <LinearLayout 
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:paddingLeft="2dp"
-                android:paddingRight="6dp"
-			    android:layout_width="wrap_content"
-			    android:layout_height="match_parent">
-                <TextView 
-                    android:paddingTop="6dp"
-                    android:paddingBottom="6dp"
-                    android:text="切换城市"
+                android:paddingRight="6dp" >
+
+                <com.fax.faw_vw.views.clickshow.ClickShowTextView
+                    android:id="@+id/home_change_city_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/btn_white"
                     android:drawableLeft="@drawable/main_home_ic_city"
-                    android:textSize="12sp"
-				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"
-				    android:id="@+id/change_city_textview"
-				    />
-                <TextView 
+                    android:drawablePadding="2dp"
+                    android:paddingBottom="4dp"
+                    android:paddingTop="4dp"
+                    android:text="切换城市"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:text="PM2.5"
-                    android:textColor="@color/dark_blue"
-				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"
-				   
-				    />
-                <TextView 
-                    android:text="指数250"
-                    android:textSize="12sp"
-				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"
-				     android:id="@+id/PM_textview"
-				     />
+                    android:textColor="@color/dark_blue" />
+
+				<LinearLayout 
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+	                android:layout_marginTop="8dp"
+                    android:gravity="center">
+	                <TextView
+	                    android:id="@+id/home_pm_textview_state"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:text="　"
+	                    android:padding="4dp"
+	                    android:gravity="center"
+	                    android:textColor="@android:color/white"
+	                    android:background="@color/dark_blue" />
+	                <TextView
+	                    android:id="@+id/home_pm_textview"
+	                    android:layout_marginLeft="4dp"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:textSize="12sp" />
+				</LinearLayout>
             </LinearLayout>
-            
-            <LinearLayout 
-                android:padding="4dp"
-                android:orientation="vertical"
-                android:background="@color/alpha_black"
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-			    android:layout_width="0dp"
-			    android:layout_height="match_parent">
-                <TextView 
-                    android:text="爱车贴士"
-                    android:drawablePadding="2dp"
-                    android:textSize="12sp"
+                android:background="#d5d5d5"
+                android:orientation="vertical"
+                android:padding="4dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
                     android:drawableLeft="@drawable/main_home_ic_tieshi"
-                    android:layout_marginBottom="6dp"
-				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"/>
-                <TextView 
-                    android:text="雨天路滑,请注意您的刹车片。"
-                    android:textSize="12sp"
-				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"/>
-            </LinearLayout>
-            <View style="@style/divVertical"/>
-            <LinearLayout 
-                android:padding="4dp"
-                android:orientation="vertical"
-                android:background="@color/alpha_black"
-                android:layout_weight="1"
-			    android:layout_width="0dp"
-			    android:layout_height="match_parent">
-                <TextView 
-                    android:text="今日油价"
                     android:drawablePadding="2dp"
-                    android:textSize="12sp"
-                    android:drawableLeft="@drawable/main_home_ic_youjia"
+                    android:text="爱车贴士"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/home_love_car_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <View style="@style/divVertical" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#d5d5d5"
+                android:orientation="vertical"
+                android:padding="4dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
-				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"/>
-                <TextView 
-                    android:text="95# 8.35元"
+                    android:drawableLeft="@drawable/main_home_ic_youjia"
+                    android:drawablePadding="2dp"
+                    android:text="今日油价"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="95#"
                     android:textColor="@color/dark_blue"
-                    android:textSize="12sp"
-				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"/>
-                <TextView 
-                    android:text="93# 7.54元"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="93#"
                     android:textColor="@color/dark_blue"
-                    android:textSize="12sp"
-				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"/>
+                    android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
 </ScrollView>

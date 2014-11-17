@@ -1,4 +1,4 @@
-package com.fax.faw_vw.fragments_main;
+package com.fax.faw_vw.more;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

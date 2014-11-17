@@ -160,7 +160,7 @@ public class MainActivity extends FragmentActivity {
 		
 		//绑定底部按钮与页卡
 		final RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radio_group);
-		radioGroup.setOnCheckedChangeListener(new RadioGroupStateFragmentBinder(getSupportFragmentManager(), R.id.contain) {
+		radioGroup.setOnCheckedChangeListener(new RadioGroupFragmentBinder(getSupportFragmentManager(), R.id.contain) {
 			@Override
 			public Fragment instanceFragment(int checkedId) {
 				switch(checkedId){
@@ -228,7 +228,6 @@ public class MainActivity extends FragmentActivity {
 				}
 			});
 		}
-		
 	}
 	
 	private void animDrawableRight(final TextView textView){

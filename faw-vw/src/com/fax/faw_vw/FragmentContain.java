@@ -19,6 +19,9 @@ public class FragmentContain extends FragmentActivity{
     public static void start(Activity activity, Fragment f, int request){
         start(activity, f.getClass(), f.getArguments(), request);
     }
+    public static void start(Activity activity, Class<? extends Fragment> c, int request){
+    	start(activity, c, new Intent(), request);
+    }
     public static void start(Activity activity, Class<? extends Fragment> c, Intent args, int request){
     	start(activity, c, args.getExtras(), request);
     }
@@ -28,10 +31,15 @@ public class FragmentContain extends FragmentActivity{
                 .putExtras(args==null?new Bundle():args), request);
     }
 
+    public static void start(Fragment f, Class<? extends Fragment> c, int request){
+    	start(f, c, new Intent(), request);
+    }
     public static void start(Fragment f, Class<? extends Fragment> c, Intent args, int request){
+    	if(args==null) args= new Intent();
     	start(f, c, args.getExtras(), request);
     }
     public static void start(Fragment f, Class<? extends Fragment> c, Bundle args, int request){
+    	if(args==null) args= new Bundle();
         f.startActivityForResult(new Intent(f.getActivity(), FragmentContain.class)
                 .putExtra(Extra_ClassName, c)
                 .putExtras(args==null?new Bundle():args), request);

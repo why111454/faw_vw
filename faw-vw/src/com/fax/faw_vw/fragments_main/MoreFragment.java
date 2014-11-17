@@ -13,6 +13,7 @@ import com.fax.faw_vw.fragments_car.CarDownloadFragment;
 import com.fax.faw_vw.model.ImageTextPagePair;
 import com.fax.faw_vw.more.FeedbackFragment;
 import com.fax.faw_vw.more.OnlineQAFragment;
+import com.fax.faw_vw.more.SettingFragment;
 import com.fax.faw_vw.more.StatementFragment;
 import com.fax.faw_vw.views.MyTopBar;
 import com.fax.faw_vw.views.clickshow.ClickShowTextView;
