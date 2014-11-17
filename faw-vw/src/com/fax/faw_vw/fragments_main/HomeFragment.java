@@ -269,7 +269,7 @@ public class HomeFragment extends MyFragment{
 		};
 		
 		if(showProgress){
-			task.setProgressDialog().setToast(true);
+			task.setProgressDialog().setToast(false, true);
 		}else{
 			task.setToast(false);
 		}
