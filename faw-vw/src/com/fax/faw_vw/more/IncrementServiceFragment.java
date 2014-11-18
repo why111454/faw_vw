@@ -10,7 +10,9 @@ import org.apache.http.message.BasicNameValuePair;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,6 +64,10 @@ public class IncrementServiceFragment extends MyFragment {
 				FragmentContain.start(IncrementServiceFragment.this, HomeCitySwitchFragment.class, Request_SwitchCity);
 			}
 		});
+		SharedPreferences mPerferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+		if(mPerferences.getString("weathercity", null)!=null){
+			showWeather(mPerferences.getString("weathercity", null), context, false);
+		}else{
 		LocManager.reqLoc(context, new LocManager.LocationListener() {
 			boolean isShowed = false;
 			@Override
@@ -73,6 +79,7 @@ public class IncrementServiceFragment extends MyFragment {
 				showWeather(city, context, false);
 			}
 		});
+		}
 		//TODO 数据绑定、提交
 		return topBar;
 	}
@@ -108,6 +115,10 @@ public class IncrementServiceFragment extends MyFragment {
 		super.onActivityResult(requestCode, resultCode, data);
 		if(resultCode == Activity.RESULT_OK && requestCode == Request_SwitchCity){
 			String city = data.getStringExtra(HomeCitySwitchFragment.Extra_City);
+			 SharedPreferences mPerferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+			 SharedPreferences.Editor mEditor = mPerferences.edit();
+			 mEditor.putString("weathercity",city);
+			 mEditor.commit();
 			showWeather(city, context, true);
 		}
 	}
@@ -133,6 +144,43 @@ public class IncrementServiceFragment extends MyFragment {
 						String pmState = pm25 < 50 ? "优" : pm25 > 100 ? "差" : "良";
 						weather_PM.setText(pmState);
 						//TODD  PM2.5小贴士
+		/*				if(pm<50)
+				        {
+				            v.backgroundColor=[UIColor colorWithRed:0 green:(float)100/255 blue:0 alpha:1];
+				            xczs.text=@"优";
+				            xcts.text=@"空气质量令人满意，基本无空气污染，各类人群可正常活动";
+				        }
+				        else if(pm<100)
+				        {
+				            v.backgroundColor=[UIColor colorWithRed:(float)178/255 green:(float)133/255 blue:0 alpha:1];
+				            xczs.text=@"良";
+				            xcts.text=@"空气质量还不错！出去走走，感受大自然，让心情放松一下";
+				        }
+				        else if(pm<150)
+				        {
+				            v.backgroundColor=[UIColor colorWithRed:(float)254/255 green:(float)71/255 blue:0 alpha:1];
+				            xczs.text=@"轻度污染";
+				            xcts.text=@"空气质量一般！敏感人群应减少室外活动";
+				        }
+				        else if(pm<200)
+				        {
+				            v.backgroundColor=[UIColor colorWithRed:(float)178/255 green:(float)45/255 blue:0 alpha:1];
+				            xczs.text=@"中度污染";
+				            xcts.text=@"应减少户外活动，外出时佩戴口罩，敏感人群应尽量避免外出";
+				        }
+				        else if(pm<300)
+				        {
+				            v.backgroundColor=[UIColor colorWithRed:(float)105/255 green:(float)0/255 blue:(float)140/255 alpha:1];
+				            xczs.text=@"重度污染";
+				            xcts.text=@"应减少户外活动，外出时佩戴口罩，敏感人群应留在室内";
+				        }
+				        else
+				        {
+				            v.backgroundColor=[UIColor colorWithRed:(float)102/255 green:(float)26/255 blue:0 alpha:1];
+				            xczs.text=@"严重污染";
+				            xcts.text=@"儿童、老年人和病人应停留在室内，避免体力消耗，一般人群避免户外活动";
+				        }
+*/
 						weather_PM_tip.setTextMulti(" ====");
 						//TODD 显示背景及显示图标
 						
