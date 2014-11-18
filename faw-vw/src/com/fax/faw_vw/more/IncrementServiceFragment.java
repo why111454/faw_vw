@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.amap.api.location.AMapLocation;
@@ -50,6 +51,7 @@ public class IncrementServiceFragment extends MyFragment {
 	private com.fax.faw_vw.views.clickshow.ClickShowTextView changecity_text;
 	private TextView wind_text, tip_text,weather_PM,clean_car,love_car_tip,oil_97,oil_93;
 	private com.fax.utils.view.MultiFormatTextView weather_PM_tip;
+	private LinearLayout PM_layouts;
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		 View view = inflater.inflate(R.layout.more_increment_service, container, false);
@@ -108,6 +110,8 @@ public class IncrementServiceFragment extends MyFragment {
 		oil_93=(TextView) view.findViewById(R.id.more_incrementservice_oil_93);
 		//切换城市
 		changecity_text=(ClickShowTextView) view.findViewById(R.id.more_incrementservice_switch_city);
+		// PM  tips 布局 背景
+		PM_layouts=(LinearLayout) view.findViewById(R.id.more_incrementservice_weather_PM_layouts);
 	}
     public final static int Request_SwitchCity = 1;
 	@Override
@@ -141,9 +145,27 @@ public class IncrementServiceFragment extends MyFragment {
 						weatherinfo_text.setTextMulti(getWeatherinfo(result.getResult().getCurrentCity(), result.getDate(), result.getResult().getWeather_data().getTemperature(), result.getResult().getWeather_data().getWeather()));
 						wind_text.setText(result.getResult().getWeather_data().getWind());
 						int pm25 = responseResult.getPm25();
-						String pmState = pm25 < 50 ? "优" : pm25 > 100 ? "差" : "良";
-						weather_PM.setText(pmState);
-						//TODD  PM2.5小贴士
+						if(pm25<50){
+							//TODO  设置layout的背景颜色 rgb
+							weather_PM.setText("优");
+							weather_PM_tip.setTextMulti("空气质量令人满意，基本无空气污染，各类人群可正常活动");
+						}else if(pm25<100){
+							weather_PM.setText("良");
+							weather_PM_tip.setTextMulti("空气质量还不错！出去走走，感受大自然，让心情放松一下");
+						}else if(pm25<150){
+							weather_PM.setText("轻度污染");
+							weather_PM_tip.setTextMulti("空气质量一般！敏感人群应减少室外活动");
+						}else if(pm25<200){
+							weather_PM.setText("中度污染");
+							weather_PM_tip.setTextMulti("应减少户外活动，外出时佩戴口罩，敏感人群应尽量避免外出");
+						}else if(pm25<300){
+							weather_PM.setText("中度污染");
+							weather_PM_tip.setTextMulti("应减少户外活动，外出时佩戴口罩，敏感人群应留在室内");
+						}else{
+							weather_PM.setText("严重污染");
+							weather_PM_tip.setTextMulti("儿童、老年人和病人应停留在室内，避免体力消耗，一般人群避免户外活动");
+						}
+						//TODD 参考ios  还有颜色未做完
 		/*				if(pm<50)
 				        {
 				            v.backgroundColor=[UIColor colorWithRed:0 green:(float)100/255 blue:0 alpha:1];
@@ -181,8 +203,8 @@ public class IncrementServiceFragment extends MyFragment {
 				            xcts.text=@"儿童、老年人和病人应停留在室内，避免体力消耗，一般人群避免户外活动";
 				        }
 */
-						weather_PM_tip.setTextMulti(" ====");
-						//TODD 显示背景及显示图标
+						
+						//TODO 显示背景及显示图标
 						
 						
 						//显示爱车贴士
