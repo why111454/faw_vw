@@ -27,11 +27,12 @@ public class StartActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if(!MyApp.hasKeyOnce("intro_1115")){
+		List<AssetFrame> frames = FrameFactory.createFramesFromAsset(this, "intro/logo_anim", 20);
+		if(frames.size()>0 && !MyApp.hasKeyOnce("intro_1115")){
 			ImageView logoAnim = new ImageView(this);
 			logoAnim.setScaleType(ScaleType.FIT_XY);
 			setContentView(logoAnim);
-			FrameAnimation fa = new FrameAnimation(logoAnim, FrameFactory.createFramesFromAsset(this, "intro/logo_anim", 20));
+			FrameAnimation fa = new FrameAnimation(logoAnim, frames);
 			fa.start();
 			fa.setFrameAnimListener(new FrameAnimListener() {
 				@Override
