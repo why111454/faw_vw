@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:layout_marginTop="30dp">
+
+         <LinearLayout
+	        android:orientation="horizontal"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:background="@drawable/btn_blue"
+	        android:gravity="center"
+	        >
+			<TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="@drawable/bottom_bar_ic_show_cars"
+                android:layout_gravity="center"/>
+			
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:text="已有车辆信息"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:background="@drawable/btn_blue"
+                android:layout_gravity="center"/>
+		</LinearLayout>
+
+         <Spinner
+             android:id="@+id/more_query_illegalinfo_spinner"
+             android:layout_width="match_parent"
+             android:layout_height="40dp"
+             android:layout_marginTop="30dp"
+             android:background="@drawable/btn_blue" />
+		
+		       <Button
+		           android:layout_width="match_parent"
+		           android:layout_height="wrap_content"
+		           android:layout_marginTop="30dp"
+		           android:layout_gravity="center"
+		           android:textColor="@android:color/white"
+		           android:id="@+id/add_button"
+		           android:text="添加车辆" />
+
+     </LinearLayout>
+</ScrollView>
