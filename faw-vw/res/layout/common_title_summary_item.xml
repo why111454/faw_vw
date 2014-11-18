@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>  
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"  
     android:layout_width="fill_parent"  
-    android:layout_height="wrap_content"  
+    android:layout_height="wrap_content"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
     android:gravity="center_vertical"
     android:minHeight="40dp">
-    <ImageView
-        android:id="@android:id/icon"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="15dp"/>
-
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp">
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_height="wrap_content">
         <TextView
             android:id="@android:id/title"  
             android:layout_width="match_parent"
             android:layout_height="wrap_content"  
             android:ellipsize="marquee"  
             android:fadingEdge="horizontal"
-            android:layout_marginTop="10dp"
             android:singleLine="true"  
-            android:textSize="14.0sp" />  
+            android:textSize="16sp" />  
         <TextView
             android:id="@android:id/summary"  
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="4"
-            android:layout_marginBottom="10dp"
             android:textColor="#999999"  
-            android:textSize="12.0sp" />
-        <View style="@style/divHorizontal"/>
+            android:textSize="12sp" />
     </LinearLayout>
 
-
+    <TextView
+        android:id="@android:id/content"  
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"  
+        android:singleLine="true"  
+        android:textSize="14.0sp" />  
   
 </LinearLayout> 

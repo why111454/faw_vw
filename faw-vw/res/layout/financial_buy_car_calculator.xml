@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <Button
+            android:id="@+id/select_car_button"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:minHeight="32dp"
+            android:layout_height="wrap_content"
+        	android:textColor="@android:color/white"
+            android:background="@drawable/common_blue_arrow_btn"
+            android:layout_marginRight="4dp"
+            android:text="选择车型" />
+        <Button
+            android:id="@+id/select_car_model_button"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:minHeight="32dp"
+            android:layout_height="wrap_content"
+        	android:textColor="@android:color/white"
+            android:background="@drawable/common_blue_arrow_btn"
+            android:layout_marginLeft="4dp"
+            android:text="选择配置" />
+    </LinearLayout>
+    
+    <Button
+        android:id="@+id/select_car_price_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="32dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/common_blue_arrow_btn"
+        android:text="购车价格:" />
+
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+        <RadioButton
+                android:id="@+id/radioButton1"
+                android:checked="true"
+                style="@style/TabBtnGray"
+                android:layout_marginRight="1dp"
+                android:text="全款购车" />
+        <RadioButton
+            android:id="@+id/radioButton2"
+            style="@style/TabBtnGray"
+            android:layout_marginRight="1dp"
+            android:text="贷款购车" />
+        <RadioButton
+            android:id="@+id/radioButton3"
+            style="@style/TabBtnGray"
+            android:text="保险计算" />
+    </RadioGroup>
+    <View
+        style="@style/divHorizontal"
+        android:layout_height="2dp"
+        android:background="@color/dark_blue" />
+	<com.fax.utils.view.list.ExpandListHeadContain 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+	    <ExpandableListView 
+	        android:id="@android:id/list"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"/>
+	</com.fax.utils.view.list.ExpandListHeadContain>
+</LinearLayout>
