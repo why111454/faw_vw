@@ -2,7 +2,6 @@ package com.fax.utils.view.list;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -50,7 +49,9 @@ public class ExpandListHeadContain extends FrameLayout {
 	int showingGroupPosition = -1;
 	public void setListView(ExpandableListView expandableListView){
 		if(listView == expandableListView || expandableListView==null) return;
-        if(listView!=null) removeView(listView);
+        if(listView!=null){
+        	removeView(listView);
+        }
         if(expandableListView.getParent() != null){
             ((ViewGroup)expandableListView.getParent()).removeView(expandableListView);
         }
@@ -133,9 +134,12 @@ public class ExpandListHeadContain extends FrameLayout {
 	private int getGroupPositionFromItemPosition(int itemPosition){
 		return ExpandableListView.getPackedPositionGroup(listView.getExpandableListPosition(itemPosition));
 	}
-	
-	private void refreshGroupHead(){
+	public void refreshGroupHead(){
 		if(showingGroupPosition >=0 && listView.getExpandableListAdapter()!=null){
+			if(showingGroupPosition<0) showingGroupPosition = 0;
+			if(showingGroupPosition>=listView.getExpandableListAdapter().getGroupCount()){
+				showingGroupPosition = listView.getExpandableListAdapter().getGroupCount()-1;
+			}
 			groupHead = listView.getExpandableListAdapter().getGroupView(showingGroupPosition,
 					listView.isGroupExpanded(showingGroupPosition), groupHead, listView);
 			if(groupHead!=null && indexOfChild(groupHead)==-1){

@@ -28,26 +28,24 @@ import java.util.Map;
  * Request构造类
  */
 public class RequestFactory {
-    private static boolean DEBUG=HttpUtils.DEBUG;
-
     public static HttpRequestBase createGet(String url){
-        if(DEBUG) Log.d("fax", "createGet:"+url);
+        if(HttpUtils.DEBUG) Log.d("fax", "createGet:"+url);
         return new HttpGet(url);
     }
     public static HttpRequestBase createPost(String url){
-        if(DEBUG) Log.d("fax", "createPost:"+url);
+        if(HttpUtils.DEBUG) Log.d("fax", "createPost:"+url);
         return new HttpPost(url);
     }
     public static HttpRequestBase createPut(String url){
-        if(DEBUG) Log.d("fax", "createPut:"+url);
+        if(HttpUtils.DEBUG) Log.d("fax", "createPut:"+url);
         return new HttpPut(url);
     }
     public static HttpRequestBase createDelete(String url){
-        if(DEBUG) Log.d("fax", "createDelete:"+url);
+        if(HttpUtils.DEBUG) Log.d("fax", "createDelete:"+url);
         return new HttpDelete(url);
     }
     public static HttpRequestBase createPost(String postUrl,Map<String,ContentBody> map){
-        if(DEBUG) Log.d("fax", "createPost:" + postUrl);
+        if(HttpUtils.DEBUG) Log.d("fax", "createPost:" + postUrl);
         HttpPost httppost = new HttpPost(postUrl);
         MultipartEntity mpEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
         for(Map.Entry<String, ContentBody> entry:map.entrySet()){
@@ -65,8 +63,8 @@ public class RequestFactory {
      * @author lib
      * */
     public static HttpRequestBase createGet(String getURL, List<NameValuePair> params) {
-        if(DEBUG) Log.d("fax", "createGet:" + getURL);
-        if(DEBUG) for(NameValuePair pair:params){
+        if(HttpUtils.DEBUG) Log.d("fax", "createGet:" + getURL);
+        if(HttpUtils.DEBUG) for(NameValuePair pair:params){
             Log.d("fax", pair.getName()+":"+pair.getValue());
         }
         String url = getURL;//如果params是空，那么会直接用这个地址来请求。
@@ -81,13 +79,13 @@ public class RequestFactory {
                 e.printStackTrace();
             }
         }
-        if(DEBUG) Log.e("lib", "createGet:" + url);
+        if(HttpUtils.DEBUG) Log.e("lib", "createGet:" + url);
         HttpGet httpRequest = new HttpGet(url);
         return httpRequest;
     }
     public static HttpRequestBase createPost(String postURL, List<NameValuePair> params) {
-    	if(DEBUG) Log.d("fax", "createPost:" + postURL);
-    	if(DEBUG) for(NameValuePair pair:params){
+    	if(HttpUtils.DEBUG) Log.d("fax", "createPost:" + postURL);
+    	if(HttpUtils.DEBUG) for(NameValuePair pair:params){
     		Log.d("fax", pair.getName()+":"+pair.getValue());
     	}
     	HttpRequestBase httpRequest = new HttpPost(postURL);
