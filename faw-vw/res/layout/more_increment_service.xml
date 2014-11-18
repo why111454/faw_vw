@@ -6,6 +6,7 @@
     android:orientation="vertical" >
 
     <RelativeLayout
+        android:id="@+id/more_incrementservice_weather_bg"
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:background="@drawable/more_incrementservice_weather_bg"
@@ -77,6 +78,7 @@
                 android:layout_marginLeft="6dp"
                 android:layout_marginRight="6dp"/>
             <TextView 
+                android:id="@+id/more_incrementservice_tip_txt"
                 android:text="温度低于0度，请注意补充防冻剂。"
                 android:textColor="@color/dark_blue"
                 android:textSize="12sp"
@@ -96,6 +98,7 @@
         android:padding="4dp" >
 
         <LinearLayout
+            android:id="@+id/more_incrementservice_weather_PM_layouts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -110,6 +113,7 @@
                 android:textSize="13sp" />
 
             <TextView
+                android:id="@+id/more_incrementservice_weather_PM"
                 android:layout_width="45dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
@@ -120,6 +124,7 @@
                 android:textSize="12sp" />
         </LinearLayout>
         <com.fax.utils.view.MultiFormatTextView 
+            android:id="@+id/more_incrementservice_weather_PM_tip"
             android:text="PM2.5小贴士\n//S12%s"
             android:textSize="16sp"
             android:layout_width="match_parent"
@@ -167,19 +172,21 @@
                         android:textSize="13sp" />
 
                     <TextView
+                        android:id="@+id/more_incrementservice_weather_clean_car"
                         android:layout_width="45dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="6dp"
                         android:layout_marginTop="10dp"
                         android:background="@color/dark_blue"
                         android:text="不宜"
+                        android:gravity="center"
                         android:textColor="#FFFFFF"
                         android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
 
             <TextView
-                android:id="@+id/home_love_car_tip"
+                android:id="@+id/more_incrementservic_love_car_tip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
@@ -220,6 +227,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/more_incrementservice_oil_97"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -229,6 +237,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/more_incrementservice_oil_93"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"

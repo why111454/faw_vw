@@ -53,7 +53,13 @@ public class WeatherResponse implements Serializable{
 		public int getPm25() {
 			return pm25;
 		}
-
+		public void setWeather_Index_data(ArrayList<Weatherindex> index) {
+			this.index=index;
+			
+		}
+		public Weatherindex getWeather_Index_data(){
+			return index.get(2);
+		}
 		public Weatherdata getWeather_data() {
 			return weather_data.get(0);
 		}

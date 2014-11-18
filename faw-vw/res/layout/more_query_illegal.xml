@@ -8,22 +8,25 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
         android:layout_marginTop="30dp">
 
         <LinearLayout
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:background="@android:color/white"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginTop="8dp">
 
             <TextView
+                android:textSize="16sp"
+                android:layout_marginLeft="18dp"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:text="*车牌号码"/>
 
             <EditText
+                android:background="@null"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -33,19 +36,23 @@
                 android:hint="请输入您的车牌号" />
 
         </LinearLayout>
-
+       <View style="@style/divHorizontal"/>
         <LinearLayout
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:background="@android:color/white"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp">
+            >
 
             <TextView
+                android:layout_marginLeft="18dp"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:text="*发动机号"/>
 
             <EditText
+                android:background="@null"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                android:singleLine="true"
@@ -55,19 +62,23 @@
                 android:hint="请输入您的发动机号" />
 
         </LinearLayout>
-
+		<View style="@style/divHorizontal"/>
         <LinearLayout
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:background="@android:color/white"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp">
+            >
 
             <TextView
+                android:layout_marginLeft="18dp"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:text="*车架号"/>
 
             <EditText
+                android:background="@null"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                android:singleLine="true"
@@ -77,19 +88,23 @@
                 android:hint="请输入您的车架号" />
 
         </LinearLayout>
-        
+        <View style="@style/divHorizontal"/>
         <LinearLayout
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:background="@android:color/white"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp">
+            >
 
             <TextView
+                android:layout_marginLeft="18dp"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:text="*城市"/>
 
             <EditText
+                android:background="@null"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
@@ -101,18 +116,19 @@
         </LinearLayout>
         
         <TextView
+            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="*为必填项。你的信息，我们将会完全保密，请您放心填写。"
             android:textSize="10sp"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="16dp" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="40dp"
             android:paddingRight="40dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="25dp"
             android:layout_gravity="center"
             android:textColor="@android:color/white"
             android:background="@drawable/btn_blue"

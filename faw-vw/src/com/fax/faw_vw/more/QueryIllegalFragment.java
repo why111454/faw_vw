@@ -1,14 +1,28 @@
 package com.fax.faw_vw.more;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.message.BasicNameValuePair;
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,6 +34,7 @@ import com.fax.faw_vw.MyFragment;
 import com.fax.faw_vw.R;
 import com.fax.faw_vw.model.Illegal;
 import com.fax.faw_vw.model.IllegalInfo;
+import com.fax.faw_vw.model.QueryJavaBean;
 import com.fax.faw_vw.views.MyTopBar;
 import com.fax.utils.http.HttpUtils;
 import com.fax.utils.task.ResultAsyncTask;
@@ -45,7 +60,6 @@ public class QueryIllegalFragment extends MyFragment {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				if(TextUtils.isEmpty(plateNumber.getText())){
 					Toast.makeText(context, "请输入您的车牌号！", 3000).show();
 					return;
@@ -62,6 +76,16 @@ public class QueryIllegalFragment extends MyFragment {
 					Toast.makeText(context, "请输入城市！", 3000).show();
 					return;
 				}
+				QueryJavaBean qj=new QueryJavaBean();
+				qj.setPlateNumber(plateNumber.getText().toString());
+				qj.setEngineNumber(engineNumber.getText().toString());
+				qj.setVehicleIdNumber(vehicleIdNumber.getText().toString());
+				qj.setCityName(cityName.getText().toString());
+				String illegal = new Gson().toJson(qj);
+				SharedPreferences sp= context.getSharedPreferences("QueryIllegalHistory", Context.MODE_PRIVATE);
+				Editor editor = sp.edit();
+				editor.putString(String.valueOf(new Date().getTime()),illegal);
+				editor.commit();
 				new ResultAsyncTask<IllegalInfo>(context) {
 					@SuppressWarnings("deprecation")
 					@Override
@@ -74,6 +98,7 @@ public class QueryIllegalFragment extends MyFragment {
 						pairs.add(new BasicNameValuePair("engineNumber", engineNumber.getText().toString()));
 						pairs.add(new BasicNameValuePair("vehicleIdNumber", vehicleIdNumber.getText().toString()));
 						pairs.add(new BasicNameValuePair("cityName",cityName.getText().toString()));
+						
 						if (pairs!=null&&pairs.size()>0) {
 				    		try {
 				    			if(IllegalUrl.contains("?")){
@@ -112,6 +137,21 @@ public class QueryIllegalFragment extends MyFragment {
 		//TODO 数据绑定、提交
 		return topBar;
 	}
-
+	
+	public static final String PATH = "/data/data/com.fax.faw_vw/shared_prefs/QueryIllegalHistory.xml";  
+	private String print() {  
+        StringBuffer buff = new StringBuffer();  
+        try {  
+            BufferedReader reader = new BufferedReader(new InputStreamReader(  
+                    new FileInputStream(PATH)));  
+            String str;  
+            while ((str = reader.readLine()) != null) {  
+                buff.append(str + "/n");  
+            }  
+        } catch (Exception e) {  
+            e.printStackTrace();  
+        }  
+        return buff.toString();  
+    }  
 
 }

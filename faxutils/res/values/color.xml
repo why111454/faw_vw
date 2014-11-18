@@ -2,4 +2,5 @@
 <resources>
     <color name="alpha_white">#33ffffff</color>
     <color name="alpha_black">#33000000</color>
+    <color name="white">#ffffffff</color>
 </resources>

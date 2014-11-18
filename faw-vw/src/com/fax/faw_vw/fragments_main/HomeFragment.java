@@ -49,6 +49,7 @@ import com.google.gson.JsonSyntaxException;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -56,6 +57,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
+import android.preference.PreferenceManager;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -199,6 +201,10 @@ public class HomeFragment extends MyFragment{
 				FragmentContain.start(HomeFragment.this, HomeCitySwitchFragment.class, Request_SwitchCity);
 			}
 		});
+		SharedPreferences mPerferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+		if(mPerferences.getString("weathercity", null)!=null){
+			showWeather(mPerferences.getString("weathercity", null), context, false);
+		}else{
 		LocManager.reqLoc(context, new LocManager.LocationListener() {
 			boolean isShowed = false;
 			@Override
@@ -210,6 +216,7 @@ public class HomeFragment extends MyFragment{
 				showWeather(city, context, false);
 			}
 		});
+		}
 		return view;
 	}
 	public final static int Request_SwitchCity = 1;
@@ -220,6 +227,12 @@ public class HomeFragment extends MyFragment{
 		super.onActivityResult(requestCode, resultCode, data);
 		if(resultCode == Activity.RESULT_OK && requestCode == Request_SwitchCity){
 			String city = data.getStringExtra(HomeCitySwitchFragment.Extra_City);
+			 /*SharedPreferences sharedpreferences=*/
+
+			 SharedPreferences mPerferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+			 SharedPreferences.Editor mEditor = mPerferences.edit();
+			 mEditor.putString("weathercity",city);
+			 mEditor.commit();
 			showWeather(city, context, true);
 		}
 	}
