@@ -48,7 +48,7 @@ public class QueryIllegalIndexFragment extends MyFragment {
 		@Override
 		public TextView getView(int position, View convertView, ViewGroup parent) {
 			TextView tv = super.getView(position, convertView, parent);
-			tv.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.common_ic_arrow_down, 0);
+//			tv.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.common_ic_arrow_down, 0);
 			return tv;
 		}
 	};
@@ -62,7 +62,9 @@ public class QueryIllegalIndexFragment extends MyFragment {
 				@Override
 				public TextView getView(int position, View convertView, ViewGroup parent) {
 					TextView tv = super.getView(position, convertView, parent);
-					tv.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.common_ic_arrow_down, 0);
+//					tv.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.common_ic_arrow_down, 0);
+					tv.setTextColor(getResources().getColor(R.color.white));    
+                    tv.setTextSize(18.0f);    
 					return tv;
 				}
 			});
