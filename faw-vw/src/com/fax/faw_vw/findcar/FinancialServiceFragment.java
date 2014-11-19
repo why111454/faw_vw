@@ -47,8 +47,8 @@ public class FinancialServiceFragment extends MyFragment {
 		view.findViewById(R.id.financial_service_com).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//TODO 购车计算器
-				
+				//购车计算器
+				FragmentContain.start(getActivity(), BuyCarCalculatorFragment.class);
 			}
 		});
 		view.findViewById(R.id.financial_service_evaluation).setOnClickListener(new View.OnClickListener() {

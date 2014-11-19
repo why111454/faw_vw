@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="dialog_bg">@android:color/white</color>
+    <color name="dialog_message_color">@android:color/black</color>
+
+    <color name="dialog_title_color">@color/dark_blue</color>
+    <color name="dialog_title_bg">@android:color/white</color>
+
+    <color name="dialog_div_btn">@android:color/transparent</color>
+    <color name="dialog_div_title_content">@android:color/transparent</color>
+    <color name="dialog_btn_color">@color/dark_blue</color>
+
+</resources>

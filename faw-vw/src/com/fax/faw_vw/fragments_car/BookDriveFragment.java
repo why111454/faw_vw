@@ -61,7 +61,7 @@ public class BookDriveFragment extends MyFragment
             @Override
             public void onClick(View v) {
                 if (car == null) {
-                    Toast.makeText(context, "请先选择车辆", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "请先选择车型", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 ModelListFragment modelListFragment = ModelListFragment.newInstance(car, null);

@@ -98,6 +98,7 @@
         android:padding="4dp" >
 
         <LinearLayout
+            android:id="@+id/more_incrementservice_weather_PM_layouts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"

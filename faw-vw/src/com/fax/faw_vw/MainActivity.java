@@ -20,6 +20,7 @@ import com.fax.faw_vw.more.OnlineQAFragment;
 import com.fax.faw_vw.more.PersonFragment;
 import com.fax.faw_vw.more.QueryIllegalFragment;
 import com.fax.faw_vw.util.Blur;
+import com.fax.faw_vw.views.AppDialogBuilder;
 import com.fax.utils.frameAnim.AssetFrame;
 import com.fax.utils.frameAnim.Frame;
 import com.fax.utils.frameAnim.FrameAnimListener;
@@ -31,6 +32,7 @@ import com.fax.utils.view.list.ObjectXAdapter;
 import com.fax.utils.view.list.ObjectXListView;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -74,6 +76,7 @@ public class MainActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		final DrawerLayout drawerLayout = (DrawerLayout) View.inflate(this, R.layout.activity_main, null);
 		setContentView(drawerLayout);
 		

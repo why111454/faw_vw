@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/dialog_bg"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp" 
+        android:layout_marginRight="10dp" >
+		<FrameLayout
+            android:id="@+id/dialog_title_contain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/dialog_title_bg">
+	        <TextView
+	            android:id="@+id/dialog_title"
+	            android:layout_width="match_parent"
+	            android:layout_height="match_parent"
+	            android:padding="20dp"
+	            android:gravity="center"
+	            android:textColor="@android:color/white"
+	            android:textSize="15sp" >
+	        </TextView>
+
+	        <LinearLayout
+	            android:id="@+id/dialog_title_more_widget"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:gravity="center"
+                android:layout_gravity="top|right"
+	            android:orientation="horizontal"
+	            android:visibility="gone" />
+
+		</FrameLayout>
+
+        <View
+            android:id="@+id/dialog_title_context_div"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/dialog_div_title_content" />
+        
+        <FrameLayout
+            android:id="@+id/dialog_context_contain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="25dp"
+            android:minWidth="280dp"
+            android:orientation="vertical" > <!-- 若不加android:minWidth,某些版本上这个dialog的宽会被自动调节过小 -->
+
+        </FrameLayout>
+        
+		<View
+            android:id="@+id/dialog_context_btn_div"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/dialog_div_btn" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center" >
+
+            <Button
+                android:id="@+id/dialog_btn_cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/common_btn_in_white"
+                android:padding="10dp"
+                android:text="@android:string/cancel"
+                android:textColor="@color/dialog_btn_color"
+                android:textSize="18sp" >
+            </Button>
+
+            <View
+                android:id="@+id/dialog_btn_div"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/dialog_div_btn" />
+
+            <Button
+                android:id="@+id/dialog_btn_mid"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/common_btn_in_white"
+                android:padding="10dp"
+                android:textColor="@color/dialog_btn_color"
+                android:textSize="18sp" >
+            </Button>
+
+            <View
+                android:id="@+id/dialog_btn_div2"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/dialog_div_btn" />
+            <Button
+                android:id="@+id/dialog_btn_ok"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/common_btn_in_white"
+                android:padding="10dp"
+                android:text="@android:string/ok"
+                android:textColor="@color/dialog_btn_color"
+                android:textSize="18sp" >
+            </Button>
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

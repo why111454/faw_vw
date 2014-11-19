@@ -199,8 +199,11 @@ public class HttpUtils {
         }
         String strResult = readInputStream(new InputStreamReader(is));
         int code = httpResponse.getStatusLine().getStatusCode();
-        if (code != HttpStatus.SC_OK && DEBUG) {
-            Log.d("fax", "execute may Fail,Code:" + httpResponse.getStatusLine().getStatusCode() + ",Entity:" + strResult);
+        if (DEBUG) {
+        	if(code != HttpStatus.SC_OK){
+        		Log.w("fax", "execute may Fail,Code:"+code);
+        	}
+            Log.d("fax", "execute result:" + strResult);
         }
         entity.consumeContent();
         try {
