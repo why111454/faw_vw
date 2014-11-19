@@ -68,7 +68,6 @@ public class IncrementServiceFragment extends MyFragment {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				FragmentContain.start(IncrementServiceFragment.this, HomeCitySwitchFragment.class, Request_SwitchCity);
 			}
 		});
@@ -88,7 +87,6 @@ public class IncrementServiceFragment extends MyFragment {
 			}
 		});
 		}
-		//TODO 数据绑定、提交
 		return topBar;
 	}
 	public void initView(View view){
@@ -156,10 +154,7 @@ public class IncrementServiceFragment extends MyFragment {
 						Bitmap weather_bg=WeatherResHelper.getBg(context, result.getResult().getWeather_data().getWeather());
 						BitmapDrawable background=new BitmapDrawable(getResources(), weather_bg);
 						weather_info_bg.setBackground(background);
-						if(responseResult.getPm25().equals("")||responseResult.getPm25()==null){
-							int pm25=0;
-						}else{
-							int pm25 = Integer.parseInt(responseResult.getPm25());
+							int pm25 = responseResult.getPM25();
 							Log.i("fax",pm25+"test");
 							if(pm25<50){
 								weather_PM.setBackgroundColor(Color.argb(255, 0, 100, 0));
@@ -186,7 +181,6 @@ public class IncrementServiceFragment extends MyFragment {
 								weather_PM.setText("严重污染");
 								weather_PM_tip.setTextMulti(getPmTipString("儿童、老年人和病人应停留在室内，避免体力消耗，一般人群避免户外活动"));
 							}
-						}
 						
 						//显示爱车贴士
 						clean_car.setText(result.getResult().getWeather_Index_data().getTitle());

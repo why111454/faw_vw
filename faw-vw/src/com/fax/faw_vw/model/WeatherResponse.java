@@ -53,6 +53,19 @@ public class WeatherResponse implements Serializable{
 		public String  getPm25() {
 			return pm25;
 		}
+		public int getPM25(){
+			if(pm25.equals("")||pm25==null){
+				return 0;
+			}else{
+				try {
+					return Integer.parseInt(pm25);
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return 0;
+				}
+			}
+		}
 		public void setPm25(String pm25) {
 			this.pm25 = pm25;
 		}
@@ -69,6 +82,7 @@ public class WeatherResponse implements Serializable{
 		public void setWeather_data(ArrayList<Weatherdata> weather_data) {
 			this.weather_data = weather_data;
 		}
+		
 	public class Weatherdata implements Serializable {
 				private String date;
 				private String dayPictureUrl;
