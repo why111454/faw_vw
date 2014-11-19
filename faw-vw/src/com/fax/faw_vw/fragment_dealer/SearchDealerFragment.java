@@ -5,14 +5,17 @@ import java.util.ArrayList;
 import org.apache.commons.io.IOUtils;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
@@ -61,11 +64,13 @@ import com.fax.faw_vw.model.CityInfo;
 import com.fax.faw_vw.model.Dealer;
 import com.fax.faw_vw.model.ProvinceList;
 import com.fax.faw_vw.model.ProvinceList.Province;
+import com.fax.faw_vw.more.QueryIllegalFragment;
 import com.fax.faw_vw.views.FirstHideSpinnerAdapter;
 import com.fax.faw_vw.views.MySpinnerAdapter;
 import com.fax.faw_vw.views.MyTopBar;
 import com.fax.utils.task.HttpAsyncTask;
 import com.fax.utils.task.ResultAsyncTask;
+import com.fax.utils.view.TopBarContain;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -183,15 +188,25 @@ public class SearchDealerFragment extends MyFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.search_dealer, container, false);
 		initProvinceCitySpinner(view);
+		MyTopBar topBar = (MyTopBar) new MyTopBar(context);
+		
+		topBar.setRightBtn("", R.drawable.search_dealer_ic_list, new OnClickListener(){
+				@Override
+				public void onClick(View v) {
+					SearchDealerListFragment searchDealerListFragment=new  SearchDealerListFragment();
+					addFragment(searchDealerListFragment);
+				}});
 		
 		mapView = new MapView(context);
 		((FrameLayout)view.findViewById(R.id.contain_map)).addView(mapView, -1, -1);
 		mapView.onCreate(savedInstanceState);
 		setUpMap();
 		
-		return new MyTopBar(context).setLeftBack()
+		return topBar.setLeftBack()
 				.setTitle("经销商查询").setContentView(view);
 	}
+	
+	
 	
 	DrivingRouteOverlay drivingRouteOverlay;
 	Dealer showingDealer;

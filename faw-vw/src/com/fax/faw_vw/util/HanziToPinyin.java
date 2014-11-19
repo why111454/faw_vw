@@ -385,10 +385,11 @@ public class HanziToPinyin {
     protected HanziToPinyin(boolean hasChinaCollator) {
         mHasChinaCollator = hasChinaCollator;
     }
+    //获得首字母大写的拼音
     public static String getFullPinYin(String source){
-        if (!Arrays.asList(Collator.getAvailableLocales()).contains(Locale.CHINA)) {
+       /* if (!Arrays.asList(Collator.getAvailableLocales()).contains(Locale.CHINA)) {
             return source;
-        } 
+        } */
         ArrayList<Token> tokens = HanziToPinyin.getInstance().get(source);
         if (tokens == null || tokens.size() == 0) {
         	return source;
@@ -401,7 +402,8 @@ public class HanziToPinyin {
 				result.append(token.source);
 			}
 		}
-        return result.toString();
+        String returnstring=result.toString().toLowerCase();
+        return getFirstLetter(returnstring)+returnstring.substring(1);
     }
     public static String getFirstLetter(String input){
     	return HanziToPinyin.getInstance().get(input.substring(0, 1)).get(0).target.substring(0,1).toUpperCase();

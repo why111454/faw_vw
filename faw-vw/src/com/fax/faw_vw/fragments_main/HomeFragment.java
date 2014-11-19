@@ -255,13 +255,16 @@ public class HomeFragment extends MyFragment{
 					if(responseResult!=null && view!=null){
 						mcity_name.setText(responseResult.getCurrentCity());
 						mdate.setText(result.getDate());
-						int pm25 = responseResult.getPm25();
-						mPM.setText(pm25+"");
-						String pmState = pm25 < 50 ? "优" : pm25 > 100 ? "差" : "良";
-						((TextView)view.findViewById(R.id.home_pm_textview_state)).setText(pmState);
+						if(responseResult.getPm25().equals("")||responseResult.getPm25()==null){
+							int pm25=0;
+						}else{
+							int pm25 = Integer.parseInt(responseResult.getPm25());
+							mPM.setText(pm25+"");
+							String pmState = pm25 < 50 ? "优" : pm25 > 100 ? "差" : "良";
+							((TextView)view.findViewById(R.id.home_pm_textview_state)).setText(pmState);
+						}
 						mtemperature.setText(responseResult.getWeather_data().getTemperature());
 						((TextView)view.findViewById(R.id.home_weather_textview)).setText(responseResult.getWeather_data().getWeather());
-						
 						int hour= Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
 						//判断白天晚上
 						if( hour>=7 && hour<=19 ){
