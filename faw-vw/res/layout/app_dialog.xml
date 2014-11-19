@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:background="@color/dialog_bg"
         android:orientation="vertical"
+        android:padding="20dp"
         android:layout_marginLeft="10dp" 
         android:layout_marginRight="10dp" >
 		<FrameLayout
@@ -18,12 +19,13 @@
             android:background="@color/dialog_title_bg">
 	        <TextView
 	            android:id="@+id/dialog_title"
-	            android:layout_width="match_parent"
+	            android:layout_width="wrap_content"
 	            android:layout_height="match_parent"
-	            android:padding="20dp"
+	            android:padding="10dp"
 	            android:gravity="center"
-	            android:textColor="@android:color/white"
-	            android:textSize="15sp" >
+	            android:layout_gravity="center"
+	            android:textColor="@color/dark_blue"
+	            android:textSize="28sp" >
 	        </TextView>
 
 	        <LinearLayout
@@ -49,7 +51,7 @@
             android:id="@+id/dialog_context_contain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="25dp"
+            android:padding="10dp"
             android:minWidth="280dp"
             android:orientation="vertical" > <!-- 若不加android:minWidth,某些版本上这个dialog的宽会被自动调节过小 -->
 
@@ -58,7 +60,7 @@
 		<View
             android:id="@+id/dialog_context_btn_div"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="6dp"
             android:background="@color/dialog_div_btn" />
 
         <LinearLayout
@@ -72,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:background="@drawable/common_btn_in_white"
+                android:background="@drawable/btn_blue"
                 android:padding="10dp"
                 android:text="@android:string/cancel"
                 android:textColor="@color/dialog_btn_color"
@@ -81,7 +83,7 @@
 
             <View
                 android:id="@+id/dialog_btn_div"
-                android:layout_width="1dp"
+                android:layout_width="15dp"
                 android:layout_height="match_parent"
                 android:background="@color/dialog_div_btn" />
 
@@ -91,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:background="@drawable/common_btn_in_white"
+                android:background="@drawable/btn_blue"
                 android:padding="10dp"
                 android:textColor="@color/dialog_btn_color"
                 android:textSize="18sp" >
@@ -99,7 +101,7 @@
 
             <View
                 android:id="@+id/dialog_btn_div2"
-                android:layout_width="1dp"
+                android:layout_width="15dp"
                 android:layout_height="match_parent"
                 android:background="@color/dialog_div_btn" />
             <Button
@@ -108,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:background="@drawable/common_btn_in_white"
+                android:background="@drawable/btn_blue"
                 android:padding="10dp"
                 android:text="@android:string/ok"
                 android:textColor="@color/dialog_btn_color"

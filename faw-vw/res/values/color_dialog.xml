@@ -8,6 +8,6 @@
 
     <color name="dialog_div_btn">@android:color/transparent</color>
     <color name="dialog_div_title_content">@android:color/transparent</color>
-    <color name="dialog_btn_color">@color/dark_blue</color>
+    <color name="dialog_btn_color">@android:color/white</color>
 
 </resources>
