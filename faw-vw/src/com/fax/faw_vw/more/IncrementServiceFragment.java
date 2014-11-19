@@ -7,11 +7,13 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.message.BasicNameValuePair;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -56,7 +58,6 @@ public class IncrementServiceFragment extends MyFragment {
 	private com.fax.faw_vw.views.clickshow.ClickShowTextView changecity_text;
 	private TextView wind_text, tip_text,weather_PM,clean_car,love_car_tip,oil_97,oil_93;
 	private com.fax.utils.view.MultiFormatTextView weather_PM_tip;
-	private LinearLayout PM_layouts;
 	private RelativeLayout weather_info_bg;
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		 View view = inflater.inflate(R.layout.more_increment_service, container, false);
@@ -115,8 +116,6 @@ public class IncrementServiceFragment extends MyFragment {
 		oil_93=(TextView) view.findViewById(R.id.more_incrementservice_oil_93);
 		//切换城市
 		changecity_text=(ClickShowTextView) view.findViewById(R.id.more_incrementservice_switch_city);
-		// PM  tips 布局 背景
-		PM_layouts=(LinearLayout) view.findViewById(R.id.more_incrementservice_weather_PM_layouts);
 		//天气背景
 		weather_info_bg=(RelativeLayout) view.findViewById(R.id.more_incrementservice_weather_bg);
 	}
@@ -143,6 +142,7 @@ public class IncrementServiceFragment extends MyFragment {
 		HttpRequestBase requestBase = RequestFactory.createGet(url, pairs);
 		
 		ResultAsyncTask<WeatherResponse> task = new GsonAsyncTask<WeatherResponse>(context, requestBase) {
+			@SuppressLint("NewApi")
 			@Override
 			protected void onPostExecuteSuc(WeatherResponse result) {
 				if(result.getError()==0){
@@ -154,70 +154,39 @@ public class IncrementServiceFragment extends MyFragment {
 						Bitmap weather_icon=WeatherResHelper.getIcon(context, result.getResult().getWeather_data().getWeather());
 						weatherinfo_icon.setImageBitmap(weather_icon);
 						Bitmap weather_bg=WeatherResHelper.getBg(context, result.getResult().getWeather_data().getWeather());
-						Drawable weatherbg=new BitmapDrawable(weather_bg);
-						weather_info_bg.setBackgroundDrawable(weatherbg);
-						int pm25 = responseResult.getPm25();
-						if(pm25<50){
-							//TODO  设置layout的背景颜色 rgb
-							weather_PM.setText("优");
-							weather_PM_tip.setTextMulti("空气质量令人满意，基本无空气污染，各类人群可正常活动");
-						}else if(pm25<100){
-							weather_PM.setText("良");
-							weather_PM_tip.setTextMulti("空气质量还不错！出去走走，感受大自然，让心情放松一下");
-						}else if(pm25<150){
-							weather_PM.setText("轻度污染");
-							weather_PM_tip.setTextMulti("空气质量一般！敏感人群应减少室外活动");
-						}else if(pm25<200){
-							weather_PM.setText("中度污染");
-							weather_PM_tip.setTextMulti("应减少户外活动，外出时佩戴口罩，敏感人群应尽量避免外出");
-						}else if(pm25<300){
-							weather_PM.setText("中度污染");
-							weather_PM_tip.setTextMulti("应减少户外活动，外出时佩戴口罩，敏感人群应留在室内");
+						BitmapDrawable background=new BitmapDrawable(getResources(), weather_bg);
+						weather_info_bg.setBackground(background);
+						if(responseResult.getPm25().equals("")||responseResult.getPm25()==null){
+							int pm25=0;
 						}else{
-							weather_PM.setText("严重污染");
-							weather_PM_tip.setTextMulti("儿童、老年人和病人应停留在室内，避免体力消耗，一般人群避免户外活动");
+							int pm25 = Integer.parseInt(responseResult.getPm25());
+							Log.i("fax",pm25+"test");
+							if(pm25<50){
+								weather_PM.setBackgroundColor(Color.argb(255, 0, 100, 0));
+								weather_PM.setText("优");
+								weather_PM_tip.setTextMulti(getPmTipString("空气质量令人满意，基本无空气污染，各类人群可正常活动"));
+							}else if(pm25<100){
+								weather_PM.setBackgroundColor(Color.argb(255,178,133, 0));
+								weather_PM.setText("良");
+								weather_PM_tip.setTextMulti(getPmTipString("空气质量还不错！出去走走，感受大自然，让心情放松一下"));
+							}else if(pm25<150){
+								weather_PM.setBackgroundColor(Color.argb(255,254,71, 0));
+								weather_PM.setText("轻度污染");
+								weather_PM_tip.setTextMulti(getPmTipString("空气质量一般！敏感人群应减少室外活动"));
+							}else if(pm25<200){
+								weather_PM.setBackgroundColor(Color.argb(255, 178, 45, 0));
+								weather_PM.setText("中度污染");
+								weather_PM_tip.setTextMulti(getPmTipString("应减少户外活动，外出时佩戴口罩，敏感人群应尽量避免外出"));
+							}else if(pm25<300){
+								weather_PM.setBackgroundColor(Color.argb(255,105, 0, 0));
+								weather_PM.setText("中度污染");
+								weather_PM_tip.setTextMulti(getPmTipString("应减少户外活动，外出时佩戴口罩，敏感人群应留在室内"));
+							}else{
+								weather_PM.setBackgroundColor(Color.argb(255, 102,26, 0));
+								weather_PM.setText("严重污染");
+								weather_PM_tip.setTextMulti(getPmTipString("儿童、老年人和病人应停留在室内，避免体力消耗，一般人群避免户外活动"));
+							}
 						}
-						//TODD 参考ios  还有颜色未做完
-		/*				if(pm<50)
-				        {
-				            v.backgroundColor=[UIColor colorWithRed:0 green:(float)100/255 blue:0 alpha:1];
-				            xczs.text=@"优";
-				            xcts.text=@"空气质量令人满意，基本无空气污染，各类人群可正常活动";
-				        }
-				        else if(pm<100)
-				        {
-				            v.backgroundColor=[UIColor colorWithRed:(float)178/255 green:(float)133/255 blue:0 alpha:1];
-				            xczs.text=@"良";
-				            xcts.text=@"空气质量还不错！出去走走，感受大自然，让心情放松一下";
-				        }
-				        else if(pm<150)
-				        {
-				            v.backgroundColor=[UIColor colorWithRed:(float)254/255 green:(float)71/255 blue:0 alpha:1];
-				            xczs.text=@"轻度污染";
-				            xcts.text=@"空气质量一般！敏感人群应减少室外活动";
-				        }
-				        else if(pm<200)
-				        {
-				            v.backgroundColor=[UIColor colorWithRed:(float)178/255 green:(float)45/255 blue:0 alpha:1];
-				            xczs.text=@"中度污染";
-				            xcts.text=@"应减少户外活动，外出时佩戴口罩，敏感人群应尽量避免外出";
-				        }
-				        else if(pm<300)
-				        {
-				            v.backgroundColor=[UIColor colorWithRed:(float)105/255 green:(float)0/255 blue:(float)140/255 alpha:1];
-				            xczs.text=@"重度污染";
-				            xcts.text=@"应减少户外活动，外出时佩戴口罩，敏感人群应留在室内";
-				        }
-				        else
-				        {
-				            v.backgroundColor=[UIColor colorWithRed:(float)102/255 green:(float)26/255 blue:0 alpha:1];
-				            xczs.text=@"严重污染";
-				            xcts.text=@"儿童、老年人和病人应停留在室内，避免体力消耗，一般人群避免户外活动";
-				        }
-*/
-						
-						//TODO 显示背景及显示图标
-						
 						
 						//显示爱车贴士
 						clean_car.setText(result.getResult().getWeather_Index_data().getTitle());
@@ -272,5 +241,8 @@ public class IncrementServiceFragment extends MyFragment {
 		//S50-2°//S20晴\n上海// Shanghai\n2014年3月4日
 		Log.w("fax",HanziToPinyin.getFullPinYin(city));
 		return "//S50"+temprature+"//S20"+weather+"\n"+city+"//"+" "+HanziToPinyin.getFullPinYin(city)+"\n"+date;
+	}
+	public String getPmTipString(String tipcontent){
+		return "PM2.5小贴士\n//S12"+tipcontent;
 	}
 }

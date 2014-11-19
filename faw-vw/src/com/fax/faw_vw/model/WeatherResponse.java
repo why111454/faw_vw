@@ -35,7 +35,7 @@ public class WeatherResponse implements Serializable{
 
 	public class Result implements Serializable{
 		private String currentCity;
-		private int pm25;
+		private String pm25;
 		private ArrayList<Weatherdata> weather_data;
 		private ArrayList<Weatherindex> index;
 		public ArrayList<Weatherindex> getIndex() {
@@ -50,15 +50,18 @@ public class WeatherResponse implements Serializable{
 		public void setCurrentCity(String currentCity) {
 			this.currentCity = currentCity;
 		}
-		public int getPm25() {
+		public String  getPm25() {
 			return pm25;
+		}
+		public void setPm25(String pm25) {
+			this.pm25 = pm25;
 		}
 		public void setWeather_Index_data(ArrayList<Weatherindex> index) {
 			this.index=index;
 			
 		}
 		public Weatherindex getWeather_Index_data(){
-			return index.get(2);
+			return index.get(1);
 		}
 		public Weatherdata getWeather_data() {
 			return weather_data.get(0);
