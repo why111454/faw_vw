@@ -11,15 +11,20 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.amap.api.location.AMapLocation;
@@ -52,7 +57,7 @@ public class IncrementServiceFragment extends MyFragment {
 	private TextView wind_text, tip_text,weather_PM,clean_car,love_car_tip,oil_97,oil_93;
 	private com.fax.utils.view.MultiFormatTextView weather_PM_tip;
 	private LinearLayout PM_layouts;
-	
+	private RelativeLayout weather_info_bg;
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		 View view = inflater.inflate(R.layout.more_increment_service, container, false);
 		MyTopBar topBar = (MyTopBar) new MyTopBar(context).setLeftBack()
@@ -112,6 +117,8 @@ public class IncrementServiceFragment extends MyFragment {
 		changecity_text=(ClickShowTextView) view.findViewById(R.id.more_incrementservice_switch_city);
 		// PM  tips 布局 背景
 		PM_layouts=(LinearLayout) view.findViewById(R.id.more_incrementservice_weather_PM_layouts);
+		//天气背景
+		weather_info_bg=(RelativeLayout) view.findViewById(R.id.more_incrementservice_weather_bg);
 	}
     public final static int Request_SwitchCity = 1;
 	@Override
@@ -144,6 +151,11 @@ public class IncrementServiceFragment extends MyFragment {
 					if(responseResult!=null && view!=null){
 						weatherinfo_text.setTextMulti(getWeatherinfo(result.getResult().getCurrentCity(), result.getDate(), result.getResult().getWeather_data().getTemperature(), result.getResult().getWeather_data().getWeather()));
 						wind_text.setText(result.getResult().getWeather_data().getWind());
+						Bitmap weather_icon=WeatherResHelper.getIcon(context, result.getResult().getWeather_data().getWeather());
+						weatherinfo_icon.setImageBitmap(weather_icon);
+						Bitmap weather_bg=WeatherResHelper.getBg(context, result.getResult().getWeather_data().getWeather());
+						Drawable weatherbg=new BitmapDrawable(weather_bg);
+						weather_info_bg.setBackgroundDrawable(weatherbg);
 						int pm25 = responseResult.getPm25();
 						if(pm25<50){
 							//TODO  设置layout的背景颜色 rgb
@@ -258,7 +270,7 @@ public class IncrementServiceFragment extends MyFragment {
 
 	public String getWeatherinfo(String city,String date,String temprature,String weather){
 		//S50-2°//S20晴\n上海// Shanghai\n2014年3月4日
-		
+		Log.w("fax",HanziToPinyin.getFullPinYin(city));
 		return "//S50"+temprature+"//S20"+weather+"\n"+city+"//"+" "+HanziToPinyin.getFullPinYin(city)+"\n"+date;
 	}
 }
