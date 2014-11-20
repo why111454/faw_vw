@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+          
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center" 
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp">
+
+            <Button
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="15dp"
+                android:id="@+id/home_order_drive_btn"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:background="@drawable/common_blue_arrow_btn"
+                android:drawablePadding="6dp"
+                android:drawableTop="@drawable/main_home_ic_test_drive"
+                android:gravity="center_horizontal|bottom"
+                android:paddingTop="10dp"
+                android:text="预约试驾"
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
+
+            <Button
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="15dp"
+                android:id="@+id/home_discount_btn"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:background="@drawable/common_blue_arrow_btn"
+                android:drawablePadding="6dp"
+                android:drawableTop="@drawable/dealer_info_content_navi"
+                android:gravity="center_horizontal|bottom"
+                android:paddingTop="10dp"
+                android:text="立即导航"
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <View style="@style/divHorizontal"/>
+        <LinearLayout
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            >
+
+            <TextView
+                android:layout_marginLeft="18dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="名称"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:singleLine="true"
+                android:id="@+id/dealer_fullname"
+                android:layout_weight="1"
+                android:text="" />
+
+        </LinearLayout>
+       <View style="@style/divHorizontal"/>
+        <LinearLayout
+            android:gravity="center"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            >
+
+            <TextView
+                android:layout_marginLeft="18dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="地址"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+               android:singleLine="true"
+                android:ems="10"
+                android:id="@+id/dealer_address"
+                android:layout_weight="1"
+                 android:text="" />
+
+        </LinearLayout>
+       <View style="@style/divHorizontal"/>
+        <LinearLayout
+            android:gravity="center"
+            android:layout_height="45dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            >
+
+            <TextView
+                android:layout_marginLeft="18dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="电话"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+               android:singleLine="true"
+                android:ems="10"
+                android:id="@+id/dealer_selltel"
+                android:layout_weight="1"
+                 android:text="" />
+
+        </LinearLayout>
+        <View style="@style/divHorizontal"/>
+        <LinearLayout
+            android:gravity="center"
+            android:layout_height="45dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            >
+
+            <TextView
+                android:layout_marginLeft="18dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="优惠信息"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:ems="10"
+                android:id="@+id/money"
+                android:layout_weight="1"
+                 android:text="" />
+
+        </LinearLayout>
+        <View style="@style/divHorizontal"/>
+       
+
+    </LinearLayout>
+</ScrollView>
+

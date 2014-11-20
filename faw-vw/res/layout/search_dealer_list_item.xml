@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+	<LinearLayout 
+	    android:layout_marginTop="6dp" 
+	    android:background="@color/white"
+	    android:id="@+id/brand_dealer_layout"
+    	android:orientation="vertical"
+    	android:gravity="center_vertical"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:padding="15dp">
+	</LinearLayout>
+</LinearLayout>

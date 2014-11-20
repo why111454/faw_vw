@@ -1,5 +1,6 @@
 package com.fax.faw_vw.fragment_dealer;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.apache.commons.io.IOUtils;
@@ -152,7 +153,7 @@ public class SearchDealerFragment extends MyFragment {
 		} catch (Exception e) {
 		}
 	}
-
+	SearchDealerListFragment searchDealerListFragment=new  SearchDealerListFragment();
 	private void chooseCityInfo(CityInfo cityInfo){
 		//清除所有加入的Marker
         for (Marker marker : aMap.getMapScreenMarkers()) {
@@ -167,7 +168,8 @@ public class SearchDealerFragment extends MyFragment {
 			}
 			@Override
 			protected void onPostExecuteSuc(ArrayList<Dealer> dealers) {
-				
+				Intent intent = new Intent();
+				searchDealerListFragment.onActivityResult(1, Activity.RESULT_OK, intent.putExtra("list",(Serializable) dealers));
 		        //地图显示到选中的城市
 		        LatLngBounds.Builder build = new LatLngBounds.Builder();
 				for(Dealer dealer : dealers){
@@ -193,7 +195,6 @@ public class SearchDealerFragment extends MyFragment {
 		topBar.setRightBtn("", R.drawable.search_dealer_ic_list, new OnClickListener(){
 				@Override
 				public void onClick(View v) {
-					SearchDealerListFragment searchDealerListFragment=new  SearchDealerListFragment();
 					addFragment(searchDealerListFragment);
 				}});
 		
