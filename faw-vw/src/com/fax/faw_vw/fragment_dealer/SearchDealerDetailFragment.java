@@ -43,9 +43,7 @@ public class SearchDealerDetailFragment extends MyFragment {
         view.findViewById(R.id.home_order_drive_btn).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				BookDriveFragment bookDriveFragment=new BookDriveFragment();
-				bookDriveFragment.onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, MyApp.createIntent(dealer));
-				FragmentContain.start(getActivity(), bookDriveFragment);
+				addFragment(MyApp.createFragment(BookDriveFragment.class, dealer));
 			}
 		});
         
