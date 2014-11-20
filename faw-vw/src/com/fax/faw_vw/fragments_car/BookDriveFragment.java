@@ -1,8 +1,11 @@
 package com.fax.faw_vw.fragments_car;
 import java.util.ArrayList;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +20,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Toast;
+
 import com.fax.faw_vw.MyFragment;
 import com.fax.faw_vw.R;
 import com.fax.faw_vw.fragment_dealer.SearchDealerFragment;
@@ -26,6 +30,7 @@ import com.fax.faw_vw.model.Dealer;
 import com.fax.faw_vw.model.Respon;
 import com.fax.faw_vw.model.Response;
 import com.fax.faw_vw.model.ShowCarItem;
+import com.fax.faw_vw.views.AppDialogBuilder;
 import com.fax.faw_vw.views.MyTopBar;
 import com.fax.utils.http.HttpUtils;
 import com.fax.utils.task.ResultAsyncTask;
@@ -101,7 +106,6 @@ public class BookDriveFragment extends MyFragment
         view.findViewById(R.id.commit_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO 接入接口提交信息（信息未填完Toast提示）
 				name_text=	(EditText) view.findViewById(R.id.name_text);
 				phone_text=(EditText) view.findViewById(R.id.phone_text);
 				if(TextUtils.isEmpty(name_text.getText().toString())){
@@ -148,16 +152,21 @@ public class BookDriveFragment extends MyFragment
 					@Override
 					protected void onPostExecute(Response result) {
 					 if(result.getSuccess()==1){//登陆成功
-						 Toast.makeText(context, "信息提交成功", Toast.LENGTH_SHORT).show();
-							if(!((FragmentActivity) context).getSupportFragmentManager().popBackStackImmediate()){
-								((Activity) context).finish();
-							}
-						}else Toast.makeText(context, "信息提交失败", Toast.LENGTH_SHORT).show();
+						 new AppDialogBuilder(context).setTitle("预约试驾成功。\n感谢您的支持！")
+							 .setMessage("我们将尽快安排客服人员\n与您取得联系。")
+							 .setPositiveButton(new DialogInterface.OnClickListener(){
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									backStack();
+								}
+							 }).show();
+						}else{
+							Toast.makeText(context, "信息提交失败", Toast.LENGTH_SHORT).show();
+						}
 						super.onPostExecute(result);
 					}
 					@Override
 					protected void onPostExecuteSuc(Response result) {
-						// TODO Auto-generated method stub
 					}
 				}.setProgressDialog().execute();
 			}

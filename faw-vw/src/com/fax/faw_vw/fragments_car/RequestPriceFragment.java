@@ -6,6 +6,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -25,6 +26,7 @@ import com.fax.faw_vw.model.CarModelList;
 import com.fax.faw_vw.model.Dealer;
 import com.fax.faw_vw.model.Response;
 import com.fax.faw_vw.model.ShowCarItem;
+import com.fax.faw_vw.views.AppDialogBuilder;
 import com.fax.faw_vw.views.MyTopBar;
 import com.fax.utils.http.HttpUtils;
 import com.fax.utils.task.ResultAsyncTask;
@@ -85,8 +87,6 @@ public class RequestPriceFragment extends MyFragment
         view.findViewById(R.id.commit_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO 接入接口提交信息（信息未填完Toast提示）
-				
 				if(TextUtils.isEmpty(name_txt.getText())){
 					Toast.makeText(context, "请输入您的姓名", 3000).show();
 					return;
@@ -116,45 +116,41 @@ public class RequestPriceFragment extends MyFragment
 
 					@Override
 					protected void onPostExecuteSuc(Response result) {
-						if(result.getSuccess()==1){
-							Toast.makeText(context, "提交成功",3000).show();
-							if(context instanceof FragmentActivity){
-								if(!((FragmentActivity) context).getSupportFragmentManager().popBackStackImmediate()){
-									((Activity) context).finish();
-								}
-							}else if(context instanceof Activity){
-								((Activity) context).finish();
-							}
-						}else{
-							Toast.makeText(context, "提交失败",3000).show();
+						if (result.getSuccess() == 1) {
+							new AppDialogBuilder(context).setTitle("报价索取成功！")
+									.setMessage("感谢您对我们的支持！")
+									.setPositiveButton(new DialogInterface.OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											backStack();
+										}
+									}).show();
+						} else {
+							Toast.makeText(context, "提交失败", 3000).show();
 						}
-						
+
 					}
 
 					@Override
 					protected Response doInBackground(Void... params) {
-						// TODO Auto-generated method stub
-						// TODO Auto-generated method stub
-						String url="http://faw-vw.allyes.com/index.php?g=api&m=price&a=add";
-						ArrayList<NameValuePair> pairs=new ArrayList<NameValuePair>();
-						pairs.add(new BasicNameValuePair("adminid",dealer.getId()));
-						pairs.add(new BasicNameValuePair("admintitle",dealer.getName()));
-						pairs.add(new BasicNameValuePair("truename",name_txt.getText().toString()));
-						pairs.add(new BasicNameValuePair("mobile",phone_text.getText().toString()));
-						pairs.add(new BasicNameValuePair("email",email_text.getText().toString()));
-						pairs.add(new BasicNameValuePair("modelid",car.getId()));
-						pairs.add(new BasicNameValuePair("modelname",car.getModel_cn()));
-						pairs.add(new BasicNameValuePair("configid",carModel.getId()));
-						pairs.add(new BasicNameValuePair("configid",carModel.getModel_name()));
-						String json=HttpUtils.reqForGet(url, pairs);
-			           try {
-						return new Gson().fromJson(json, Response.class);
-					} catch (JsonSyntaxException e) {
-						// TODO Auto-generated catch block
-						
-						e.printStackTrace();
-						return null;
-					}
+						String url = "http://faw-vw.allyes.com/index.php?g=api&m=price&a=add";
+						ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
+						pairs.add(new BasicNameValuePair("adminid", dealer.getId()));
+						pairs.add(new BasicNameValuePair("admintitle", dealer.getName()));
+						pairs.add(new BasicNameValuePair("truename", name_txt.getText().toString()));
+						pairs.add(new BasicNameValuePair("mobile", phone_text.getText().toString()));
+						pairs.add(new BasicNameValuePair("email", email_text.getText().toString()));
+						pairs.add(new BasicNameValuePair("modelid", car.getId()));
+						pairs.add(new BasicNameValuePair("modelname", car.getModel_cn()));
+						pairs.add(new BasicNameValuePair("configid", carModel.getId()));
+						pairs.add(new BasicNameValuePair("configid", carModel.getModel_name()));
+						String json = HttpUtils.reqForGet(url, pairs);
+						try {
+							return new Gson().fromJson(json, Response.class);
+						} catch (Exception e) {
+							e.printStackTrace();
+							return null;
+						}
 					}
 				}.setProgressDialog().execute();
 			}

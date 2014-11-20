@@ -89,7 +89,8 @@ public class AppDialogBuilder implements OnClickListener, DialogInterface{
 	public AppDialogBuilder setMessage(CharSequence message){
 		TextView tv= new TextView(context);
 		tv.setText(message);
-//		tv.setTextSize(16);
+		tv.setGravity(Gravity.CENTER);
+		tv.setTextSize(20);
 		tv.setTextColor(context.getResources().getColor(R.color.dialog_message_color));
 		tv.setVerticalScrollBarEnabled(true);
 		tv.setMovementMethod(ScrollingMovementMethod.getInstance());
@@ -102,7 +103,7 @@ public class AppDialogBuilder implements OnClickListener, DialogInterface{
 	public AppDialogBuilder setCheckBox(CharSequence message){
 		CheckBox tv=new CheckBox(context);
 		tv.setText(message);
-		tv.setTextSize(16);
+		tv.setTextSize(18);
 		tv.setTextColor(context.getResources().getColor(R.color.dialog_message_color));
 		this.contentView =tv;
 //		tv.setButtonDrawable(R.drawable.checkbox_white);
@@ -303,7 +304,6 @@ public class AppDialogBuilder implements OnClickListener, DialogInterface{
         if (title!=null&&title.length()>0) {
             if (icon != null) {
                 titleTv.setCompoundDrawables(icon, null, null, null);
-                titleTv.setCompoundDrawablePadding((int) titleTv.getTextSize() / 2);
             }
             titleTv.setText(title);
             if(titleGravity!=null) titleTv.setGravity(titleGravity);
@@ -323,8 +323,11 @@ public class AppDialogBuilder implements OnClickListener, DialogInterface{
         }
         if(titleBg!=null) view.findViewById(R.id.dialog_title_contain).setBackgroundColor(titleBg);
 
-        if (contentView !=null) {
-            ViewGroup contextContain = (ViewGroup) view.findViewById(R.id.dialog_context_contain);
+        ViewGroup contextContain = (ViewGroup) view.findViewById(R.id.dialog_context_contain);
+        if(contentView == null){
+        	contextContain.setVisibility(View.GONE);
+        	
+        }else {
             if(!(contentView instanceof TextView)) {//如果不是setMessage（自定义View）就要更改默认布局
                 //不要顶栏分割线的margin
                 ((LinearLayout.LayoutParams) view.findViewById(R.id.dialog_title_context_div).getLayoutParams()).setMargins(0, 0, 0, 0);
@@ -371,9 +374,12 @@ public class AppDialogBuilder implements OnClickListener, DialogInterface{
         if(btnMidStr!=null) btnMid.setText(btnMidStr);
         else{
             btnMid.setVisibility(View.GONE);
-            if(btnCancleStr==null) view.findViewById(R.id.dialog_btn_div).setVisibility(View.GONE);
-            if(btnOkStr==null) view.findViewById(R.id.dialog_btn_div2).setVisibility(View.GONE);
-            if(btnOkStr!=null&&btnCancleStr!=null) view.findViewById(R.id.dialog_btn_div2).setVisibility(View.GONE);
+            if(btnOkStr!=null&&btnCancleStr!=null){//左右两边按钮都有内容，那么显示一条div
+            	view.findViewById(R.id.dialog_btn_div2).setVisibility(View.GONE);
+            }else{//左右有一个为空，那么隐藏两条
+            	view.findViewById(R.id.dialog_btn_div).setVisibility(View.GONE);
+                view.findViewById(R.id.dialog_btn_div2).setVisibility(View.GONE);
+            }
         }
 
         if(btnOkStr==null&&btnMidStr==null&&btnCancleStr==null){

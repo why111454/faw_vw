@@ -227,8 +227,6 @@ public class HomeFragment extends MyFragment{
 		super.onActivityResult(requestCode, resultCode, data);
 		if(resultCode == Activity.RESULT_OK && requestCode == Request_SwitchCity){
 			String city = data.getStringExtra(HomeCitySwitchFragment.Extra_City);
-			 /*SharedPreferences sharedpreferences=*/
-
 			 SharedPreferences mPerferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 			 SharedPreferences.Editor mEditor = mPerferences.edit();
 			 mEditor.putString("weathercity",city);
@@ -255,13 +253,12 @@ public class HomeFragment extends MyFragment{
 					if(responseResult!=null && view!=null){
 						mcity_name.setText(responseResult.getCurrentCity());
 						mdate.setText(result.getDate());
-						int pm25 = responseResult.getPm25();
-						mPM.setText(pm25+"");
-						String pmState = pm25 < 50 ? "优" : pm25 > 100 ? "差" : "良";
-						((TextView)view.findViewById(R.id.home_pm_textview_state)).setText(pmState);
+							int pm25 = responseResult.getPM25();
+							mPM.setText(pm25+"");
+							String pmState = pm25 < 50 ? "优" : pm25 > 100 ? "差" : "良";
+							((TextView)view.findViewById(R.id.home_pm_textview_state)).setText(pmState);
 						mtemperature.setText(responseResult.getWeather_data().getTemperature());
 						((TextView)view.findViewById(R.id.home_weather_textview)).setText(responseResult.getWeather_data().getWeather());
-						
 						int hour= Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
 						//判断白天晚上
 						if( hour>=7 && hour<=19 ){
@@ -284,10 +281,7 @@ public class HomeFragment extends MyFragment{
 			task.setToast(false);
 		}
 		task.execute();
-
-		//TODO 显示当前油价（用油价的接口）
          ResultAsyncTask<OilPriceResponse> oiltask=new ResultAsyncTask<OilPriceResponse>(context) {
-			
 			@Override
 			protected void onPostExecuteSuc(OilPriceResponse result) {
 				// TODO Auto-generated method stub
@@ -300,7 +294,6 @@ public class HomeFragment extends MyFragment{
 
 			@Override
 			protected OilPriceResponse doInBackground(Void... params) {
-				// TODO Auto-generated method stub
 				String url="http://m3.mgogo.com/vwapp/oil.php";
 				ArrayList<NameValuePair> pairs=new ArrayList<NameValuePair>();
 				pairs.add(new BasicNameValuePair("city", cityname));
