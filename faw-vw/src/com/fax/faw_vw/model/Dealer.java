@@ -47,5 +47,16 @@ public class Dealer implements Serializable{
 	public String getGlat() {
 		return lat;
 	}
+	public Dealer(String id, String name, String fullname, String address,
+			String selltel, String lon, String lat) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.fullname = fullname;
+		this.address = address;
+		this.selltel = selltel;
+		this.lon = lon;
+		this.lat = lat;
+	}
 	
 }

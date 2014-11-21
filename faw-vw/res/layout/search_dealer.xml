@@ -23,6 +23,7 @@
 		    android:layout_width="wrap_content"
 		    android:layout_height="match_parent"/>
         <EditText 
+            android:id="@+id/search_dealer_name_unique"
 		    android:layout_width="0dp"
 		    android:hint="请输入经销商名称"
 		    android:textSize="12sp"
@@ -30,6 +31,7 @@
 		    android:layout_weight="1"
 		    android:layout_height="match_parent"/>
         <Button 
+            android:id="@+id/find_dealer_byname"
             android:text="查找"
             android:textSize="12sp"
             android:paddingRight="4dp"

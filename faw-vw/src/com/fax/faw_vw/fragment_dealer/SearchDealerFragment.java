@@ -1,6 +1,7 @@
 package com.fax.faw_vw.fragment_dealer;
 
 import java.io.Serializable;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import org.apache.commons.io.IOUtils;
@@ -13,6 +14,8 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +25,7 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.view.animation.BounceInterpolator;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -65,19 +69,24 @@ import com.fax.faw_vw.model.CityInfo;
 import com.fax.faw_vw.model.Dealer;
 import com.fax.faw_vw.model.ProvinceList;
 import com.fax.faw_vw.model.ProvinceList.Province;
+import com.fax.faw_vw.model.SearchDeclarBody;
+import com.fax.faw_vw.model.SearchDeclarBody.delcar;
+import com.fax.faw_vw.model.SearchDeclarResponse;
 import com.fax.faw_vw.more.QueryIllegalFragment;
 import com.fax.faw_vw.views.FirstHideSpinnerAdapter;
 import com.fax.faw_vw.views.MySpinnerAdapter;
 import com.fax.faw_vw.views.MyTopBar;
+import com.fax.utils.http.HttpUtils;
 import com.fax.utils.task.HttpAsyncTask;
 import com.fax.utils.task.ResultAsyncTask;
 import com.fax.utils.view.TopBarContain;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 /**经销商查询 */
 public class SearchDealerFragment extends MyFragment {
-
+	
 	private FirstHideSpinnerAdapter emptyAdapter = new FirstHideSpinnerAdapter(new String[]{null}){
 		@Override
 		public TextView getView(int position, View convertView, ViewGroup parent) {
@@ -89,6 +98,11 @@ public class SearchDealerFragment extends MyFragment {
 	ProvinceList provinceList;
 	Spinner provinceSpinner;
 	Spinner citySpinner;
+	SearchDealerListFragment searchDealerListFragment;
+	private EditText search_delarename;
+	private ArrayList<Dealer> dealerlist;
+	
+	
 	private void initProvinceCitySpinner(View view) {
 		try {
 			String json = IOUtils.toString(getActivity().getAssets().open("cityConfig.json"));
@@ -153,23 +167,24 @@ public class SearchDealerFragment extends MyFragment {
 		} catch (Exception e) {
 		}
 	}
-	SearchDealerListFragment searchDealerListFragment=new  SearchDealerListFragment();
+	
 	private void chooseCityInfo(CityInfo cityInfo){
+		Log.w("why",MyApp.getDealerListUrl(cityInfo));
 		//清除所有加入的Marker
         for (Marker marker : aMap.getMapScreenMarkers()) {
             if (marker.getObject() instanceof Dealer) marker.remove();
         }
-        
         //异步获取所有经销商
         new HttpAsyncTask<ArrayList<Dealer>>(context, MyApp.getDealerListUrl(cityInfo)) {
 			@Override
 			protected ArrayList<Dealer> instanceObject(String json) throws Exception {
+				
 				return new Gson().fromJson(json, new TypeToken<ArrayList<Dealer>>(){}.getType());
 			}
 			@Override
 			protected void onPostExecuteSuc(ArrayList<Dealer> dealers) {
-				Intent intent = new Intent();
-				searchDealerListFragment.onActivityResult(1, Activity.RESULT_OK, intent.putExtra("list",(Serializable) dealers));
+				
+				dealerlist=dealers;
 		        //地图显示到选中的城市
 		        LatLngBounds.Builder build = new LatLngBounds.Builder();
 				for(Dealer dealer : dealers){
@@ -189,15 +204,31 @@ public class SearchDealerFragment extends MyFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.search_dealer, container, false);
+		search_delarename=(EditText) view.findViewById(R.id.search_dealer_name_unique);
 		initProvinceCitySpinner(view);
 		MyTopBar topBar = (MyTopBar) new MyTopBar(context);
 		
 		topBar.setRightBtn("", R.drawable.search_dealer_ic_list, new OnClickListener(){
 				@Override
 				public void onClick(View v) {
+					searchDealerListFragment =new SearchDealerListFragment();
+					Intent intent = new Intent();
+					searchDealerListFragment.onActivityResult(1, Activity.RESULT_OK, intent.putExtra("list",(Serializable) dealerlist));
 					addFragment(searchDealerListFragment);
 				}});
-		
+		view.findViewById(R.id.find_dealer_byname).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(TextUtils.isEmpty(search_delarename.getText())){
+					Toast.makeText(context, "请输入经销商名称",3000).show();
+					return;
+				}
+				getDeclarbyName(context, search_delarename.getText().toString());
+				
+			}
+		});
 		mapView = new MapView(context);
 		((FrameLayout)view.findViewById(R.id.contain_map)).addView(mapView, -1, -1);
 		mapView.onCreate(savedInstanceState);
@@ -207,6 +238,56 @@ public class SearchDealerFragment extends MyFragment {
 				.setTitle("经销商查询").setContentView(view);
 	}
 	
+	public void getDeclarbyName(Context context,final String declarname){
+		new ResultAsyncTask<SearchDeclarBody>(context) {
+			//因为接口确定连接我没有按像post的方式改
+			@Override
+			protected  SearchDeclarBody doInBackground(Void... params) {
+				// TODO Auto-generated method stub
+				String url=URLEncoder.encode(declarname);
+				String json=HttpUtils.reqForGet("http://faw-vw.allyes.com/index.php?g=api&m=apicache&a=getdata&update=0&type=ddmp&url=GetDealer?type=0&DEALER_NAME="+url);
+				//String json=HttpUtils.reqForGet("http://faw-vw.allyes.com/index.php?g=api&m=apicache&a=getdata&update=0&type=ddmp&url=GetDealer?type=0&DEALER_NAME=新疆庞大一众汽车服务有限公司");
+				try {
+					SearchDeclarResponse sdR=new Gson().fromJson(json,SearchDeclarResponse.class);
+					SearchDeclarBody sdB=new Gson().fromJson(sdR.getBody(), SearchDeclarBody.class);
+					Log.w("why", sdB.getBody().get(2).getDEALER_NAME());
+					
+							return sdB;
+						
+				}catch (JsonSyntaxException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
+				return null;
+			}
+			@Override
+			protected void onPostExecuteSuc(SearchDeclarBody result) {
+				// TODO Auto-generated method stub
+				if(result==null){
+					Toast.makeText(context, "对不起，查询失败！", 3000).show();
+					return;
+				}
+				ArrayList<Dealer>  deal_list=new ArrayList<Dealer>();
+				for( SearchDeclarBody.delcar s:result.getBody()){
+					if(s.getDEALER_NAME().equals(declarname)){
+						Log.w("why",s.getABOUT_TIME());
+						Dealer de=new Dealer(s.getDEALER_ID(), s.getDEALER_NAME(), s.getDEALER_NAME(),s.getADDRESS(), s.getSERVICE_PHONE(), s.getLONGITUDE(),s.getLATITUDE());
+						deal_list.add(de);
+						break;
+					}
+				}
+				if(deal_list.isEmpty()){
+						Toast.makeText(context, "对不起，没有查到这个经销商！", 3000).show();
+						return;
+				}
+				searchDealerListFragment =new SearchDealerListFragment();
+				Intent intent = new Intent();
+				searchDealerListFragment.onActivityResult(1, Activity.RESULT_OK, intent.putExtra("list",(Serializable) deal_list));
+				addFragment(searchDealerListFragment);
+			}
+		}.setProgressDialog().execute();
+	}
 	
 	
 	DrivingRouteOverlay drivingRouteOverlay;
