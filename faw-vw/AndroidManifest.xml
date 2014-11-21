@@ -62,9 +62,12 @@
             android:noHistory="true"
             android:screenOrientation="portrait"
             android:label="@string/app_name" >
-            <intent-filter>
+            <intent-filter android:priority="0">
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
+		        <category android:name="android.intent.category.BROWSABLE" />
+		        <data android:scheme="geo" />
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" android:launchMode="singleTask" android:screenOrientation="portrait"/>

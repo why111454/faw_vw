@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fax.faw_vw.FragmentContain;
 import com.fax.faw_vw.MyApp;
@@ -46,6 +48,18 @@ public class SearchDealerDetailFragment extends MyFragment {
 				addFragment(MyApp.createFragment(BookDriveFragment.class, dealer));
 			}
 		});
+        view.findViewById(R.id.dealer_info_content_navi_btn).setOnClickListener(new View.OnClickListener() {
+        	@Override
+        	public void onClick(View v) {
+        		try{
+	        		Uri uri = Uri.parse("geo:"+dealer.getGlat()+","+dealer.getGlon());
+	        		Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+	        		startActivity(intent);
+        		}catch(Exception e){
+        			Toast.makeText(context, "请先安装地图软件！", Toast.LENGTH_LONG).show();
+        		}
+        	}
+        });
         
 		 return new MyTopBar(getActivity()).setLeftBack()
 	                .setTitle("预约试驾").setContentView(view);
